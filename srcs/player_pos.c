@@ -64,7 +64,6 @@ void	put_to_zero(t_map *map)
 
 int	key_manager(int keycode, t_main *main)
 {
-	put_to_zero(&main->map);
 	if (keycode == 53 || keycode == 65307)
 		close_window(main);
 	if (keycode == 122) // 119

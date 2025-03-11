@@ -32,6 +32,7 @@ int	key_manager(int keycode, t_main *main);
 int	close_window(t_main *main);
 int	game_refresh(t_main *main);
 void	update_map(t_main *main, int i, int px_h);
+void	put_to_zero(t_map *map);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE

@@ -72,6 +72,9 @@ void	checks_inits(t_main *main)
 	check_walls1(&main->map);
 	check_walls2(&main->map);
 	check_epc(&main->map, &main->p_pos);
+	main->map.pixel_pos_x = main->p_pos.x * 48;
+	main->map.pixel_pos_y = main->p_pos.y * 48;
+	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
 	check_path(&main->map, main->p_pos.x, main->p_pos.y);
 }
 
