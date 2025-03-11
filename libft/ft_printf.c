@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/cub3d.h"
 
 int	get_next_arg(va_list *ap, char c)
 {
