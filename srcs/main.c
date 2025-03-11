@@ -18,8 +18,13 @@ void	vars_init(t_map *map, char *map_path)
 	map->q = 0;
 	map->s = 0;
 	map->d = 0;
+	map->left = 0;
+	map->right = 0;
 	map->pixel_pos_x = 0;
 	map->pixel_pos_y = 0;
+	map->pos_a = 0;
+	map->pos_dx = cos(map->pos_a) * 5;
+	map->pos_dy = sin(map->pos_a) * 5;
 }
 
 void	save_pos(t_pxy *x_pos, int j, int i)

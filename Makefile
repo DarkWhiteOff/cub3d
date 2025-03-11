@@ -13,7 +13,7 @@ OBJS := $(SRC:%.c=%.o)
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -g -g3
-MLX_FLAGS = -Lmlx -lmlx_Linux -Imlx -lXext -lX11
+MLX_FLAGS = -Lmlx -lmlx_Linux -Imlx -lXext -lX11 -lm
 
 .c.o:
 	$(CC) $(FLAGS) -c $< -o $@

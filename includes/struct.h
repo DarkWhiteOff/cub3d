@@ -20,6 +20,8 @@
 # include <stdarg.h>
 # include <math.h>
 
+# define PI 3.1415926535
+
 typedef struct s_pxy
 {
 	int	x;
@@ -49,12 +51,30 @@ typedef struct s_map
 	int		player_on_exit;
 	int		moves;
 	t_pxy	sc_s;
+	// Player
 	int			z;
 	int			q;
 	int			s;
 	int			d;
-	size_t pixel_pos_x;
-	size_t pixel_pos_y;
+	// Rotation
+	int			left;
+	int			right;
+	float pixel_pos_x;
+	float pixel_pos_y;
+	float pos_dx;
+	float pos_dy;
+	float pos_a;
+	// Ray
+	int r;
+	int mx;
+	int my;
+	int mp;
+	int dof;
+	float rx;
+	float ry;
+	float ra;
+	float xo;
+	float yo;
 }	t_map;
 
 typedef struct s_main
@@ -71,8 +91,7 @@ typedef struct s_main
 	t_pxy		e_pos;
 	t_sprite	spr_wall;
 	t_sprite	spr_floor;
-	t_sprite	spr_coll;
-	t_sprite	spr_door;
+	t_sprite	spr_angle;
 	t_sprite	spr_p;
 }	t_main;
 
