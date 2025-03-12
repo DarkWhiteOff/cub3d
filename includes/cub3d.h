@@ -34,6 +34,8 @@ int	game_refresh(t_main *main);
 void	update_map(t_main *main, int i, int px_h);
 void	put_to_zero(t_map *map);
 
+void drawLine(t_main *main, double beginX, double beginY, double endX, double endY, int color);
+
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

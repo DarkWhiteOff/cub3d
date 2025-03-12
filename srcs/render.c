@@ -111,5 +111,27 @@ void	update_map(t_main *main, int i, int px_h)
 		}
 		mlx_put_i
 	}
-	
+	drawLine(main, main->map.pixel_pos_x, main->map.pixel_pos_y, main->map.rx, main->map.ry, );
+}
+
+void drawLine(t_main *main, double beginX, double beginY, double endX, double endY, int color)
+{
+    double deltaX = endX - beginX;
+    double deltaY = endY - beginY;
+
+    double pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+
+    deltaX /= pixels;
+    deltaY /= pixels;
+
+    double pixelsX = beginX;
+    double pixelsY = beginY;
+ 
+    for(int i=0; i<pixels; i++){
+        mlx_pixel_put(main->mlx_p, main->mlx_win, pixelsX, pixelsY, color);
+
+        pixelsX+=deltaX;
+        pixelsY+=deltaY;
+        pixels--;
+    }
 }
