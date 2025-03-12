@@ -34,6 +34,9 @@ int	game_refresh(t_main *main);
 void	update_map(t_main *main, int i, int px_h);
 void	put_to_zero(t_map *map);
 
+void    mlx_pixel_put_custom(t_main *main, int x, int y, int color);
+void    draw_line(t_main *main, int x1, int y1, int x2, int y2, int color);
+
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

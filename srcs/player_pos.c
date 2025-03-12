@@ -22,15 +22,24 @@ void	put_to_zero(t_map *map)
 	map->d = 0;
 	map->left = 0;
 	map->right = 0;
+	map->r = 0;
+	map->mx = 0;
+	map->mp = 0;
+	map->dof = 0;
+	map->rx = 0;
+	map->ry = 0;
+	map->ra = 0;
+	map->xo = 0;
+	map->yo = 0;
 }
 
 int	key_manager(int keycode, t_main *main)
 {
 	if (keycode == 53 || keycode == 65307)
 		close_window(main);
-	if (keycode == 122) // 119
+	if (keycode == 119) // 122
 		main->map.z = 1;
-	if (keycode == 113) // 97
+	if (keycode == 97) // 113w
 		main->map.q = 1;
 	if (keycode == 115)
 		main->map.s = 1;

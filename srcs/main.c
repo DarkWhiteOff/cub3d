@@ -25,6 +25,15 @@ void	vars_init(t_map *map, char *map_path)
 	map->pos_a = 0;
 	map->pos_dx = cos(map->pos_a) * 5;
 	map->pos_dy = sin(map->pos_a) * 5;
+	map->r = 0;
+	map->mx = 0;
+	map->mp = 0;
+	map->dof = 0;
+	map->rx = 0;
+	map->ry = 0;
+	map->ra = 0;
+	map->xo = 0;
+	map->yo = 0;
 }
 
 void	save_pos(t_pxy *x_pos, int j, int i)
