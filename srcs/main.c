@@ -48,7 +48,6 @@ void	vars_init(t_map *map, char *map_path)
 	map->pos_a = 180;
 	map->pos_dx = cos(map->pos_a) * 5;
 	map->pos_dy = sin(map->pos_a) * 5;
-	map->_map = copy_map(map);
 }
 
 void	save_pos(t_pxy *x_pos, int j, int i)
@@ -160,6 +159,7 @@ int	main(int argc, char *argv[])
 		return (ft_printf("Error\nMap name is incorrect.\n"));
 	vars_init(&main.map, argv[1]);
     checks_inits(&main);
+	main.map._map = copy_map(&main.map);
 	render_init(&main);
 	sprites_init(&main);
 	mlx_hook(main.mlx_win, 2, 1L << 0, key_manager, &main);

@@ -6,7 +6,7 @@
 /*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:35:40 by tzizi             #+#    #+#             */
-/*   Updated: 2025/03/12 13:12:54 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/03/12 16:04:04 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void drawRay(t_map map, t_main *main)
         ra += 2*M_PI;
     if (ra > 2*M_PI)
         ra -= 2*M_PI;
-    for(r=0; r<60;r++)
+    for(r=0; r<1;r++)
     {
         dof = 0;
         float disH=1000000;
@@ -76,33 +76,33 @@ void drawRay(t_map map, t_main *main)
         {
             ry = (int)map.pixel_pos_y - 0.0001;
             rx = (map.pixel_pos_y - ry) * aTan + map.pixel_pos_x;
-            yo = -64;
+            yo = -48;
             xo = -yo * aTan;
         }
         if (ra < M_PI) //looking up
         {
-            ry = (int)map.pixel_pos_y + 64;
+            ry = (int)map.pixel_pos_y + 48;
             rx = (map.pixel_pos_y - ry) * aTan + map.pixel_pos_x;
-            yo = 64;
+            yo = 48;
             xo = -yo * aTan;
         }
         if (ra == 0 || ra == M_PI) /// looking left or right
         {
             rx = map.pixel_pos_x;
             ry = map.pixel_pos_y;
-            dof = 8;
+            dof = 15;
         }
-        while (dof < 8)
+        while (dof < 15)
         {
-            mx = (int) (rx) >> 6;
-            my = (int)(ry) >> 6;
+            mx = (int) (rx) / 48;
+            my = (int)(ry) / 48;
             mp = my * map.w + mx;
             if (mp > 0 && mp < map.w * map.h && map._map[mp] == 1)
             {
                 hx = rx;
                 hy = ry;
                 disH = dist(map.pixel_pos_x, map.pixel_pos_y, hx, hy);
-                dof = 8;
+                dof = 15;
             }
             else // next step adding offset on x and y
             {
@@ -122,33 +122,33 @@ void drawRay(t_map map, t_main *main)
         {
             rx = (int)map.pixel_pos_x - 0.0001;
             ry = (map.pixel_pos_x - rx) * nTan + map.pixel_pos_y;
-            xo = -64;
+            xo = -48;
             yo = -xo * nTan;
         }
         if (ra < PI2 || ra > PI3) //looking right
         {
-            rx = (int)map.pixel_pos_x + 64;
+            rx = (int)map.pixel_pos_x + 48;
             ry = (map.pixel_pos_x - rx) * nTan + map.pixel_pos_y;
-            xo = 64;
+            xo = 48;
             yo = -xo * nTan;
         }
         if (ra == 0 || ra == M_PI) /// up or down
         {
             rx = map.pixel_pos_x;
             ry = map.pixel_pos_y;
-            dof = 8;
+            dof = 15;
         }
-        while (dof < 8)
+        while (dof < 15)
         {
-            mx = (int) (rx) >> 6;
-            my = (int)(ry) >> 6;
+            mx = (int) (rx) / 48;
+            my = (int)(ry) / 48;
             mp = my * map.w + mx;
             if (mp > 0 && mp < map.w * map.h && map._map[mp] == 1)
             {
                 vx = rx;
                 vy = ry;
                 disV = dist(map.pixel_pos_x, map.pixel_pos_y, vx, vy);
-                dof = 8;
+                dof = 15;
             }
             else // next step adding offset on x and y
             {
@@ -169,7 +169,7 @@ void drawRay(t_map map, t_main *main)
             rx = hx;
             ry = hy;
         }
-        drawLine(main, map.pixel_pos_x, map.pixel_pos_y, rx, ry, green);
+        //drawLine(main, map.pixel_pos_x, map.pixel_pos_y, rx, ry, green);
         float ca = -map.pos_a - ra; // fisheye fix
         if (ca < 0)
             ca += 2*M_PI;
@@ -179,14 +179,13 @@ void drawRay(t_map map, t_main *main)
         float lineH = ((map.w * map.h)*320/disT); // clalc line Height
         if (lineH>320)
             lineH=320;
-        float lineO = 160 - lineH/2; // calc line offset
-        int width = r*8+530;
-        int height = (int)(lineH + lineO);
-        if (mp > 0 && mp < map.w * map.h && map._map[mp] == 1)
-            mlx_xpm_file_to_image(main->mlx_p, "../spr_tiles/spr_wall.xp", &width, &height);
-        else
-            mlx_xpm_file_to_image(main->mlx_p, "../spr_tiles/spr_floor.xp", &width, &height);
-        //drawRect(r*8+530, lineH+lineO, red, 8);
+        //float lineO = 160 - lineH/2; // calc line offset
+        // int width = r*15+530;
+        // int height = (int)(lineH + lineO);
+        // if (mp > 0 && mp < map.w * map.h && map._map[mp] == 1)
+        //     mlx_xpm_file_to_image(main->mlx_p, "../spr_tiles/spr_wall.xp", &width, &height);
+        // else
+        //     mlx_xpm_file_to_image(main->mlx_p, "../spr_tiles/spr_floor.xp", &width, &height);
         ra += DEG_TO_RAD;
         if (ra < 0)
         ra += 2*M_PI;
