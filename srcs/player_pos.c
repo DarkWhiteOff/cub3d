@@ -26,20 +26,20 @@ void	put_to_zero(t_map *map)
 
 int	key_manager(int keycode, t_main *main)
 {
-	if (keycode == 53 || keycode == 65307)
+	if (keycode == 53 || keycode == KEY_ESC)
 		close_window(main);
-	if (keycode == 122) // 119
+	if (keycode == KEY_Z || keycode == KEY_W)
 		main->map.z = 1;
-	if (keycode == 113) // 97
+	if (keycode == KEY_A || keycode == KEY_Q)
 		main->map.q = 1;
-	if (keycode == 115)
+	if (keycode == KEY_S)
 		main->map.s = 1;
-	if (keycode == 100)
+	if (keycode == KEY_D)
 		main->map.d = 1;
 	// if (keycode == 65362) // up
-	if (keycode == 65361) // left
+	if (keycode == KEY_LEFT)
 		main->map.left = 1;
-	if (keycode == 65363) // right
+	if (keycode == KEY_RIGHT)
 		main->map.right = 1;
 	// if (keycode == 65364) // down
 	return (0);

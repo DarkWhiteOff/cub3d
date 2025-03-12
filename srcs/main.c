@@ -1,5 +1,28 @@
 #include "../includes/cub3d.h"
 
+int	*copy_map(t_map *map)
+{
+	int x = 0;
+	int y = 0;
+	int i = 0;
+
+	int	*_map = malloc(map->w * map->h * sizeof(int));
+	while (y < map->h)
+	{
+		x = 0;
+		while (x < map->w)
+		{
+			if (map->grid[y][x] == '1')
+				_map[i++] = 1;
+			else
+				_map[i++] = 0;
+			x++;
+		}
+		y++;
+	}
+	return _map;
+}
+
 void	vars_init(t_map *map, char *map_path)
 {
 	map->path = map_path;
@@ -22,9 +45,10 @@ void	vars_init(t_map *map, char *map_path)
 	map->right = 0;
 	map->pixel_pos_x = 0;
 	map->pixel_pos_y = 0;
-	map->pos_a = 0;
+	map->pos_a = 180;
 	map->pos_dx = cos(map->pos_a) * 5;
 	map->pos_dy = sin(map->pos_a) * 5;
+	map->_map = copy_map(map);
 }
 
 void	save_pos(t_pxy *x_pos, int j, int i)
@@ -106,7 +130,7 @@ void	render_init(t_main *main)
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
 	main->mlx_win = mlx_new_window(main->mlx_p,
-			(main->map.w * 48) * 2, main->map.h * 48, "cub3d");
+		(main->map.w * 48) * 2, main->map.h * 48, "cub3d");
 	if (!main->mlx_win)
 	{
 		mlx_destroy_display(main->mlx_p);

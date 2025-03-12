@@ -20,7 +20,7 @@
 # include <stdarg.h>
 # include <math.h>
 
-# define PI 3.1415926535
+// # define M_PI 3.1415926535
 
 typedef struct s_pxy
 {
@@ -45,6 +45,7 @@ typedef struct s_map
 	int		coll;
 	int		fd;
 	char	**grid;
+	int		*_map;
 	char	**highlight_grid;
 	int		exit_acc;
 	int		coll_acc;

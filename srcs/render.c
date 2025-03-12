@@ -27,15 +27,15 @@ void	update_map(t_main *main, int i, int px_h)
 	{
 		if (main->map.z == 1)
 		{
-			main->map.pixel_pos_x -= main->map.pos_dx;
-			main->map.pixel_pos_y -= main->map.pos_dy;
+			main->map.pixel_pos_x += main->map.pos_dx;
+			main->map.pixel_pos_y += main->map.pos_dy;
 		}
 		else if (main->map.q == 1)
 			main->map.pixel_pos_x = main->map.pixel_pos_x - 10;
 		else if (main->map.s == 1)
 		{
-			main->map.pixel_pos_x += main->map.pos_dx;
-			main->map.pixel_pos_y += main->map.pos_dy;
+			main->map.pixel_pos_x -= main->map.pos_dx;
+			main->map.pixel_pos_y -= main->map.pos_dy;
 		}
 		else if (main->map.d == 1)
 			main->map.pixel_pos_x = main->map.pixel_pos_x + 10;
@@ -43,15 +43,15 @@ void	update_map(t_main *main, int i, int px_h)
 		{
 			main->map.pos_a -= 0.1;
 			if (main->map.pos_a < 0)
-				main->map.pos_a += (2 * PI);
+				main->map.pos_a += (2 * M_PI);
 			main->map.pos_dx = cos(main->map.pos_a) * 5;
 			main->map.pos_dy = sin(main->map.pos_a) * 5;
 		}
 		else if (main->map.right == 1)
 		{
 			main->map.pos_a += 0.1;
-			if (main->map.pos_a > (2 * PI))
-				main->map.pos_a -= (2 * PI);
+			if (main->map.pos_a > (2 * M_PI))
+				main->map.pos_a -= (2 * M_PI);
 			main->map.pos_dx = cos(main->map.pos_a) * 5;
 			main->map.pos_dy = sin(main->map.pos_a) * 5;
 		}
@@ -70,4 +70,5 @@ void	update_map(t_main *main, int i, int px_h)
 		j++;
 		px_w += 48;
 	}
+	drawRay(main->map, main);
 }
