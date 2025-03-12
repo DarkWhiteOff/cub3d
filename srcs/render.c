@@ -16,6 +16,84 @@ int	game_refresh(t_main *main)
 	return (0);
 }
 
+void drawLine(t_main *main, double beginX, double beginY, double endX, double endY, int color)
+{
+    double deltaX = endX - beginX;
+    double deltaY = endY - beginY;
+
+    double pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+
+    deltaX /= pixels;
+    deltaY /= pixels;
+
+    double pixelsX = beginX;
+    double pixelsY = beginY;
+ 
+    for(int i=0; i<pixels; i++){
+        mlx_pixel_put(main->mlx_p, main->mlx_win, pixelsX, pixelsY, color);
+
+        pixelsX+=deltaX;
+        pixelsY+=deltaY;
+        pixels--;
+    }
+}
+
+void	drawRay(t_main *main)
+{
+	int r = 0;
+	int mx = 0;
+	int my = 0;
+	int mp = 0;
+	int dof = 0;
+	float rx = 0;
+	float ry = 0;
+	float ra = 0;
+	float xo = 0;
+	float yo = 0;
+
+	ra = main->map.pos_a;
+	for (r = 0; r < 1; r++)
+	{
+		dof = 0;
+		float aTan = 1 / tan(ra);
+		if (ra > PI)
+		{
+			ry = (((int) main->map.pixel_pos_y / 48) * 48) - 0.0001;
+			rx = (main->map.pixel_pos_y - ry) * aTan + main->map.pixel_pos_x;
+			yo = -48;
+			xo = -yo * aTan;
+		}
+		if (ra < PI)
+		{
+			ry = (((int) main->map.pixel_pos_y / 48) * 48) + 48;
+			rx = (main->map.pixel_pos_y - ry) * aTan + main->map.pixel_pos_x;
+			yo = 48;
+			xo = -yo * aTan;
+		}
+		if (ra == 0 || ra == PI)
+		{
+			rx = main->map.pixel_pos_x;
+			ry = main->map.pixel_pos_y;
+			dof = 15;
+		}
+		while (dof < 15)
+		{
+			mx = (int) (rx) / 48;
+			my = (int) (ry) / 48;
+			mp = my * main->map.w + mx;
+			if (mp > 0 && (mp < (main->map.w * main->map.h)) && main->map.grid[mp] != NULL)
+				dof = 15;
+			else
+			{
+				rx += xo;
+				ry += yo;
+				dof += 1;
+			}
+		}
+		drawLine(main, main->map.pixel_pos_x, main->map.pixel_pos_y, rx, ry, 0x0000FF00);
+	}
+}
+
 void	update_map(t_main *main, int i, int px_h)
 {
 	int	j;
@@ -27,15 +105,15 @@ void	update_map(t_main *main, int i, int px_h)
 	{
 		if (main->map.z == 1)
 		{
-			main->map.pixel_pos_x -= main->map.pos_dx;
-			main->map.pixel_pos_y -= main->map.pos_dy;
+			main->map.pixel_pos_x += main->map.pos_dx;
+			main->map.pixel_pos_y += main->map.pos_dy;
 		}
 		else if (main->map.q == 1)
 			main->map.pixel_pos_x = main->map.pixel_pos_x - 10;
 		else if (main->map.s == 1)
 		{
-			main->map.pixel_pos_x += main->map.pos_dx;
-			main->map.pixel_pos_y += main->map.pos_dy;
+			main->map.pixel_pos_x -= main->map.pos_dx;
+			main->map.pixel_pos_y -= main->map.pos_dy;
 		}
 		else if (main->map.d == 1)
 			main->map.pixel_pos_x = main->map.pixel_pos_x + 10;
@@ -70,68 +148,5 @@ void	update_map(t_main *main, int i, int px_h)
 		j++;
 		px_w += 48;
 	}
-	main->map.ra = main->map.pos_a;
-	for (main->map.r = 0; main->map.r < 1; main->map.r++)
-	{
-		main->map.dof = 0;
-		float aTan = 1 / tan(main->map.ra);
-		if (main->map.ra > PI)
-		{
-			main->map.ry = (((int) main->map.pixel_pos_y / 48) * 48) - 0.0001;
-			main->map.rx = (main->map.pixel_pos_y - main->map.ry) * aTan + main->map.pixel_pos_x;
-			main->map.yo = -48;
-			main->map.xo = -main->map.yo * aTan;
-		}
-		if (main->map.ra < PI)
-		{
-			main->map.ry = (((int) main->map.pixel_pos_y / 48) * 48) + 48;
-			main->map.rx = (main->map.pixel_pos_y - main->map.ry) * aTan + main->map.pixel_pos_x;
-			main->map.yo = 48;
-			main->map.xo = -main->map.yo * aTan;
-		}
-		if (main->map.ra == 0 || main->map.ra == PI)
-		{
-			main->map.rx = main->map.pixel_pos_x;
-			main->map.ry = main->map.pixel_pos_y;
-			main->map.dof = 15;
-		}
-		while (main->map.dof < 15)
-		{
-			main->map.mx = (int) (main->map.rx) / 48;
-			main->map.my = (int) (main->map.ry) / 48;
-			main->map.mp = main->map.my * main->map.w + main->map.mx;
-			if ((main->map.mp < (main->map.w * main->map.h)) && main->map.grid[main->map.mp] != NULL)
-				main->map.dof = 15;
-			else
-			{
-				main->map.rx += main->map.xo;
-				main->map.ry += main->map.yo;
-				main->map.dof += 1;
-			}
-		}
-		drawLine(main, main->map.pixel_pos_x, main->map.pixel_pos_y, main->map.rx, main->map.ry, 0x0000FF00);
-	}
-	
-}
-
-void drawLine(t_main *main, double beginX, double beginY, double endX, double endY, int color)
-{
-    double deltaX = endX - beginX;
-    double deltaY = endY - beginY;
-
-    double pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-
-    deltaX /= pixels;
-    deltaY /= pixels;
-
-    double pixelsX = beginX;
-    double pixelsY = beginY;
- 
-    for(int i=0; i<pixels; i++){
-        mlx_pixel_put(main->mlx_p, main->mlx_win, pixelsX, pixelsY, color);
-
-        pixelsX+=deltaX;
-        pixelsY+=deltaY;
-        pixels--;
-    }
+	drawRay(main);
 }
