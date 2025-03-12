@@ -109,9 +109,9 @@ void	update_map(t_main *main, int i, int px_h)
 				main->map.dof += 1;
 			}
 		}
-		mlx_put_i
+		drawLine(main, main->map.pixel_pos_x, main->map.pixel_pos_y, main->map.rx, main->map.ry, 0x0000FF00);
 	}
-	drawLine(main, main->map.pixel_pos_x, main->map.pixel_pos_y, main->map.rx, main->map.ry, );
+	
 }
 
 void drawLine(t_main *main, double beginX, double beginY, double endX, double endY, int color)
