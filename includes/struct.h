@@ -22,6 +22,13 @@
 
 # define PI 3.1415926535
 
+# define white 0xFFFFFF
+# define red   0x00FF0000
+# define green 0x0000FF00
+# define blue  0x000000FF
+# define black 000000
+# define yellow 0xFFFF00
+
 typedef struct s_pxy
 {
 	int	x;

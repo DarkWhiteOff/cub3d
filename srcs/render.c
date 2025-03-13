@@ -24,27 +24,27 @@ int	game_refresh(t_main *main)
 	return (0);
 }
 
-// void drawLine(t_main *main, double beginX, double beginY, double endX, double endY, int color)
-// {
-//     double deltaX = endX - beginX;
-//     double deltaY = endY - beginY;
+void drawLine(t_main *main, int beginX, int beginY, int endX, int endY, int color)
+{
+    double deltaX = endX - beginX;
+    double deltaY = endY - beginY;
 
-//     double pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+    double pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
 
-//     deltaX /= pixels;
-//     deltaY /= pixels;
+    deltaX /= pixels;
+    deltaY /= pixels;
 
-//     double pixelsX = beginX;
-//     double pixelsY = beginY;
+    double pixelsX = beginX;
+    double pixelsY = beginY;
  
-//     for(int i=0; i<pixels; i++){
-//         mlx_pixel_put(main->mlx_p, main->mlx_win, pixelsX, pixelsY, color);
+    for(int i=0; i<pixels; i++){
+        mlx_pixel_put(main->mlx_p, main->mlx_win, pixelsX, pixelsY, color);
 
-//         pixelsX+=deltaX;
-//         pixelsY+=deltaY;
-//         pixels--;
-//     }
-// }
+        pixelsX+=deltaX;
+        pixelsY+=deltaY;
+        pixels--;
+    }
+}
 
 void	raycasting(t_main *main)
 {
@@ -65,10 +65,10 @@ void	raycasting(t_main *main)
 	int side = 0;
 	// LINE
 	int wall_dist = 0;
-	int lx = 0;
+	int lh = 0;
 	int ly0 = 0;
 	int ly1 = 0;
-	double wall_x = 0;
+	// double wall_x = 0;
 
 	while (x < (main->map.w * 48))
 	{
@@ -86,12 +86,12 @@ void	raycasting(t_main *main)
 		hit = 0;
 		side = 0;
 		wall_dist = 0;
-		lx = 0;
+		lh = 0;
 		ly0 = 0;
 		ly1 = 0;
-		wall_x = 0;
+		// wall_x = 0;
 
-		cameraX = 2 * x / (double)main->map.w * 48 - 1;
+		cameraX = 2 * x / ((double)main->map.w * 48) - 1;
 		rayDirX = main->map.dirX + main->map.planeX * cameraX;
 		rayDirY = main->map.dirY + main->map.planeY * cameraX;
 		deltaDistX = fabs(1 / rayDirX);
@@ -118,6 +118,7 @@ void	raycasting(t_main *main)
 			stepY = 1;
         	sideDistY = (mapY + 1.0 - main->map.p_pos_y) * deltaDistY;
 		}
+		hit = 0;
 		while (hit == 0)
 		{
 			if (sideDistX < sideDistY)
@@ -132,27 +133,35 @@ void	raycasting(t_main *main)
 				mapY += stepY;
 				side = 1;
 			}
-			if (mapY < 0.25 || mapX < 0.25 || mapY > (main->map.h - 0.25) || mapX > (main->map.w - 1.25))
+			printf("mapX : %d (%d) | mapY : %d (%d)\n", mapX, mapX / 48, mapY, mapY / 48);
+			printf("main->map.grid[mapY / 48][mapX / 48] : %c\n", main->map.grid[mapY / 48][mapX / 48]);
+			if (mapY < 0.25
+				|| mapX < 0.25
+				|| mapY > main->map.h - 0.25
+				|| mapX > main->map.w - 1.25)
 				break ;
-			else if (main->map.grid[mapY][mapX] > 0)
-					hit = 1;
+			else if (main->map.grid[mapY / 48][mapX / 48] > '0')
+				hit = 1;
 		}
 		if (side == 0)
 			wall_dist = sideDistX - deltaDistX;
 		else
 			wall_dist = sideDistY - deltaDistY;
-		lx = (int)((main->map.h * 48) / wall_dist);
-		ly0 = -lx / 2 + (main->map.h * 48) / 2;
+		if (wall_dist == 0)
+			wall_dist = 1;
+		lh = (int)((main->map.h * 48) / wall_dist);
+		ly0 = -lh / 2 + (main->map.h * 48) / 2;
+		ly1 = lh / 2 + (main->map.h * 48) / 2;
 		if (ly0 < 0)
 			ly0 = 0;
-		ly1 = lx / 2 + (main->map.h * 48) / 2;
 		if (ly1 >= (main->map.h * 48))
-			ly1 = (main->map.h * 48) - 1;
-		if (side == 0)
-			wall_x = main->map.p_pos_y + wall_dist * rayDirY;
-		else
-			wall_x = main->map.p_pos_x + wall_dist * rayDirX;
-		wall_x -= floor(wall_x);
+			ly1 = (main->map.h * 48) - (1 * 48);
+		// if (side == 0)
+		// 	wall_x = main->map.p_pos_y + wall_dist * rayDirY;
+		// else
+		// 	wall_x = main->map.p_pos_x + wall_dist * rayDirX;
+		// wall_x -= floor(wall_x);
+        //drawLine(main, x, ly0, x, ly1, color);
 		x++;
 	}
 }
