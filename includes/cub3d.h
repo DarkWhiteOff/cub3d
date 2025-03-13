@@ -31,7 +31,7 @@ void	actualise_map_data(t_main *main);
 int	key_manager(int keycode, t_main *main);
 int	close_window(t_main *main);
 int	game_refresh(t_main *main);
-void	update_map(t_main *main, int i, int px_h);
+void	update_map(t_main *main, int i, int px_h, int check);
 void	put_to_zero(t_map *map);
 
 void drawLine(t_main *main, double beginX, double beginY, double endX, double endY, int color);

@@ -4,17 +4,22 @@ int	game_refresh(t_main *main)
 {
 	int	i;
 	int	px_h;
+	static int check;
 
 	i = 0;
 	px_h = 0;
-	if (main->map.z == 1 || main->map.q == 1 || main->map.s == 1 || main->map.d == 1 || main->map.left == 1 || main->map.right == 1)
+	//printf("z : %d\n", main->map.z);
+	if (main->map.z == 1 || main->map.q == 1 || main->map.s == 1 || main->map.d == 1 || main->map.left == 1 || main->map.right == 1 || check == 0)
 	{
+		put_to_zero(&main->map);
 		while (i < main->map.h)
 		{
-			update_map(main, i, px_h);
+			update_map(main, i, px_h, check);
 			i++;
 			px_h += 48;
 		}
+
+		check = 1;
 	}
 	return (0);
 }
@@ -67,6 +72,25 @@ void	raycasting(t_main *main)
 
 	while (x < (main->map.w * 48))
 	{
+		cameraX = 0;
+		rayDirX = 0;
+		rayDirY = 0;
+		deltaDistX = 0;
+		deltaDistY = 0;
+		mapX = 0;
+		mapY = 0;
+		sideDistX = 0;
+		sideDistY = 0;
+		stepX = 0;
+		stepY = 0;
+		hit = 0;
+		side = 0;
+		wall_dist = 0;
+		lx = 0;
+		ly0 = 0;
+		ly1 = 0;
+		wall_x = 0;
+
 		cameraX = 2 * x / (double)main->map.w * 48 - 1;
 		rayDirX = main->map.dirX + main->map.planeX * cameraX;
 		rayDirY = main->map.dirY + main->map.planeY * cameraX;
@@ -108,8 +132,10 @@ void	raycasting(t_main *main)
 				mapY += stepY;
 				side = 1;
 			}
-			if (main->map.grid[mapX][mapY] > 0)
-				hit = 1;
+			if (mapY < 0.25 || mapX < 0.25 || mapY > (main->map.h - 0.25) || mapX > (main->map.w - 1.25))
+				break ;
+			else if (main->map.grid[mapY][mapX] > 0)
+					hit = 1;
 		}
 		if (side == 0)
 			wall_dist = sideDistX - deltaDistX;
@@ -123,21 +149,22 @@ void	raycasting(t_main *main)
 		if (ly1 >= (main->map.h * 48))
 			ly1 = (main->map.h * 48) - 1;
 		if (side == 0)
-			wall_x = main->map.p_pos_y + wall_dist * main->map.dirY;
+			wall_x = main->map.p_pos_y + wall_dist * rayDirY;
 		else
-			wall_x = main->map.p_pos_x + wall_dist * main->map.dirX;
+			wall_x = main->map.p_pos_x + wall_dist * rayDirX;
 		wall_x -= floor(wall_x);
 		x++;
 	}
 }
 
-void	update_map(t_main *main, int i, int px_h)
+void	update_map(t_main *main, int i, int px_h, int check)
 {
 	int	j;
 	int	px_w;
 
 	j = 0;
 	px_w = 0;
+	(void)check;
 	while (main->map.grid[i][j] != '\0')
 	{
 		if (main->map.grid[i][j] == '1')
@@ -146,10 +173,11 @@ void	update_map(t_main *main, int i, int px_h)
 		if (main->map.grid[i][j] == '0')
 			mlx_put_image_to_window(main->mlx_p,
 				main->mlx_win, main->spr_floor.img, px_w, px_h);
-		mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->spr_p.img, main->map.p_pos_x, main->map.p_pos_y);
-		// mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->spr_angle.img, main->map.p_pos_x + main->map.DirX * 5, main->map.p_pos_y + main->map.DirY * 5);
 		j++;
 		px_w += 48;
 	}
-	raycasting(main);
+	mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->spr_p.img, main->map.p_pos_x, main->map.p_pos_y);
+	mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->spr_angle.img, main->map.p_pos_x + main->map.dirX * 15, main->map.p_pos_y + main->map.dirY * 15);
+	if (check == 1)
+		raycasting(main);
 }
