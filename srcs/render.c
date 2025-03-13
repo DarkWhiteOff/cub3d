@@ -68,7 +68,7 @@ void	raycasting(t_main *main)
 	int lh = 0;
 	int ly0 = 0;
 	int ly1 = 0;
-	// double wall_x = 0;
+	double wall_x = 0;
 
 	while (x < (main->map.w * 48))
 	{
@@ -89,34 +89,34 @@ void	raycasting(t_main *main)
 		lh = 0;
 		ly0 = 0;
 		ly1 = 0;
-		// wall_x = 0;
+		wall_x = 0;
 
 		cameraX = 2 * x / ((double)main->map.w * 48) - 1;
 		rayDirX = main->map.dirX + main->map.planeX * cameraX;
 		rayDirY = main->map.dirY + main->map.planeY * cameraX;
 		deltaDistX = fabs(1 / rayDirX);
 		deltaDistY = fabs(1 / rayDirY);
-		mapX = (int)main->map.p_pos_x;
-		mapY = (int)main->map.p_pos_y;
+		mapX = (int)main->map.p_pos_x / 48;
+		mapY = (int)main->map.p_pos_y / 48;
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (main->map.p_pos_x - mapX) * deltaDistX;
+			sideDistX = (main->map.p_pos_x / 48 - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - main->map.p_pos_x) * deltaDistX;
+			sideDistX = (mapX + 1.0 - main->map.p_pos_x / 48) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-        	sideDistY = (main->map.p_pos_y - mapY) * deltaDistY;
+        	sideDistY = (main->map.p_pos_y / 48 - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-        	sideDistY = (mapY + 1.0 - main->map.p_pos_y) * deltaDistY;
+        	sideDistY = (mapY + 1.0 - main->map.p_pos_y / 48) * deltaDistY;
 		}
 		hit = 0;
 		while (hit == 0)
@@ -156,12 +156,13 @@ void	raycasting(t_main *main)
 			ly0 = 0;
 		if (ly1 >= (main->map.h * 48))
 			ly1 = (main->map.h * 48) - (1 * 48);
-		// if (side == 0)
-		// 	wall_x = main->map.p_pos_y + wall_dist * rayDirY;
-		// else
-		// 	wall_x = main->map.p_pos_x + wall_dist * rayDirX;
-		// wall_x -= floor(wall_x);
-        //drawLine(main, x, ly0, x, ly1, color);
+		if (side == 0)
+			wall_x = main->map.p_pos_y / 48 + wall_dist * rayDirY;
+		else
+			wall_x = main->map.p_pos_x / 48 + wall_dist * rayDirX;
+		wall_x -= floor(wall_x);
+		int color = green;
+        drawLine(main, x, ly0, x, ly1, color);
 		x++;
 	}
 }
