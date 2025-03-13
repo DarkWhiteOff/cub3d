@@ -40,18 +40,14 @@ typedef struct s_map
 	char	*path;
 	int		h;
 	int		w;
-	int		ex;
+	int		px_h;
+	int		px_w;
 	int		pos;
-	int		coll;
 	int		fd;
 	char	**grid;
 	char	**highlight_grid;
-	int		exit_acc;
-	int		coll_acc;
-	int		player_on_exit;
-	int		moves;
 	t_pxy	sc_s;
-	// Player
+	// Movements
 	int			z;
 	int			q;
 	int			s;
@@ -59,11 +55,13 @@ typedef struct s_map
 	// Rotation
 	int			left;
 	int			right;
-	float pixel_pos_x;
-	float pixel_pos_y;
-	float pos_dx;
-	float pos_dy;
-	float pos_a;
+	// Math
+	double p_pos_x;
+	double p_pos_y; // player pos
+	double dirX;
+	double dirY; // direction vector
+	double planeX;
+	double planeY; // 
 }	t_map;
 
 typedef struct s_main

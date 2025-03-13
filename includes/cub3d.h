@@ -45,7 +45,7 @@ char	*get_next_line(int fd, t_map *map);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strcat(char *dest, char *src);
 char	*ft_strchr(const char *s, int c);
-int		ftft_strlen(const char *s, unsigned char c);
+int		ft(const char *s, unsigned char c);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 char	*ft_gen(char *newstr, char const *str, unsigned int s, size_t len);

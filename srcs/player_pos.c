@@ -24,6 +24,68 @@ void	put_to_zero(t_map *map)
 	map->right = 0;
 }
 
+void	actualise_map_data(t_main *main)
+{
+	int tmp_x = main->map.dirX;
+
+	if (main->map.z == 1 || main->map.q == 1 || main->map.s == 1 || main->map.d == 1 || main->map.left == 1 || main->map.right == 1)
+	{
+		if (main->map.z == 1)
+		{
+			main->map.p_pos_x += main->map.dirX;
+			main->map.p_pos_y += main->map.dirY;
+		}
+		else if (main->map.q == 1)
+		{
+			main->map.p_pos_x += main->map.dirY;
+			main->map.p_pos_y -= main->map.dirX;
+		}
+		else if (main->map.s == 1)
+		{
+			main->map.p_pos_x -= main->map.dirX;
+			main->map.p_pos_y -= main->map.dirY;
+		}
+		else if (main->map.d == 1)
+		{
+			main->map.p_pos_x -= main->map.dirY;
+			main->map.p_pos_y += main->map.dirX;
+		}
+		else if (main->map.left == 1)
+		{
+			main->map.dirX = main->map.dirX * cos(1 * 0.015) - main->map.dirY * sin(1 * 0.015);
+			main->map.dirY = tmp_x * sin(1 * 0.015) + main->map.dirY * cos(1 * 0.015);
+			tmp_x = main->map.planeX;
+			main->map.planeX = main->map.planeX * cos(1 * 0.015) - main->map.planeY * sin(1 * 0.015);
+			main->map.planeY = tmp_x * sin(1 * 0.015) + main->map.planeY * cos(1 * 0.015);
+		}
+		else if (main->map.right == 1)
+		{
+			main->map.dirX = main->map.dirX * cos(-1 * 0.015) - main->map.dirY * sin(-1 * 0.015);
+			main->map.dirY = tmp_x * sin(-1 * 0.015) + main->map.dirY * cos(-1 * 0.015);
+			tmp_x = main->map.planeX;
+			main->map.planeX = main->map.planeX * cos(-1 * 0.015) - main->map.planeY * sin(-1 * 0.015);
+			main->map.planeY = tmp_x * sin(-1 * 0.015) + main->map.planeY * cos(-1 * 0.015);
+		}
+		// else if (main->map.left == 1)
+		// {
+		// 	main->map.pos_a -= 0.1;
+		// 	if (main->map.pos_a < 0)
+		// 		main->map.pos_a += (2 * PI);
+		// 	main->map.DirX = cos(main->map.pos_a) * 5;
+		// 	main->map.DirY = sin(main->map.pos_a) * 5;
+		// }
+		// else if (main->map.right == 1)
+		// {
+		// 	main->map.pos_a += 0.1;
+		// 	if (main->map.pos_a > (2 * PI))
+		// 		main->map.pos_a -= (2 * PI);
+		// 	main->map.DirX = cos(main->map.pos_a) * 5;
+		// 	main->map.DirY = sin(main->map.pos_a) * 5;
+		// }
+		put_to_zero(&main->map);
+	}
+}
+
 int	key_manager(int keycode, t_main *main)
 {
 	if (keycode == 53 || keycode == 65307)
@@ -36,11 +98,10 @@ int	key_manager(int keycode, t_main *main)
 		main->map.s = 1;
 	if (keycode == 100)
 		main->map.d = 1;
-	// if (keycode == 65362) // up
-	if (keycode == 65361) // left
+	if (keycode == 65361)
 		main->map.left = 1;
-	if (keycode == 65363) // right
+	if (keycode == 65363)
 		main->map.right = 1;
-	// if (keycode == 65364) // down
+	actualise_map_data(main);
 	return (0);
 }

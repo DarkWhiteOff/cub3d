@@ -5,13 +5,9 @@ void	vars_init(t_map *map, char *map_path)
 	map->path = map_path;
 	map->h = 0;
 	map->w = 0;
-	map->ex = 0;
+	map->px_h = 640;
+	map->px_w = 480;
 	map->pos = 0;
-	map->coll = 0;
-	map->exit_acc = 0;
-	map->coll_acc = 0;
-	map->player_on_exit = 0;
-	map->moves = 0;
 	map->sc_s.x = 0;
 	map->sc_s.y = 0;
 	map->z = 0;
@@ -20,11 +16,13 @@ void	vars_init(t_map *map, char *map_path)
 	map->d = 0;
 	map->left = 0;
 	map->right = 0;
-	map->pixel_pos_x = 0;
-	map->pixel_pos_y = 0;
-	map->pos_a = 0;
-	map->pos_dx = cos(map->pos_a) * 5;
-	map->pos_dy = sin(map->pos_a) * 5;
+
+	map->p_pos_x = 0.0;
+	map->p_pos_y = 0.0; // player pos
+	map->dirX = 0.0;
+	map->dirY = 1; // direction vector
+	map->planeX = -0.66;
+	map->planeY = 0.0; // 
 }
 
 void	save_pos(t_pxy *x_pos, int j, int i)
@@ -77,8 +75,8 @@ void	checks_inits(t_main *main)
 	check_walls1(&main->map);
 	check_walls2(&main->map);
 	check_epc(&main->map, &main->p_pos);
-	main->map.pixel_pos_x = main->p_pos.x * 48;
-	main->map.pixel_pos_y = main->p_pos.y * 48;
+	main->map.p_pos_x = main->p_pos.x * 48;
+	main->map.p_pos_y = main->p_pos.y * 48;
 	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
 	check_path(&main->map, main->p_pos.x, main->p_pos.y);
 }
@@ -138,6 +136,7 @@ int	main(int argc, char *argv[])
     checks_inits(&main);
 	render_init(&main);
 	sprites_init(&main);
+	game_refresh(&main);
 	mlx_hook(main.mlx_win, 2, 1L << 0, key_manager, &main);
 	mlx_hook(main.mlx_win, 17, 0, close_window, &main);
 	mlx_loop_hook(main.mlx_p, game_refresh, &main);
