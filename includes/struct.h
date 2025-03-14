@@ -71,6 +71,32 @@ typedef struct s_map
 	double planeY; // 
 }	t_map;
 
+enum e_texture_index
+{
+	NORTH = 0,
+	SOUTH = 1,
+	EAST = 2,
+	WEST = 3
+};
+
+typedef struct s_texinfo
+{
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	int				*floor;
+	int				*ceiling;
+	unsigned long	hex_floor;
+	unsigned long	hex_ceiling;
+	int				size;
+	int				index;
+	double			step;
+	double			pos;
+	int				x;
+	int				y;
+}	t_texinfo;
+
 typedef struct s_main
 {
 	void		*mlx_p;
@@ -87,6 +113,7 @@ typedef struct s_main
 	t_sprite	spr_floor;
 	t_sprite	spr_angle;
 	t_sprite	spr_p;
+	t_texinfo	texinfo;
 }	t_main;
 
 #endif

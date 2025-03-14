@@ -12,13 +12,14 @@ int	game_refresh(t_main *main)
 	if (main->map.z == 1 || main->map.q == 1 || main->map.s == 1 || main->map.d == 1 || main->map.left == 1 || main->map.right == 1 || check == 0)
 	{
 		put_to_zero(&main->map);
+		if (check == 1)
+			raycasting(main);
 		while (i < main->map.h)
 		{
 			update_map(main, i, px_h, check);
 			i++;
 			px_h += 48;
 		}
-
 		check = 1;
 	}
 	return (0);
@@ -133,8 +134,8 @@ void	raycasting(t_main *main)
 				mapY += stepY;
 				side = 1;
 			}
-			printf("mapX : %d (%d) | mapY : %d (%d)\n", mapX, mapX / 48, mapY, mapY / 48);
-			printf("main->map.grid[mapY / 48][mapX / 48] : %c\n", main->map.grid[mapY / 48][mapX / 48]);
+			printf("mapX : %d | mapY : %d\n", mapX, mapY);
+			printf("main->map.grid[mapY][mapX] : %c\n", main->map.grid[mapY][mapX]);
 			if (mapY < 0.25
 				|| mapX < 0.25
 				|| mapY > main->map.h - 0.25
@@ -161,8 +162,45 @@ void	raycasting(t_main *main)
 		else
 			wall_x = main->map.p_pos_x / 48 + wall_dist * rayDirX;
 		wall_x -= floor(wall_x);
-		int color = green;
-        drawLine(main, x, ly0, x, ly1, color);
+		// int color = green;
+        // drawLine(main, x, ly0, x, ly1, color);
+		
+	int			y = 0;
+	int			color = 0;
+
+	if (side == 0)
+	{
+		if (rayDirX < 0)
+			main->texinfo.index = WEST;
+		else
+			main->texinfo.index = EAST;
+	}
+	else
+	{
+		if (rayDirY > 0)
+			main->texinfo.index = SOUTH;
+		else
+			main->texinfo.index = NORTH;
+	}
+	main->texinfo.x = (int)(wall_x * main->texinfo.size);
+	if ((side == 0 && rayDirX < 0)
+		|| (side == 1 && rayDirY > 0))
+		main->texinfo.x = main->texinfo.size - main->texinfo.x - 1;
+	main->texinfo.step = 1.0 * main->texinfo.size / lh;
+	main->texinfo.pos = (ly0 - (main->map.h * 48) / 2
+			+ lh / 2) * main->texinfo.step;
+	y = ly0;
+	while (y < ly1)
+	{
+		main->texinfo.y = (int)main->texinfo.pos & (main->texinfo.size - 1);
+		main->texinfo.pos += main->texinfo.step;
+		color = green; // data->textures[main->texinfo.index][main->texinfo.size * main->texinfo.y + main->texinfo.x];
+		if (main->texinfo.index == NORTH || main->texinfo.index == EAST)
+			color = (color >> 1) & 8355711;
+		// if (color > 0)
+		// 	data->texture_pixels[y][x] = color;
+		y++;
+	}
 		x++;
 	}
 }
@@ -188,6 +226,4 @@ void	update_map(t_main *main, int i, int px_h, int check)
 	}
 	mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->spr_p.img, main->map.p_pos_x, main->map.p_pos_y);
 	mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->spr_angle.img, main->map.p_pos_x + main->map.dirX * 15, main->map.p_pos_y + main->map.dirY * 15);
-	if (check == 1)
-		raycasting(main);
 }

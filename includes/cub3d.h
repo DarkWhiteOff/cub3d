@@ -35,6 +35,7 @@ void	update_map(t_main *main, int i, int px_h, int check);
 void	put_to_zero(t_map *map);
 
 void drawLine(t_main *main, int beginX, int beginY, int endX, int endY, int color);
+void	raycasting(t_main *main);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE
