@@ -4,8 +4,9 @@ void	is_epc(t_map *map, int i, int j, t_pxy *p_pos)
 {
 	if (map->grid[i][j] == 'P')
 	{
-		map->pos++;
-		save_pos(p_pos, j, i);
+		map->player_pos++;
+		p_pos->x = j;
+		p_pos->y = i;
 	}
 }
 
@@ -31,7 +32,7 @@ void	check_epc(t_map *map, t_pxy *p_pos)
 		j = 0;
 		i++;
 	}
-	if (map->pos != 1)
+	if (map->player_pos != 1)
 	{
 		free_grids(map);
 		exit (ft_printf("Error\nVerify your player position.\n"));

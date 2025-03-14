@@ -9,7 +9,7 @@ void	render_init(t_main *main);
 int	check_map_name(char *map_name);
 void	checks_inits(t_main *main);
 void	get_screen_size(t_map *map);
-void	vars_init(t_map *map, char *map_path);
+void	vars_init(t_main *main, char *map_path);
 void	empty_line_check(char *line, int fd);
 void	parse_map(t_map *map);
 void	check_walls1(t_map *map);
@@ -22,7 +22,6 @@ void	allocate_grids(t_map *map);
 void	grid_init(t_main *main);
 void	free_grids(t_map *map);
 int	strlenmap(char *line, t_map *map);
-void	save_pos(t_pxy *e_pos, int j, int i);
 void	check_fd_error(t_main *main);
 void	sprites_init(t_main *main);
 void	free_sprites(t_main *main);
@@ -33,8 +32,6 @@ int	close_window(t_main *main);
 int	game_refresh(t_main *main);
 void	update_map(t_main *main, int i, int px_h, int check);
 void	put_to_zero(t_map *map);
-
-void drawLine(t_main *main, int beginX, int beginY, int endX, int endY, int color);
 void	raycasting(t_main *main);
 
 // GET_NEXT_LINE - LIBFT

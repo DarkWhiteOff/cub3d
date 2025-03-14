@@ -1,34 +1,52 @@
 #include "../includes/cub3d.h"
 
-void	vars_init(t_map *map, char *map_path)
+void map_init (t_map *map, char *map_path)
 {
+	//Checks
 	map->path = map_path;
 	map->h = 0;
 	map->w = 0;
-	map->px_h = 640;
-	map->px_w = 480;
-	map->pos = 0;
+	map->px_h = 0;
+	map->px_w = 0;
+	map->player_pos = 0;
+	map->grid = NULL;
+	map->highlight_grid = NULL;
 	map->sc_s.x = 0;
 	map->sc_s.y = 0;
+	//Controls
 	map->z = 0;
 	map->q = 0;
 	map->s = 0;
 	map->d = 0;
 	map->left = 0;
 	map->right = 0;
-
-	map->p_pos_x = 0.0;
-	map->p_pos_y = 0.0; // player pos
-	map->dirX = 0.0;
-	map->dirY = 1; // direction vector
-	map->planeX = -0.66;
-	map->planeY = 0.0; // 
+	//Math
+	map->px_player_pos.x = 0;
+	map->px_player_pos.y = 0;
+	map->d_player_pos.x = 0.0;
+	map->d_player_pos.y = 0.0;
 }
 
-void	save_pos(t_pxy *x_pos, int j, int i)
+void ray_init (t_ray *ray)
 {
-	x_pos->x = j;
-	x_pos->y = i;
+	ray->FOV = 60.0;
+	ray->HFOV = 30.0;
+	ray->ray_angle = 270.0; // N (270º), S (90º), W (180º), E (0º) 
+	ray->diff_ray_angle = 0.0;
+	ray->precision = 50.0;
+	ray->limit = 11.0;
+	ray->cos = 0.0;
+	ray->sin = 0.0;
+	ray->d_player_pos.x = 0.0;
+	ray->d_player_pos.y = 0.0;
+	ray->d_ray_pos.x = 0.0;
+	ray->d_ray_pos.y = 0.0;
+}
+
+void	vars_init(t_main *main, char *map_path)
+{
+	map_init(&main->map, map_path);
+	ray_init(&main->ray);
 }
 
 void	check_fd_error(t_main *main)
@@ -71,12 +89,19 @@ void	checks_inits(t_main *main)
 {
 	get_screen_size(&main->map);
 	parse_map(&main->map);
+	main->map.px_h = main->map.h * 48;
+	main->map.px_w = main->map.w * 48;
+	main->ray.diff_ray_angle = 2 * HFOV / main->map.px_w;
 	grid_init(main);
 	check_walls1(&main->map);
 	check_walls2(&main->map);
 	check_epc(&main->map, &main->p_pos);
-	main->map.p_pos_x = main->p_pos.x * 48;
-	main->map.p_pos_y = main->p_pos.y * 48;
+	main->map.px_player_pos.x = (size_t)main->p_pos.x * 48;
+	main->map.px_player_pos.y = (size_t)main->p_pos.y * 48;
+	main->ray.d_player_pos.x = (int)(main->p_pos.x + 0.5);
+	main->ray.d_player_pos.y = (int)(main->p_pos.y + 0.5);
+	ray->d_ray_pos.x = main->ray.d_player_pos.x;
+	ray->d_ray_pos.y = main->ray.d_player_pos.y;
 	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
 	check_path(&main->map, main->p_pos.x, main->p_pos.y);
 }
@@ -132,7 +157,7 @@ int	main(int argc, char *argv[])
 		return (ft_printf("Error\nNo map file /to much files were entered.\n"));
 	if (check_map_name(argv[1]) == 1)
 		return (ft_printf("Error\nMap name is incorrect.\n"));
-	vars_init(&main.map, argv[1]);
+	vars_init(&main, argv[1]);
     checks_inits(&main);
 	render_init(&main);
 	sprites_init(&main);

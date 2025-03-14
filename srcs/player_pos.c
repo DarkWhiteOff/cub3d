@@ -24,49 +24,46 @@ void	put_to_zero(t_map *map)
 	map->right = 0;
 }
 
+void	move_pl(float angle, t_main *main, float ray_cos, float ray_sin)
+{
+	float x = main->map.d_player_pos.x;
+	float y = main->map.d_player_pos.y;
+
+	ray_cos = cos(degree_to_radians(angle)) * 5; // 0.12?
+	ray_sin = sin(degree_to_radians(angle)) * 5;
+	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))][(int)(x + 0.5)]))
+		main->map.d_player_pos.y += ray_sin;
+	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))]))
+		main->map.d_player_pos.x += ray_cos;
+}
+
 void	actualise_map_data(t_main *main)
 {
-	int tmp_x = main->map.dirX;
+	float angle;
 
-	if (main->map.z == 1 || main->map.q == 1 || main->map.s == 1 || main->map.d == 1 || main->map.left == 1 || main->map.right == 1)
+	angle = main->ray.angle;
+	if (main->map.z == 1)
+		move_pl(angle, main, 0, 0);
+	else if (main->map.q == 1)
 	{
-		if (main->map.z == 1)
-		{
-			main->map.p_pos_x += main->map.dirX * 5;
-			main->map.p_pos_y += main->map.dirY * 5;
-		}
-		else if (main->map.q == 1)
-		{
-			main->map.p_pos_x += main->map.dirY * 5;
-			main->map.p_pos_y -= main->map.dirX * 5;
-		}
-		else if (main->map.s == 1)
-		{
-			main->map.p_pos_x -= main->map.dirX * 5;
-			main->map.p_pos_y -= main->map.dirY * 5;
-		}
-		else if (main->map.d == 1)
-		{
-			main->map.p_pos_x -= main->map.dirY * 5;
-			main->map.p_pos_y += main->map.dirX * 5;
-		}
-		else if (main->map.left == 1)
-		{
-			main->map.dirX = main->map.dirX * cos(-0.15000) - main->map.dirY * sin(-0.15000);
-			main->map.dirY = tmp_x * sin(-0.15000) + main->map.dirY * cos(-0.15000);
-			tmp_x = main->map.planeX;
-			main->map.planeX = main->map.planeX * cos(-0.15000) - main->map.planeY * sin(-0.15000);
-			main->map.planeY = tmp_x * sin(-0.15000) + main->map.planeY * cos(-0.15000);
-		}
-		else if (main->map.right == 1)
-		{
-			main->map.dirX = main->map.dirX * cos(0.15000) - main->map.dirY * sin(0.15000);
-			main->map.dirY = tmp_x * sin(0.15000) + main->map.dirY * cos(0.15000);
-			tmp_x = main->map.planeX;
-			main->map.planeX = main->map.planeX * cos(0.15000) - main->map.planeY * sin(0.15000);
-			main->map.planeY = tmp_x * sin(0.15000) + main->map.planeY * cos(0.15000);
-		}
+		angle = main->ray.angle - 90;
+		move_pl(angle, main, 0, 0);
 	}
+	else if (main->map.s == 1)
+	{
+		angle = main->ray.angle - 180;
+		move_pl(angle, main, 0, 0);
+	}
+	else if (main->map.d == 1)
+	{
+		angle = main->ray.angle + 180;
+		move_pl(angle, main, 0, 0);
+	}
+	else if (main->map.left == 1)
+		main->ray.ray_angle -= 3;
+	else if (main->map.right == 1)
+		main->ray.ray_angle += 3;
+	put_to_zero(&main->map);
 }
 
 int	key_manager(int keycode, t_main *main)
@@ -85,6 +82,5 @@ int	key_manager(int keycode, t_main *main)
 		main->map.left = 1;
 	if (keycode == 65363)
 		main->map.right = 1;
-	actualise_map_data(main);
 	return (0);
 }
