@@ -9,6 +9,7 @@ void map_init (t_map *map, char *map_path)
 	map->px_h = 0;
 	map->px_w = 0;
 	map->player_pos = 0;
+	map->fd = -1;
 	map->grid = NULL;
 	map->highlight_grid = NULL;
 	map->sc_s.x = 0;
@@ -37,14 +38,23 @@ void ray_init (t_ray *ray)
 	ray->limit = 11.0;
 	ray->cos = 0.0;
 	ray->sin = 0.0;
-	ray->d_player_pos.x = 0.0;
-	ray->d_player_pos.y = 0.0;
 	ray->d_ray_pos.x = 0.0;
 	ray->d_ray_pos.y = 0.0;
 }
 
 void	vars_init(t_main *main, char *map_path)
 {
+	main->mlx_p = NULL;
+	main->mlx_win= NULL;
+	main->img = NULL;
+	main->addr = NULL;
+	main->b = 0;
+	main->ls = 0;
+	main->end = 0;
+	main->p_pos.x = -1;
+	main->p_pos.y = -1;
+	main->rate = 30;
+	main->nframes = 0;
 	map_init(&main->map, map_path);
 	ray_init(&main->ray);
 }
@@ -89,19 +99,19 @@ void	checks_inits(t_main *main)
 {
 	get_screen_size(&main->map);
 	parse_map(&main->map);
-	main->map.px_h = main->map.h * 48;
-	main->map.px_w = main->map.w * 48;
-	main->ray.diff_ray_angle = 2 * HFOV / main->map.px_w;
+	main->map.px_h = 480; // main->map.h * 48
+	main->map.px_w = 640; // main->map.w * 48
+	main->ray.diff_ray_angle = 2 * main->ray.HFOV / main->map.px_w;
 	grid_init(main);
 	check_walls1(&main->map);
 	check_walls2(&main->map);
 	check_epc(&main->map, &main->p_pos);
 	main->map.px_player_pos.x = (size_t)main->p_pos.x * 48;
 	main->map.px_player_pos.y = (size_t)main->p_pos.y * 48;
-	main->ray.d_player_pos.x = (int)(main->p_pos.x + 0.5);
-	main->ray.d_player_pos.y = (int)(main->p_pos.y + 0.5);
-	ray->d_ray_pos.x = main->ray.d_player_pos.x;
-	ray->d_ray_pos.y = main->ray.d_player_pos.y;
+	main->map.d_player_pos.x = (float)(main->p_pos.x);
+	main->map.d_player_pos.y = (float)(main->p_pos.y);
+	// main->ray.d_ray_pos.x = main->map.d_player_pos.x;
+	// main->ray.d_ray_pos.y = main->map.d_player_pos.y;
 	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
 	check_path(&main->map, main->p_pos.x, main->p_pos.y);
 }
@@ -129,7 +139,7 @@ void	render_init(t_main *main)
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
 	main->mlx_win = mlx_new_window(main->mlx_p,
-			(main->map.w * 48) * 2, main->map.h * 48, "cub3d");
+			main->map.px_w, main->map.px_h, "cub3d");
 	if (!main->mlx_win)
 	{
 		mlx_destroy_display(main->mlx_p);
@@ -137,7 +147,7 @@ void	render_init(t_main *main)
 		free_grids(&main->map);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
-	main->img = mlx_new_image(main->mlx_p, (main->map.w * 48) * 2, main->map.h * 48);
+	main->img = mlx_new_image(main->mlx_p, main->map.px_w, main->map.px_h);
 	if (!main->img)
 	{
 		mlx_destroy_window(main->mlx_p, main->mlx_win);
@@ -162,7 +172,8 @@ int	main(int argc, char *argv[])
 	render_init(&main);
 	sprites_init(&main);
 	game_refresh(&main);
-	mlx_hook(main.mlx_win, 2, 1L << 0, key_manager, &main);
+	mlx_hook(main.mlx_win, 2, 1L << 0, key_manager_down, &main);
+	mlx_hook(main.mlx_win, 3, 1L << 1, key_manager_up, &main);
 	mlx_hook(main.mlx_win, 17, 0, close_window, &main);
 	mlx_loop_hook(main.mlx_p, game_refresh, &main);
 	mlx_loop(main.mlx_p);

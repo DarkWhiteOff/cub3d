@@ -27,12 +27,14 @@ void	sprites_init(t_main *main);
 void	free_sprites(t_main *main);
 void	update_player_pos(t_main *main, char c);
 void	actualise_map_data(t_main *main);
-int	key_manager(int keycode, t_main *main);
+int	key_manager_down(int keycode, t_main *main);
+int	key_manager_up(int keycode, t_main *main);
 int	close_window(t_main *main);
 int	game_refresh(t_main *main);
 void	update_map(t_main *main, int i, int px_h, int check);
 void	put_to_zero(t_map *map);
 void	raycasting(t_main *main);
+float	degree_to_radians(float degree);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE

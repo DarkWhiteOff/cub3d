@@ -24,13 +24,18 @@ void	put_to_zero(t_map *map)
 	map->right = 0;
 }
 
+float	degree_to_radians(float degree)
+{
+	return (degree * PI / 180);
+}
+
 void	move_pl(float angle, t_main *main, float ray_cos, float ray_sin)
 {
 	float x = main->map.d_player_pos.x;
 	float y = main->map.d_player_pos.y;
 
-	ray_cos = cos(degree_to_radians(angle)) * 5; // 0.12?
-	ray_sin = sin(degree_to_radians(angle)) * 5;
+	ray_cos = cos(degree_to_radians(angle)) * 0.12; // 0.12?
+	ray_sin = sin(degree_to_radians(angle)) * 0.12;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))][(int)(x + 0.5)]))
 		main->map.d_player_pos.y += ray_sin;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))]))
@@ -41,38 +46,38 @@ void	actualise_map_data(t_main *main)
 {
 	float angle;
 
-	angle = main->ray.angle;
+	angle = main->ray.ray_angle;
 	if (main->map.z == 1)
 		move_pl(angle, main, 0, 0);
 	else if (main->map.q == 1)
 	{
-		angle = main->ray.angle - 90;
+		angle = main->ray.ray_angle - 90;
 		move_pl(angle, main, 0, 0);
 	}
 	else if (main->map.s == 1)
 	{
-		angle = main->ray.angle - 180;
+		angle = main->ray.ray_angle - 180;
 		move_pl(angle, main, 0, 0);
 	}
 	else if (main->map.d == 1)
 	{
-		angle = main->ray.angle + 180;
+		angle = main->ray.ray_angle + 90;
 		move_pl(angle, main, 0, 0);
 	}
 	else if (main->map.left == 1)
 		main->ray.ray_angle -= 3;
 	else if (main->map.right == 1)
 		main->ray.ray_angle += 3;
-	put_to_zero(&main->map);
+	// put_to_zero(&main->map);
 }
 
-int	key_manager(int keycode, t_main *main)
+int	key_manager_down(int keycode, t_main *main)
 {
 	if (keycode == 53 || keycode == 65307)
 		close_window(main);
-	if (keycode == 119) // 122
+	if (keycode == 122) // 119
 		main->map.z = 1;
-	if (keycode == 97) // 113
+	if (keycode == 113) // 97
 		main->map.q = 1;
 	if (keycode == 115)
 		main->map.s = 1;
@@ -82,5 +87,22 @@ int	key_manager(int keycode, t_main *main)
 		main->map.left = 1;
 	if (keycode == 65363)
 		main->map.right = 1;
+	return (0);
+}
+
+int	key_manager_up(int keycode, t_main *main)
+{
+	if (keycode == 122) // 119
+		main->map.z = 0;
+	if (keycode == 113) // 97
+		main->map.q = 0;
+	if (keycode == 115)
+		main->map.s = 0;
+	if (keycode == 100)
+		main->map.d = 0;
+	if (keycode == 65361)
+		main->map.left = 0;
+	if (keycode == 65363)
+		main->map.right = 0;
 	return (0);
 }

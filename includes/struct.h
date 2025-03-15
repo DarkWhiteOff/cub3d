@@ -20,14 +20,13 @@
 # include <stdarg.h>
 # include <math.h>
 
-# define M_PI 3.1415926535
+# define PI 3.1415926535
 
 # define white 0xFFFFFF
 # define red   0x00FF0000
 # define green 0x0000FF00
 # define blue  0x000000FF
 # define black 000000
-# define  0xFFFF00
 
 typedef struct s_pxy
 {
@@ -64,8 +63,7 @@ typedef struct s_ray
 	float limit;
 	float cos;
 	float sin;
-	t_d_pxy d_player_pos
-	t_d_pxy d_ray_pos
+	t_d_pxy d_ray_pos;
 }	t_ray;
 
 typedef struct s_map
@@ -89,13 +87,14 @@ typedef struct s_map
 	int			left;
 	int			right;
 	// Math
-	t_px_pxy px_payer_pos
+	t_px_pxy px_player_pos;
+	t_d_pxy d_player_pos;
 }	t_map;
 
 typedef struct s_main
 {
 	void		*mlx_p;
-	void		*;
+	void		*mlx_win;
 	void		*img;
 	char		*addr;
 	int			b;
@@ -108,6 +107,8 @@ typedef struct s_main
 	t_sprite	spr_floor;
 	t_sprite	spr_angle;
 	t_sprite	spr_p;
+	int rate;
+	long nframes;
 }	t_main;
 
 #endif
