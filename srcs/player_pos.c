@@ -14,25 +14,17 @@ int	close_window(t_main *main)
 	exit (ft_printf("Windows was killed.\n"));
 }
 
-void	put_to_zero(t_map *map)
-{
-	map->z = 0;
-	map->q = 0;
-	map->s = 0;
-	map->d = 0;
-	map->left = 0;
-	map->right = 0;
-}
-
 float	degree_to_radians(float degree)
 {
 	return (degree * PI / 180);
 }
 
-void	move_pl(float angle, t_main *main, float ray_cos, float ray_sin)
+void	move(float angle, t_main *main)
 {
 	float x = main->map.d_player_pos.x;
 	float y = main->map.d_player_pos.y;
+	float ray_cos;
+	float ray_sin;
 
 	ray_cos = cos(degree_to_radians(angle)) * 0.12; // 0.12?
 	ray_sin = sin(degree_to_radians(angle)) * 0.12;
@@ -42,33 +34,32 @@ void	move_pl(float angle, t_main *main, float ray_cos, float ray_sin)
 		main->map.d_player_pos.x += ray_cos;
 }
 
-void	actualise_map_data(t_main *main)
+void	actualise_player(t_main *main)
 {
 	float angle;
 
 	angle = main->ray.ray_angle;
 	if (main->map.z == 1)
-		move_pl(angle, main, 0, 0);
+		move(angle, main);
 	else if (main->map.q == 1)
 	{
 		angle = main->ray.ray_angle - 90;
-		move_pl(angle, main, 0, 0);
+		move(angle, main);
 	}
 	else if (main->map.s == 1)
 	{
 		angle = main->ray.ray_angle - 180;
-		move_pl(angle, main, 0, 0);
+		move(angle, main);
 	}
 	else if (main->map.d == 1)
 	{
 		angle = main->ray.ray_angle + 90;
-		move_pl(angle, main, 0, 0);
+		move(angle, main);
 	}
 	else if (main->map.left == 1)
 		main->ray.ray_angle -= 3;
 	else if (main->map.right == 1)
 		main->ray.ray_angle += 3;
-	// put_to_zero(&main->map);
 }
 
 int	key_manager_down(int keycode, t_main *main)

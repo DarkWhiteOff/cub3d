@@ -9,7 +9,7 @@ void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int co
 	*(unsigned int *)dst = color;
 }
 
-void	draw_texture(t_main *main, int ray_count, int wall_height)
+void	draw_texture(t_main *main, int ray_count, int wall_height) //Rien compris
 {
 	float	dy;
 	float	ds;
@@ -46,31 +46,34 @@ void	raycasting(t_main *main)
 
 	while (++i < main->map.px_w)
 	{
+		//Ray end pos calculations
 		main->ray.cos = cos(degree_to_radians(ray_angle)) / main->ray.precision;
 		main->ray.sin = sin(degree_to_radians(ray_angle)) / main->ray.precision;
 		main->ray.d_ray_pos.x = main->map.d_player_pos.x + 0.5;
 		main->ray.d_ray_pos.y = main->map.d_player_pos.y + 0.5;
 		while (!ft_strchr("1", main->map.grid[(int)main->ray.d_ray_pos.y][(int)main->ray.d_ray_pos.x]) && \
-			sqrt(powf(main->ray.d_ray_pos.x - main->map.d_player_pos.x - 0.5, 2.) + \
-			powf(main->ray.d_ray_pos.y - main->map.d_player_pos.y - 0.5, 2.)) < main->ray.limit)
+			sqrt(powf(main->ray.d_ray_pos.x - main->map.d_player_pos.x - 0.5, 2.0) + \
+			powf(main->ray.d_ray_pos.y - main->map.d_player_pos.y - 0.5, 2.0)) < main->ray.limit)
 		{
 			
 			main->ray.d_ray_pos.x += main->ray.cos;
 			main->ray.d_ray_pos.y += main->ray.sin;
 		}
-		distance = sqrt(powf(main->ray.d_ray_pos.x - main->map.d_player_pos.x - 0.5, 2.) + powf(main->ray.d_ray_pos.y - main->map.d_player_pos.y - 0.5, 2.));
-		distance = distance * cos(degree_to_radians(ray_angle - main->ray.ray_angle));
-		
+		//Wall height calculations
+		distance = sqrt(powf(main->ray.d_ray_pos.x - main->map.d_player_pos.x - 0.5, 2.0) + powf(main->ray.d_ray_pos.y - main->map.d_player_pos.y - 0.5, 2.0));
+		distance = distance * cos(degree_to_radians(ray_angle - main->ray.ray_angle));	
 		wall_h = (int)(main->map.px_h / (1.5 * distance));
 		ds = ((float)main->map.px_h / 2) - (float)wall_h;
+		//Put pixels on img (not window)
 		j = -1;
 		while (++j < main->map.px_h)
 		{
 			if (j < ds)
-				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, green);
+				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, green); //Ceiling
 			else if (j >= (main->map.px_h / 2) + wall_h)
-				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, red);
+				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, red); //Floor
 		}
+		//Rienc compris à cette fonction
 		draw_texture(main, i, wall_h);
 		ray_angle += main->ray.diff_ray_angle;
 	}
@@ -78,12 +81,8 @@ void	raycasting(t_main *main)
 
 int	game_refresh(t_main *main)
 {
-	if (!(main->nframes % main->rate))
-	{
-		actualise_map_data(main); // MOVES
-		raycasting(main); // RAYCAST
-		mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->img, 0, 0);
-	}
-	main->nframes++;
+	actualise_player(main); // MOVES
+	raycasting(main); // RAYCAST
+	mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->img, 0, 0); // REFRESH IMG
 	return (0);
 }

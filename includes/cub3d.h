@@ -5,8 +5,8 @@
 # include "struct.h"
 
 // CUB3D
-void	render_init(t_main *main);
-int	check_map_name(char *map_name);
+void    render_init(t_main *main);
+int     check_map_name(char *map_name);
 void	checks_inits(t_main *main);
 void	get_screen_size(t_map *map);
 void	vars_init(t_main *main, char *map_path);
@@ -14,26 +14,27 @@ void	empty_line_check(char *line, int fd);
 void	parse_map(t_map *map);
 void	check_walls1(t_map *map);
 void	check_walls2(t_map *map);
-int	check_map_limits_epc(t_map *map, int y, int x);
+int     check_map_limits_epc(t_map *map, int y, int x);
 void	is_epc(t_map *map, int i, int j, t_pxy *p_pos);
 void	check_epc(t_map *map, t_pxy *p_pos);
 void	check_path(t_map *map, int x, int y);
 void	allocate_grids(t_map *map);
 void	grid_init(t_main *main);
 void	free_grids(t_map *map);
-int	strlenmap(char *line, t_map *map);
+int     strlenmap(char *line, t_map *map);
 void	check_fd_error(t_main *main);
 void	sprites_init(t_main *main);
 void	free_sprites(t_main *main);
 void	update_player_pos(t_main *main, char c);
-void	actualise_map_data(t_main *main);
-int	key_manager_down(int keycode, t_main *main);
-int	key_manager_up(int keycode, t_main *main);
-int	close_window(t_main *main);
-int	game_refresh(t_main *main);
-void	update_map(t_main *main, int i, int px_h, int check);
-void	put_to_zero(t_map *map);
+void	actualise_player(t_main *main);
+void	move(float angle, t_main *main);
+int     key_manager_down(int keycode, t_main *main);
+int     key_manager_up(int keycode, t_main *main);
+int     close_window(t_main *main);
+int     game_refresh(t_main *main);
 void	raycasting(t_main *main);
+void	draw_texture(t_main *main, int ray_count, int wall_height);
+void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int color);
 float	degree_to_radians(float degree);
 
 // GET_NEXT_LINE - LIBFT

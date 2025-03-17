@@ -86,13 +86,14 @@ typedef struct s_map
 	int			d;
 	int			left;
 	int			right;
-	// Math
+	//Pos
 	t_px_pxy px_player_pos;
 	t_d_pxy d_player_pos;
 }	t_map;
 
 typedef struct s_main
 {
+	//Mlx
 	void		*mlx_p;
 	void		*mlx_win;
 	void		*img;
@@ -100,15 +101,15 @@ typedef struct s_main
 	int			b;
 	int			ls;
 	int			end;
+	//Map
 	t_map		map;
 	t_ray		ray;
 	t_pxy		p_pos;
+	//Sprites
 	t_sprite	spr_wall;
 	t_sprite	spr_floor;
 	t_sprite	spr_angle;
 	t_sprite	spr_p;
-	int rate;
-	long nframes;
 }	t_main;
 
 #endif

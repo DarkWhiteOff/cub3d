@@ -32,7 +32,7 @@ void ray_init (t_ray *ray)
 {
 	ray->FOV = 60.0;
 	ray->HFOV = 30.0;
-	ray->ray_angle = 270.0; // N (270º), S (90º), W (180º), E (0º) 
+	ray->ray_angle = 270.0; // N (270º), S (90º), W (180º), E (0º)
 	ray->diff_ray_angle = 0.0;
 	ray->precision = 50.0;
 	ray->limit = 11.0;
@@ -53,8 +53,6 @@ void	vars_init(t_main *main, char *map_path)
 	main->end = 0;
 	main->p_pos.x = -1;
 	main->p_pos.y = -1;
-	main->rate = 30;
-	main->nframes = 0;
 	map_init(&main->map, map_path);
 	ray_init(&main->ray);
 }
@@ -110,8 +108,6 @@ void	checks_inits(t_main *main)
 	main->map.px_player_pos.y = (size_t)main->p_pos.y * 48;
 	main->map.d_player_pos.x = (float)(main->p_pos.x);
 	main->map.d_player_pos.y = (float)(main->p_pos.y);
-	// main->ray.d_ray_pos.x = main->map.d_player_pos.x;
-	// main->ray.d_ray_pos.y = main->map.d_player_pos.y;
 	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
 	check_path(&main->map, main->p_pos.x, main->p_pos.y);
 }
