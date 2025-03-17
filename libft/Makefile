@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	ft_printf.c \
+SRC =	ft_strncmp.c \
+	ft_printf.c \
 	ft_hex.c \
 	ft_itoa.c \
 	ft_ptr.c \
@@ -20,7 +21,8 @@ SRC =	ft_printf.c \
 	get_next_line.c \
 	get_next_line_utils.c
 
-BFILES =	ft_printf.o \
+BFILES =	ft_strncmp.o \
+		ft_printf.o \
 		ft_hex.o \
 		ft_itoa.o \
 		ft_ptr.o \

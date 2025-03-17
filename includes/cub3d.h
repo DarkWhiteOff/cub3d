@@ -11,17 +11,18 @@ void	checks_inits(t_main *main);
 void	get_screen_size(t_map *map);
 void	vars_init(t_main *main, char *map_path);
 void	empty_line_check(char *line, int fd);
-void	parse_map(t_map *map);
+void	get_infos(t_main *main);
+void	parse_map(t_main *main);
 void	check_walls1(t_map *map);
 void	check_walls2(t_map *map);
-int     check_map_limits_epc(t_map *map, int y, int x);
-void	is_epc(t_map *map, int i, int j, t_pxy *p_pos);
-void	check_epc(t_map *map, t_pxy *p_pos);
+int     check_other_char(t_map *map, int y, int x);
+void	is_epc(t_main *main, int i, int j, t_pxy *p_pos);
+void	check_epc(t_main *main, t_pxy *p_pos);
 void	check_path(t_map *map, int x, int y);
 void	allocate_grids(t_map *map);
 void	grid_init(t_main *main);
 void	free_grids(t_map *map);
-int     strlenmap(char *line, t_map *map);
+int     strlenmap(char *line);
 void	check_fd_error(t_main *main);
 void	sprites_init(t_main *main);
 void	free_sprites(t_main *main);
@@ -42,15 +43,14 @@ float	degree_to_radians(float degree);
 #  define BUFFER_SIZE 42
 # endif
 
-char	*get_next_line(int fd, t_map *map);
+char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strcat(char *dest, char *src);
 char	*ft_strchr(const char *s, int c);
 int		ft(const char *s, unsigned char c);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
-char	*ft_gen(char *newstr, char const *str, unsigned int s, size_t len);
-size_t	ft_calc(char const *str, unsigned int start, size_t len);
+int     ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // FT_PRINTF
 int		ft_printf(const char *str, ...);

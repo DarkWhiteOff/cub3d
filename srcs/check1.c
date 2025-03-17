@@ -1,30 +1,45 @@
 #include "../includes/cub3d.h"
 
-void	is_epc(t_map *map, int i, int j, t_pxy *p_pos)
+void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
 {
-	if (map->grid[i][j] == 'P')
+	if (main->map.grid[i][j] == 'N' || main->map.grid[i][j] == 'S' || main->map.grid[i][j] == 'W' || main->map.grid[i][j] == 'E')
 	{
-		map->player_pos++;
+		main->map.player_pos++;
 		p_pos->x = j;
 		p_pos->y = i;
+		if (main->map.grid[i][j] == 'N')
+			main->ray.ray_angle = 270.0;
+		if (main->map.grid[i][j] == 'S')
+			main->ray.ray_angle = 90.0;
+		if (main->map.grid[i][j] == 'W')
+			main->ray.ray_angle = 180.0;
+		if (main->map.grid[i][j] == 'E')
+			main->ray.ray_angle = 0.0;
 	}
 }
 
-void	check_epc(t_map *map, t_pxy *p_pos)
+int	check_other_char(t_map *map, int y, int x)
+{
+	if (map->grid[y][x] != 'N' && map->grid[y][x] != 'S' && map->grid[y][x] != 'W' && map->grid[y][x] != 'E' && map->grid[y][x] != '0' && map->grid[y][x] != '1')
+		return (1);
+	return (0);
+}
+
+void	check_epc(t_main *main, t_pxy *p_pos)
 {
 	int	i;
 	int	j;
 
 	i = 1;
 	j = 0;
-	while (i < map->h - 1)
+	while (i < main->map.h - 1)
 	{
-		while (map->grid[i][j] != '\0')
+		while (main->map.grid[i][j] != '\0')
 		{
-			is_epc(map, i, j, p_pos);
-			if (check_map_limits_epc(map, i, j) == 0)
+			is_epc(main, i, j, p_pos);
+			if (check_other_char(&main->map, i, j) == 1)
 			{
-				free_grids(map);
+				free_grids(&main->map);
 				exit (ft_printf("Error\nMap contains unrecognized character.\n"));
 			}
 			j++;
@@ -32,24 +47,11 @@ void	check_epc(t_map *map, t_pxy *p_pos)
 		j = 0;
 		i++;
 	}
-	if (map->player_pos != 1)
+	if (main->map.player_pos != 1)
 	{
-		free_grids(map);
-		exit (ft_printf("Error\nVerify your player position.\n"));
+		free_grids(&main->map);
+		exit (ft_printf("Error\nNo player position.\n"));
 	}
-}
-
-void	check_path(t_map *map, int x, int y)
-{
-	if (map->grid[y][x] == '1' || map->highlight_grid[y][x] == '1'
-		|| x < 0 || y < 0 || x > map->w || y > map->h)
-		return ;
-	map->highlight_grid[y][x] = '1';
-	check_path(map, x - 1, y);
-	check_path(map, x + 1, y);
-	check_path(map, x, y - 1);
-	check_path(map, x, y + 1);
-	return ;
 }
 
 void	allocate_grids(t_map *map)
@@ -91,7 +93,12 @@ void	grid_init(t_main *main)
 	j = 0;
 	main->map.fd = open(main->map.path, O_RDONLY);
 	check_fd_error(main);
-	line = get_next_line(main->map.fd, &main->map);
+	line = get_next_line(main->map.fd);
+	while (main->tex.map_start--)
+	{
+		free(line);
+		line = get_next_line(main->map.fd);
+	}
 	allocate_grids(&main->map);
 	while (i < main->map.h)
 	{
@@ -103,7 +110,7 @@ void	grid_init(t_main *main)
 		main->map.grid[i++][j] = '\0';
 		j = 0;
 		free(line);
-		line = get_next_line(main->map.fd, &main->map);
+		line = get_next_line(main->map.fd);
 	}
 	close(main->map.fd);
 }

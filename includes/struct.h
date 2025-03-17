@@ -53,6 +53,17 @@ typedef struct s_sprite
 	void	*img;
 }	t_sprite;
 
+typedef struct s_tex
+{
+	char *NO;
+	char *SO;
+	char *WE;
+	char *EA;
+	int color_f;
+	int color_c;
+	int map_start;
+}	t_tex;
+
 typedef struct s_ray
 {
 	float FOV;
@@ -78,7 +89,6 @@ typedef struct s_map
 	int		fd;
 	char	**grid;
 	char	**highlight_grid;
-	t_pxy	sc_s;
 	//Controls
 	int			z;
 	int			q;
@@ -104,12 +114,14 @@ typedef struct s_main
 	//Map
 	t_map		map;
 	t_ray		ray;
+	t_tex		tex;
 	t_pxy		p_pos;
 	//Sprites
 	t_sprite	spr_wall;
 	t_sprite	spr_floor;
 	t_sprite	spr_angle;
 	t_sprite	spr_p;
+	int fdtest;
 }	t_main;
 
 #endif

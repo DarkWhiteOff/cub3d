@@ -6,14 +6,12 @@ void map_init (t_map *map, char *map_path)
 	map->path = map_path;
 	map->h = 0;
 	map->w = 0;
-	map->px_h = 0;
-	map->px_w = 0;
+	map->px_h = 480;
+	map->px_w = 640;
 	map->player_pos = 0;
 	map->fd = -1;
 	map->grid = NULL;
 	map->highlight_grid = NULL;
-	map->sc_s.x = 0;
-	map->sc_s.y = 0;
 	//Controls
 	map->z = 0;
 	map->q = 0;
@@ -32,7 +30,7 @@ void ray_init (t_ray *ray)
 {
 	ray->FOV = 60.0;
 	ray->HFOV = 30.0;
-	ray->ray_angle = 270.0; // N (270º), S (90º), W (180º), E (0º)
+	ray->ray_angle = 0.0;
 	ray->diff_ray_angle = 0.0;
 	ray->precision = 50.0;
 	ray->limit = 11.0;
@@ -40,6 +38,17 @@ void ray_init (t_ray *ray)
 	ray->sin = 0.0;
 	ray->d_ray_pos.x = 0.0;
 	ray->d_ray_pos.y = 0.0;
+}
+
+void tex_init (t_tex *tex)
+{
+	tex->NO = NULL;
+	tex->SO = NULL;
+	tex->WE = NULL;
+	tex->EA = NULL;
+	tex->color_f = -1;
+	tex->color_c = -1;
+	tex->map_start = -1;
 }
 
 void	vars_init(t_main *main, char *map_path)
@@ -55,6 +64,8 @@ void	vars_init(t_main *main, char *map_path)
 	main->p_pos.y = -1;
 	map_init(&main->map, map_path);
 	ray_init(&main->ray);
+	tex_init(&main->tex);
+	main->ray.diff_ray_angle = 2 * main->ray.HFOV / main->map.px_w;
 }
 
 void	check_fd_error(t_main *main)
@@ -63,47 +74,24 @@ void	check_fd_error(t_main *main)
 		exit (ft_printf("Error\nfd not working."));
 }
 
-int	strlenmap(char *line, t_map *map)
+int	strlenmap(char *line)
 {
 	int	i;
 
 	i = 0;
 	while (line[i] != '\n' && line[i] != '\0')
 		i++;
-	if (i > map->sc_s.x / 48)
-	{
-		free(line);
-		exit (ft_printf("Error\nYour screen is too small for this map !"));
-	}
 	return (i);
-}
-
-void	get_screen_size(t_map *map)
-{
-	void	*mlxptr;
-
-	mlxptr = mlx_init();
-	if (!mlxptr)
-	{
-		free(mlxptr);
-		exit (ft_printf("Error\nMlx failed.\n"));
-	}
-	mlx_get_screen_size(mlxptr, &map->sc_s.x, &map->sc_s.y);
-	mlx_destroy_display(mlxptr);
-	free(mlxptr);
 }
 
 void	checks_inits(t_main *main)
 {
-	get_screen_size(&main->map);
-	parse_map(&main->map);
-	main->map.px_h = 480; // main->map.h * 48
-	main->map.px_w = 640; // main->map.w * 48
-	main->ray.diff_ray_angle = 2 * main->ray.HFOV / main->map.px_w;
+	get_infos(main);
+	parse_map(main);
 	grid_init(main);
 	check_walls1(&main->map);
 	check_walls2(&main->map);
-	check_epc(&main->map, &main->p_pos);
+	check_epc(main, &main->p_pos);
 	main->map.px_player_pos.x = (size_t)main->p_pos.x * 48;
 	main->map.px_player_pos.y = (size_t)main->p_pos.y * 48;
 	main->map.d_player_pos.x = (float)(main->p_pos.x);
@@ -119,8 +107,8 @@ int	check_map_name(char *map_name)
 	i = 0;
 	while (map_name[i] != '\0')
 		i++;
-	if (map_name[i - 1] == 'r' && map_name[i - 2] == 'e'
-		&& map_name[i - 3] == 'b' && map_name[i - 4] == '.'
+	if (map_name[i - 1] == 'b' && map_name[i - 2] == 'u'
+		&& map_name[i - 3] == 'c' && map_name[i - 4] == '.'
 		&& (map_name[i - 5] != '/' && map_name[i - 5] != 0))
 		return (0);
 	return (1);
