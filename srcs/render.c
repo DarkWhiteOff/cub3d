@@ -9,7 +9,7 @@ void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int co
 	*(unsigned int *)dst = color;
 }
 
-void	draw_texture(t_main *main, int ray_count, int wall_height) //Rien compris
+void	draw_texture(t_main *main, int ray_count, int wall_height) //A refaire pour comprendre
 {
 	float	dy;
 	float	ds;
@@ -73,7 +73,7 @@ void	raycasting(t_main *main)
 			else if (j >= (main->map.px_h / 2) + wall_h)
 				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, red); //Floor
 		}
-		//Rienc compris à cette fonction
+		//Complexe mais la fonction dessine les murs sur l'img
 		draw_texture(main, i, wall_h);
 		ray_angle += main->ray.diff_ray_angle;
 	}
