@@ -8,6 +8,7 @@ void map_init (t_map *map, char *map_path)
 	map->w = 0;
 	map->px_h = 480;
 	map->px_w = 640;
+	map->diff_w = NULL;
 	map->player_pos = 0;
 	map->fd = -1;
 	map->grid = NULL;
@@ -89,6 +90,27 @@ void	checks_inits(t_main *main)
 	get_infos(main);
 	parse_map(main);
 	grid_init(main);
+
+	int i = 0;
+	int j = 0;
+	printf("main->map.h : %d\n", main->map.h);
+	while (main->map.diff_w[i] != -1)
+	{
+		printf("main->map.w : %d (%d)\n", main->map.diff_w[i], i);
+		i++;
+	}
+	i = 0;
+	while (i < main->map.h)
+	{
+		while (j < main->map.diff_w[i])
+		{
+			printf("%c", main->map.grid[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+		j = 0;
+	}
 	check_walls1(&main->map);
 	check_walls2(&main->map);
 	check_epc(main, &main->p_pos);

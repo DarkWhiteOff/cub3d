@@ -65,14 +65,14 @@ void	allocate_grids(t_map *map)
 	map->highlight_grid = (char **)malloc(sizeof(char *) * map->h + 1);
 	while (i < map->h)
 	{
-		map->grid[i] = (char *)malloc(sizeof(char) * map->w + 1);
-		map->highlight_grid[i] = (char *)malloc(sizeof(char) * map->w + 1);
+		map->grid[i] = (char *)malloc(sizeof(char) * (map->diff_w[i] + 1));
+		map->highlight_grid[i] = (char *)malloc(sizeof(char) * (map->diff_w[i] + 1));
 		i++;
 	}
 	i = 0;
 	while (i < map->h)
 	{
-		while (j < map->w)
+		while (j < map->diff_w[i])
 		{
 			map->highlight_grid[i][j] = '0';
 			j++;
