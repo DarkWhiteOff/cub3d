@@ -26,8 +26,8 @@ void	move(float angle, t_main *main)
 	float ray_cos;
 	float ray_sin;
 
-	ray_cos = cos(degree_to_radians(angle)) * 0.12; // 0.12?
-	ray_sin = sin(degree_to_radians(angle)) * 0.12;
+	ray_cos = cos(degree_to_radians(angle)) * 0.05;
+	ray_sin = sin(degree_to_radians(angle)) * 0.05;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))][(int)(x + 0.5)]))
 		main->map.d_player_pos.y += ray_sin;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))]))
@@ -57,43 +57,43 @@ void	actualise_player(t_main *main)
 		move(angle, main);
 	}
 	else if (main->map.left == 1)
-		main->ray.ray_angle -= 3;
+		main->ray.ray_angle -= 0.6;
 	else if (main->map.right == 1)
-		main->ray.ray_angle += 3;
+		main->ray.ray_angle += 0.6;
 }
 
 int	key_manager_down(int keycode, t_main *main)
 {
-	if (keycode == 53 || keycode == 65307)
+	if (keycode == 53 || keycode == KEY_ESC)
 		close_window(main);
-	if (keycode == 122) // 119
+	if (keycode == KEY_W)
 		main->map.z = 1;
-	if (keycode == 113) // 97
+	if (keycode == KEY_A)
 		main->map.q = 1;
-	if (keycode == 115)
+	if (keycode == KEY_S)
 		main->map.s = 1;
-	if (keycode == 100)
+	if (keycode == KEY_D)
 		main->map.d = 1;
-	if (keycode == 65361)
+	if (keycode == KEY_LEFT)
 		main->map.left = 1;
-	if (keycode == 65363)
+	if (keycode == KEY_RIGHT)
 		main->map.right = 1;
 	return (0);
 }
 
 int	key_manager_up(int keycode, t_main *main)
 {
-	if (keycode == 122) // 119
+	if (keycode == KEY_W)
 		main->map.z = 0;
-	if (keycode == 113) // 97
+	if (keycode == KEY_A)
 		main->map.q = 0;
-	if (keycode == 115)
+	if (keycode == KEY_S)
 		main->map.s = 0;
-	if (keycode == 100)
+	if (keycode == KEY_D)
 		main->map.d = 0;
-	if (keycode == 65361)
+	if (keycode == KEY_LEFT)
 		main->map.left = 0;
-	if (keycode == 65363)
+	if (keycode == KEY_RIGHT)
 		main->map.right = 0;
 	return (0);
 }

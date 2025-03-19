@@ -13,34 +13,61 @@ int get_index_hex(char c)
 	return (-1);
 }
 
-char	*get_rgb(char *line)
+int	get_rgb(char *line, int rgb)
 {
 	int i = 0;
-	int res = 0;
+	int j;
+	int r = 0;
+	int g = 0;
+	int b = 0;
+	int c = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		printf("line %s || c = %c\n", line, line[i]);
 		if (line[i] < 58 && line[i] > 47)
 		{
-			res *= 10;
-			res += line[i]-48;
+			j = 0;
+			while (line[i + j] && j < 3 && (line[i + j] < 58 && line[i + j] > 47))
+			{
+				if (c == 0)
+				{
+					r *= 10;
+					r += line[i + j] - 48;
+				}
+				if (c == 1)
+				{
+					g *= 10;
+					g += line[i + j] - 48;
+				}
+				if (c == 2)
+				{
+					b *= 10;
+					b += line[i + j] - 48;
+				}
+				j++;
+			}
+			c++;
+			i+=j;
 		}
 		i++;
 	}
-	return (ft_itoa(res));
+	if (rgb == 1)
+		return (r);
+	if (rgb == 2)
+		return (g);
+	return (b);
 }
 
-int    rgbToHex(char *rgb)
+int    rgbToHex(char *line)
 {
     char hex[] = "0123456789ABCDEF";
     char res[7] = "0000000";
 	int dec = 0;
 
-	printf("rgb %s\n", rgb);
-	return (0);
-	int r = 0;
-	int g = 0;
-	int b = 0;
+	int r = get_rgb(line, 1);
+	int g = get_rgb(line, 2);
+	int b = get_rgb(line, 3);
+
+	printf("r %d g %d b %d\n", r, g, b);
 
     int r0 = r/16;
     int g0 = g/16;
@@ -61,7 +88,30 @@ int    rgbToHex(char *rgb)
 		+ get_index_hex(res[3]) * pow(16, 2) + get_index_hex(res[2]) * pow(16, 3)
 		+ get_index_hex(res[1]) * pow(16, 4) + get_index_hex(res[0]) * pow(16, 5);
 	
-	return dec;
+	printf("decimal color %d\n", dec);
+	return (dec);
+}
+
+int	ft_isspace(int c)
+{
+	if (c == ' ' || c == '\t' || c == '\v'
+		|| c == '\n' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
+}
+
+int	only_space_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (!line)
+		return (1);
+	while (line[i] && ft_isspace(line[i]))
+		i++;
+	if (i == (int)ft_strlen(line))
+		return (1);
+	return (0);
 }
 
 void	get_infos(t_main *main)
@@ -79,36 +129,39 @@ void	get_infos(t_main *main)
 	while (line)
 	{
 		main->tex.map_start++;
-		if (ft_strncmp(line, "NO ", 3) == 0)
+		if (!only_space_line(line))
 		{
-			main->tex.NO = ft_substr(line, 3, ft_strlen(line) - 3);
-			NO = 1;
-		}
-		if (ft_strncmp(line, "SO ", 3) == 0)
-		{
-			main->tex.SO = ft_substr(line, 3, ft_strlen(line) - 3);
-			SO = 1;
-		}
+			if (ft_strncmp(line, "NO ", 3) == 0)
+			{
+				main->tex.NO = ft_substr(line, 3, ft_strlen(line) - 3);
+				NO = 1;
+			}
+			if (ft_strncmp(line, "SO ", 3) == 0)
+			{
+				main->tex.SO = ft_substr(line, 3, ft_strlen(line) - 3);
+				SO = 1;
+			}
 			if (ft_strncmp(line, "WE ", 3) == 0)
-		{
-			main->tex.WE = ft_substr(line, 3, ft_strlen(line) - 3);
-			WE = 1;
+			{
+				main->tex.WE = ft_substr(line, 3, ft_strlen(line) - 3);
+				WE = 1;
+			}
+			if (ft_strncmp(line, "EA ", 3) == 0)
+			{
+				main->tex.EA = ft_substr(line, 3, ft_strlen(line) - 3);
+				EA = 1;
+			}
+			if (!ft_strncmp(line, "C", 1) && main->tex.color_c == -1)
+				main->tex.color_c = rgbToHex(line);
+			if (!ft_strncmp(line, "F", 1) && main->tex.color_f == -1)
+				main->tex.color_f = rgbToHex(line);
 		}
-		if (ft_strncmp(line, "EA ", 3) == 0)
-		{
-			main->tex.EA = ft_substr(line, 3, ft_strlen(line) - 3);
-			EA = 1;
-		}
-		if (ft_strncmp(line, "C", 1) == 0)
-			main->tex.color_c = rgbToHex(get_rgb(line));
-		if (ft_strncmp(line, "F", 1) == 0)
-			main->tex.color_c = rgbToHex(get_rgb(line));
 		free(line);
-		// if (NO == 1 && SO == 1 && WE == 1 && EA == 1)
-		// 	break ;
+		if (NO == 1 && SO == 1 && WE == 1 && EA == 1
+				&& main->tex.color_c != -1 && main->tex.color_f != -1)
+			break ;
 		line = get_next_line(main->fdtest);
 	}
-	printf("ceilling color %d\nfloor color %d\n", main->tex.color_c, main->tex.color_f);
 	main->tex.map_start++;
 	// if (NO != 1 && SO != 1 && WE != 1 && EA != 1)
 	// 	ft_printf("Error\nTextures missing.\n");
