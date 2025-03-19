@@ -4,20 +4,6 @@
 # include "../mlx/mlx.h"
 # include "struct.h"
 
-# define KEY_Z				122
-# define KEY_Q				113
-# define KEY_W				119
-# define KEY_A				97
-# define KEY_S				115
-# define KEY_D				100
-
-# define KEY_UP  			65362
-# define KEY_LEFT  			65361
-# define KEY_RIGHT 			65363
-# define KEY_DOWN  			65364
-
-# define KEY_ESC  			65307
-
 // CUB3D
 void    render_init(t_main *main);
 int     check_map_name(char *map_name);

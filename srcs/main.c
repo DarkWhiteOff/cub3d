@@ -82,6 +82,13 @@ int	strlenmap(char *line)
 	i = 0;
 	while (line[i] != '\n' && line[i] != '\0')
 		i++;
+	if (line[i - 1] == ' ')
+	{
+		i -= 1;
+		while (line[i] == ' ')
+			i--;
+		i++;
+	}
 	return (i);
 }
 

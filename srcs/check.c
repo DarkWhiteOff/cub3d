@@ -92,6 +92,8 @@ int    rgbToHex(char *line)
 	return (dec);
 }
 
+//
+
 int	ft_isspace(int c)
 {
 	if (c == ' ' || c == '\t' || c == '\v'
@@ -141,7 +143,7 @@ void	get_infos(t_main *main)
 				main->tex.SO = ft_substr(line, 3, ft_strlen(line) - 3);
 				SO = 1;
 			}
-			if (ft_strncmp(line, "WE ", 3) == 0)
+				if (ft_strncmp(line, "WE ", 3) == 0)
 			{
 				main->tex.WE = ft_substr(line, 3, ft_strlen(line) - 3);
 				WE = 1;
@@ -156,10 +158,14 @@ void	get_infos(t_main *main)
 			if (!ft_strncmp(line, "F", 1) && main->tex.color_f == -1)
 				main->tex.color_f = rgbToHex(line);
 		}
+		// if (ft_strncmp(l, "F ", 2))
+		// if (ft_strncmp(l, "C ", 2))
 		free(line);
 		if (NO == 1 && SO == 1 && WE == 1 && EA == 1
-				&& main->tex.color_c != -1 && main->tex.color_f != -1)
+			&& main->tex.color_c != -1 && main->tex.color_f != -1)
 			break ;
+		printf("iic : %d\n", main->tex.color_c);
+		printf("iic : %d\n", main->tex.color_f);
 		line = get_next_line(main->fdtest);
 	}
 	main->tex.map_start++;
@@ -223,6 +229,7 @@ void	parse_map(t_main *main)
 	char	*l;
 
 	l = get_next_line(main->fdtest);
+	printf("l : %s\n", l);
 	// while (ft_strncmp(l, "", 42) == 0)
 	// {
 	// 	free(l);
@@ -248,17 +255,11 @@ void	check_walls1(t_map *map)
 	int	i;
 
 	i = 0;
-	return ;
-	// while (map->grid[0][i] == ' ')
-	// 		i++;
 	while (i < map->diff_w[0])
 	{
-		// if (map->grid[0][i] == ' ')
-		// {
-		// 	while (map->grid[map->h - 1][i] == ' ')
-		// 		i++;
-		// }
-		if (map->grid[0][i] != '1')
+		while (map->grid[0][i] == ' ')
+			i++;
+		if (map->grid[0][i] != '1' && (map->grid[0][i] != ' ' && i < map->diff_w[0]))
 		{
 			free_grids(map);
 			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
@@ -266,16 +267,11 @@ void	check_walls1(t_map *map)
 		i++;
 	}
 	i = 0;
-	// while (map->grid[map->h - 1][i] == ' ')
-	// 		i++;
 	while (i < map->diff_w[map->h - 1])
 	{
-		// if (map->grid[map->h - 1][i] == ' ')
-		// {
-		// 	while (map->grid[map->h - 1][i] == ' ')
-		// 		i++;
-		// }
-		if (map->grid[map->h - 1][i] != '1')
+		while (map->grid[0][i] == ' ')
+			i++;
+		if (map->grid[0][i] != '1' && (map->grid[0][i] != ' ' && i < map->diff_w[0]))
 		{
 			free_grids(map);
 			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
@@ -287,29 +283,37 @@ void	check_walls1(t_map *map)
 void	check_walls2(t_map *map)
 {
 	int	i;
+	int j;
 
 	i = 1;
-	return ;
+	j = 0;
 	while (i < map->h - 1)
 	{
-		if (map->grid[i][0] != '1')
+		while (map->grid[i][j] == ' ')
+			j++;
+		if (map->grid[i][j] != '1')
 		{
+			printf("hi : %d | j : %d\n", i, j);
 			free_grids(map);
 			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
 		}
 		if (map->grid[i][map->diff_w[i] - 1] != '1')
 		{
+			printf("bi : %d | j : %d\n", i, map->diff_w[i] - 1);
 			free_grids(map);
 			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
 		}
+		j = 0;
 		i++;
 	}
 }
 
 void	check_path(t_map *map, int x, int y)
 {
+	if (map->grid[y][x] == ' ')
+		exit(printf("FUCK\n"));
 	if (map->grid[y][x] == '1' || map->highlight_grid[y][x] == '1'
-		|| x < 0 || y < 0 || x > map->w || y > map->h)
+		|| x < 0 || y < 0 || x > map->diff_w[y] || y > map->h)
 		return ;
 	map->highlight_grid[y][x] = '1';
 	check_path(map, x - 1, y);

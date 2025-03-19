@@ -20,8 +20,8 @@ void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
 
 int	check_other_char(t_map *map, int y, int x)
 {
-	if (map->grid[y][x] != 'N' && map->grid[y][x] != 'S' && map->grid[y][x] != 'W' && map->grid[y][x] != 'E' && map->grid[y][x] != '0' && map->grid[y][x] != '1')
-		return (0);
+	if (map->grid[y][x] != 'N' && map->grid[y][x] != 'S' && map->grid[y][x] != 'W' && map->grid[y][x] != 'E' && map->grid[y][x] != '0' && map->grid[y][x] != '1' && map->grid[y][x] != ' ')
+		return (1);
 	return (0);
 }
 
@@ -102,7 +102,7 @@ void	grid_init(t_main *main)
 	allocate_grids(&main->map);
 	while (i < main->map.h)
 	{
-		while (line[j] && line[j] != '\n')
+		while (j < main->map.diff_w[i])
 		{
 			main->map.grid[i][j] = line[j];
 			j++;

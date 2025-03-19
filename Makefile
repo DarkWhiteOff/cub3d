@@ -16,7 +16,7 @@ FLAGS = -Wall -Wextra -Werror -g -g3
 MLX_FLAGS = -Lmlx -lmlx_Linux -Imlx -lXext -lX11 -lm
 
 .c.o:
-	$(CC) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
@@ -25,7 +25,7 @@ $(LIBFT_LIB):
 
 $(NAME) : $(LIBFT_LIB) $(OBJS)
 	make -sC $(MLX_PATH)
-	$(CC) $(OBJS) $(LIBFT_LIB) -o $(NAME) -L$(MLX_PATH) $(MLX_FLAGS)
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT_LIB) -o $(NAME) -L$(MLX_PATH) $(MLX_FLAGS)
 
 clean:
 	make clean -sC $(LIBFT_PATH)
