@@ -69,9 +69,9 @@ void	raycasting(t_main *main)
 		while (++j < main->map.px_h)
 		{
 			if (j < ds)
-				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, green); //Ceiling
+				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, main->tex.color_c); //Ceiling
 			else if (j >= (main->map.px_h / 2) + wall_h)
-				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, red); //Floor
+				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, main->tex.color_f); //Floor
 		}
 		//Complexe mais la fonction dessine les murs sur l'img
 		draw_texture(main, i, wall_h);
