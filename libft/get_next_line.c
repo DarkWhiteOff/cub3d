@@ -61,7 +61,7 @@ char	*prepare_nextline(char	*newLine)
 	return (save);
 }
 
-char	*get_next_line(int fd, t_map *map)
+char	*get_next_line(int fd)
 {
 	char		*buffer;
 	char		*n_l;
@@ -85,7 +85,7 @@ char	*get_next_line(int fd, t_map *map)
 		return (NULL);
 	}
 	save = prepare_nextline(n_l);
-	if (n_l[0] == '\0' || n_l[0] == '\n' || ft_strlen(n_l) > map->sc_s.x / 48)
+	if (n_l[0] == '\0' || n_l[0] == '\n')
 		free(save);
 	return (n_l);
 }

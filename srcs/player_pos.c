@@ -14,33 +14,86 @@ int	close_window(t_main *main)
 	exit (ft_printf("Windows was killed.\n"));
 }
 
-void	put_to_zero(t_map *map)
+float	degree_to_radians(float degree)
 {
-	map->z = 0;
-	map->q = 0;
-	map->s = 0;
-	map->d = 0;
-	map->left = 0;
-	map->right = 0;
+	return (degree * PI / 180);
 }
 
-int	key_manager(int keycode, t_main *main)
+void	move(float angle, t_main *main)
 {
-	if (keycode == 53 || keycode == KEY_ESC)
+	float x = main->map.d_player_pos.x;
+	float y = main->map.d_player_pos.y;
+	float ray_cos;
+	float ray_sin;
+
+	ray_cos = cos(degree_to_radians(angle)) * 0.12; // 0.12?
+	ray_sin = sin(degree_to_radians(angle)) * 0.12;
+	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))][(int)(x + 0.5)]))
+		main->map.d_player_pos.y += ray_sin;
+	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))]))
+		main->map.d_player_pos.x += ray_cos;
+}
+
+void	actualise_player(t_main *main)
+{
+	float angle;
+
+	angle = main->ray.ray_angle;
+	if (main->map.z == 1)
+		move(angle, main);
+	else if (main->map.q == 1)
+	{
+		angle = main->ray.ray_angle - 90;
+		move(angle, main);
+	}
+	else if (main->map.s == 1)
+	{
+		angle = main->ray.ray_angle - 180;
+		move(angle, main);
+	}
+	else if (main->map.d == 1)
+	{
+		angle = main->ray.ray_angle + 90;
+		move(angle, main);
+	}
+	else if (main->map.left == 1)
+		main->ray.ray_angle -= 3;
+	else if (main->map.right == 1)
+		main->ray.ray_angle += 3;
+}
+
+int	key_manager_down(int keycode, t_main *main)
+{
+	if (keycode == 53 || keycode == 65307)
 		close_window(main);
-	if (keycode == KEY_Z || keycode == KEY_W)
+	if (keycode == 122) // 119
 		main->map.z = 1;
-	if (keycode == KEY_A || keycode == KEY_Q)
+	if (keycode == 113) // 97
 		main->map.q = 1;
-	if (keycode == KEY_S)
+	if (keycode == 115)
 		main->map.s = 1;
-	if (keycode == KEY_D)
+	if (keycode == 100)
 		main->map.d = 1;
-	// if (keycode == 65362) // up
-	if (keycode == KEY_LEFT)
+	if (keycode == 65361)
 		main->map.left = 1;
-	if (keycode == KEY_RIGHT)
+	if (keycode == 65363)
 		main->map.right = 1;
-	// if (keycode == 65364) // down
+	return (0);
+}
+
+int	key_manager_up(int keycode, t_main *main)
+{
+	if (keycode == 122) // 119
+		main->map.z = 0;
+	if (keycode == 113) // 97
+		main->map.q = 0;
+	if (keycode == 115)
+		main->map.s = 0;
+	if (keycode == 100)
+		main->map.d = 0;
+	if (keycode == 65361)
+		main->map.left = 0;
+	if (keycode == 65363)
+		main->map.right = 0;
 	return (0);
 }

@@ -20,13 +20,31 @@
 # include <stdarg.h>
 # include <math.h>
 
-// # define M_PI 3.1415926535
+# define PI 3.1415926535
+
+# define white 0xFFFFFF
+# define red   0x00FF0000
+# define green 0x0000FF00
+# define blue  0x000000FF
+# define black 000000
 
 typedef struct s_pxy
 {
 	int	x;
 	int	y;
 }	t_pxy;
+
+typedef struct s_px_pxy
+{
+	size_t	x;
+	size_t	y;
+}	t_px_pxy;
+
+typedef struct s_d_pxy
+{
+	float	x;
+	float	y;
+}	t_d_pxy;
 
 typedef struct s_sprite
 {
@@ -35,51 +53,58 @@ typedef struct s_sprite
 	void	*img;
 }	t_sprite;
 
+typedef struct s_tex
+{
+	char *NO;
+	char *SO;
+	char *WE;
+	char *EA;
+	int color_f;
+	int color_c;
+	int map_start;
+}	t_tex;
+
+typedef struct s_ray
+{
+	float FOV;
+	float HFOV;
+	float ray_angle;
+	float	diff_ray_angle;
+	float precision;
+	float limit;
+	float cos;
+	float sin;
+	t_d_pxy d_ray_pos;
+}	t_ray;
+
 typedef struct s_map
 {
+	//Checks
 	char	*path;
 	int		h;
 	int		w;
-	int		ex;
-	int		pos;
-	int		coll;
+	int		px_h;
+	int		px_w;
+	int		*diff_w;
+	int		player_pos;
 	int		fd;
 	char	**grid;
-	int		*_map;
 	char	**highlight_grid;
-	int		exit_acc;
-	int		coll_acc;
-	int		player_on_exit;
-	int		moves;
-	t_pxy	sc_s;
-	// Player
+	//Controls
 	int			z;
 	int			q;
 	int			s;
 	int			d;
-	// Rotation
 	int			left;
 	int			right;
-	float pixel_pos_x;
-	float pixel_pos_y;
-	float pos_dx;
-	float pos_dy;
-	float pos_a;
-	// Ray
-	int r;
-	int mx;
-	int my;
-	int mp;
-	int dof;
-	float rx;
-	float ry;
-	float ra;
-	float xo;
-	float yo;
+	//Pos
+	t_px_pxy px_player_pos;
+	t_d_pxy d_player_pos;
 }	t_map;
 
 typedef struct s_main
 {
+	//Mlx
 	void		*mlx_p;
 	void		*mlx_win;
 	void		*img;
@@ -87,13 +112,17 @@ typedef struct s_main
 	int			b;
 	int			ls;
 	int			end;
+	//Map
 	t_map		map;
+	t_ray		ray;
+	t_tex		tex;
 	t_pxy		p_pos;
-	t_pxy		e_pos;
+	//Sprites
 	t_sprite	spr_wall;
 	t_sprite	spr_floor;
 	t_sprite	spr_angle;
 	t_sprite	spr_p;
+	int fdtest;
 }	t_main;
 
 #endif

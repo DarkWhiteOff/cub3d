@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zamgar <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 14:24:43 by zamgar            #+#    #+#              #
-#    Updated: 2024/06/04 18:03:23 by zamgar           ###   ########.fr        #
+#    Updated: 2025/03/19 13:56:07 by tzizi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	ft_printf.c \
+SRC =	ft_strncmp.c \
+	ft_printf.c \
 	ft_hex.c \
 	ft_itoa.c \
 	ft_ptr.c \
@@ -20,7 +21,8 @@ SRC =	ft_printf.c \
 	get_next_line.c \
 	get_next_line_utils.c
 
-BFILES =	ft_printf.o \
+BFILES =	ft_strncmp.o \
+		ft_printf.o \
 		ft_hex.o \
 		ft_itoa.o \
 		ft_ptr.o \

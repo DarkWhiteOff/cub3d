@@ -1,73 +1,56 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define KEY_Z				122
-# define KEY_Q				113
-# define KEY_W				119
-# define KEY_A				97
-# define KEY_S				115
-# define KEY_D				100
-
-# define KEY_UP  			65362
-# define KEY_LEFT  			65361
-# define KEY_RIGHT 			65363
-# define KEY_DOWN  			65364
-# define KEY_ESC  			65307
-
-# define PI2 M_PI/2
-# define PI3 3*M_PI/2
-# define DEG_TO_RAD 0.0174533
-
 # include "../mlx/mlx.h"
 # include "struct.h"
 
-//TEST
-void drawRay(t_map map, t_main *main);
-
 // CUB3D
-void	render_init(t_main *main);
-int	check_map_name(char *map_name);
+void    render_init(t_main *main);
+int     check_map_name(char *map_name);
 void	checks_inits(t_main *main);
 void	get_screen_size(t_map *map);
-void	vars_init(t_map *map, char *map_path);
+void	vars_init(t_main *main, char *map_path);
 void	empty_line_check(char *line, int fd);
-void	parse_map(t_map *map);
+void	get_infos(t_main *main);
+void	parse_map(t_main *main);
 void	check_walls1(t_map *map);
 void	check_walls2(t_map *map);
-int	check_map_limits_epc(t_map *map, int y, int x);
-void	is_epc(t_map *map, int i, int j, t_pxy *p_pos);
-void	check_epc(t_map *map, t_pxy *p_pos);
+int     check_other_char(t_map *map, int y, int x);
+void	is_epc(t_main *main, int i, int j, t_pxy *p_pos);
+void	check_epc(t_main *main, t_pxy *p_pos);
 void	check_path(t_map *map, int x, int y);
 void	allocate_grids(t_map *map);
 void	grid_init(t_main *main);
 void	free_grids(t_map *map);
-int	strlenmap(char *line, t_map *map);
-void	save_pos(t_pxy *e_pos, int j, int i);
+int     strlenmap(char *line);
 void	check_fd_error(t_main *main);
 void	sprites_init(t_main *main);
 void	free_sprites(t_main *main);
 void	update_player_pos(t_main *main, char c);
-void	actualise_map_data(t_main *main);
-int	key_manager(int keycode, t_main *main);
-int	close_window(t_main *main);
-int	game_refresh(t_main *main);
-void	update_map(t_main *main, int i, int px_h);
-void	put_to_zero(t_map *map);
+void	actualise_player(t_main *main);
+void	move(float angle, t_main *main);
+int     key_manager_down(int keycode, t_main *main);
+int     key_manager_up(int keycode, t_main *main);
+int     close_window(t_main *main);
+int     game_refresh(t_main *main);
+void	raycasting(t_main *main);
+void	draw_texture(t_main *main, int ray_count, int wall_height);
+void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int color);
+float	degree_to_radians(float degree);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
-char	*get_next_line(int fd, t_map *map);
+char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strcat(char *dest, char *src);
 char	*ft_strchr(const char *s, int c);
-int		ftft_strlen(const char *s, unsigned char c);
+int		ft(const char *s, unsigned char c);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
-char	*ft_gen(char *newstr, char const *str, unsigned int s, size_t len);
-size_t	ft_calc(char const *str, unsigned int start, size_t len);
+int     ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // FT_PRINTF
 int		ft_printf(const char *str, ...);

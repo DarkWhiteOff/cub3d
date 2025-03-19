@@ -1,5 +1,119 @@
 #include "../includes/cub3d.h"
 
+int get_index_hex(char c)
+{
+	int i = 0;
+	char hex[] = "0123456789ABCDEF";
+	while (i < 16)
+	{
+		if (hex[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+char	*get_rgb(char *line)
+{
+	int i = 0;
+	int res = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		printf("line %s || c = %c\n", line, line[i]);
+		if (line[i] < 58 && line[i] > 47)
+		{
+			res *= 10;
+			res += line[i]-48;
+		}
+		i++;
+	}
+	return (ft_itoa(res));
+}
+
+int    rgbToHex(char *rgb)
+{
+    char hex[] = "0123456789ABCDEF";
+    char res[7] = "0000000";
+	int dec = 0;
+
+	printf("rgb %s\n", rgb);
+	return (0);
+	int r = 0;
+	int g = 0;
+	int b = 0;
+
+    int r0 = r/16;
+    int g0 = g/16;
+    int b0 = b/16;
+
+    res[0] = hex[r0];
+    res[1] = hex[r - (16 * r0)];
+
+    res[2] = hex[g0];
+    res[3] = hex[g - (16 * g0)];
+
+    res[4] = hex[b0];
+    res[5] = hex[b - (16 * b0)];
+
+    res[6] = '\0';
+
+	dec = get_index_hex(res[5]) + get_index_hex(res[4]) * 16
+		+ get_index_hex(res[3]) * pow(16, 2) + get_index_hex(res[2]) * pow(16, 3)
+		+ get_index_hex(res[1]) * pow(16, 4) + get_index_hex(res[0]) * pow(16, 5);
+	
+	return dec;
+}
+
+void	get_infos(t_main *main)
+{
+	char	*line;
+	int NO = 0;
+	int SO = 0;
+	int WE = 0;
+	int EA = 0;
+
+	main->fdtest = open(main->map.path, O_RDONLY);
+	if (main->fdtest < 0 || read(main->fdtest, 0, 0) < 0)
+		exit (ft_printf("Error\nfd not working."));
+	line = get_next_line(main->fdtest);
+	while (line)
+	{
+		main->tex.map_start++;
+		if (ft_strncmp(line, "NO ", 3) == 0)
+		{
+			main->tex.NO = ft_substr(line, 3, ft_strlen(line) - 3);
+			NO = 1;
+		}
+		if (ft_strncmp(line, "SO ", 3) == 0)
+		{
+			main->tex.SO = ft_substr(line, 3, ft_strlen(line) - 3);
+			SO = 1;
+		}
+			if (ft_strncmp(line, "WE ", 3) == 0)
+		{
+			main->tex.WE = ft_substr(line, 3, ft_strlen(line) - 3);
+			WE = 1;
+		}
+		if (ft_strncmp(line, "EA ", 3) == 0)
+		{
+			main->tex.EA = ft_substr(line, 3, ft_strlen(line) - 3);
+			EA = 1;
+		}
+		if (ft_strncmp(line, "C", 1) == 0)
+			main->tex.color_c = rgbToHex(get_rgb(line));
+		if (ft_strncmp(line, "F", 1) == 0)
+			main->tex.color_c = rgbToHex(get_rgb(line));
+		free(line);
+		// if (NO == 1 && SO == 1 && WE == 1 && EA == 1)
+		// 	break ;
+		line = get_next_line(main->fdtest);
+	}
+	printf("ceilling color %d\nfloor color %d\n", main->tex.color_c, main->tex.color_f);
+	main->tex.map_start++;
+	// if (NO != 1 && SO != 1 && WE != 1 && EA != 1)
+	// 	ft_printf("Error\nTextures missing.\n");
+}
+
 void	empty_line_check(char *line, int fd)
 {
 	if (line == NULL)
@@ -12,33 +126,68 @@ void	empty_line_check(char *line, int fd)
 	}
 }
 
-void	parse_map(t_map *map)
+void get_diff_width(t_main *main)
 {
-	int		fd;
+	int fd;
+	int ok;
 	char	*l;
-	int		line_samelen;
+	int i = 0;
 
-	line_samelen = 0;
-	fd = open(map->path, O_RDONLY);
+	fd = open(main->map.path, O_RDONLY);
 	if (fd < 0 || read(fd, 0, 0) < 0)
 		exit (ft_printf("Error\nfd not working."));
-	l = get_next_line(fd, map);
-	empty_line_check(l, fd);
-	map->w = strlenmap(l, map);
+	l = get_next_line(fd);
+	ok = main->tex.map_start;
+	while (ok--)
+	{
+		free(l);
+		l = get_next_line(fd);
+	}
 	while (l)
 	{
-		if (strlenmap(l, map) != map->w || strlenmap(l, map) > map->sc_s.x / 48)
-			line_samelen = 1;
-		map->h++;
-		empty_line_check(l, fd);
+		main->map.diff_w[i++] = strlenmap(l);
 		free(l);
-		l = get_next_line(fd, map);
+		l = get_next_line(main->fdtest);
 	}
 	close(fd);
-	if (map->w == map->h || map->w == 0 || map->h == 0 || line_samelen == 1)
+	main->map.diff_w[i] = -1;
+}
+
+int	check_w(int *array)
+{
+	int i = 0;
+	while (array[i] != -1)
+	{
+		if (array[i] == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	parse_map(t_main *main)
+{
+	char	*l;
+
+	l = get_next_line(main->fdtest);
+	// while (ft_strncmp(l, "", 42) == 0)
+	// {
+	// 	free(l);
+	// 	get_next_line(main->fdtest);
+	// }
+	empty_line_check(l, main->fdtest);
+	while (l)
+	{
+		main->map.h++;
+		empty_line_check(l, main->fdtest);
+		free(l);
+		l = get_next_line(main->fdtest);
+	}
+	close(main->fdtest);
+	main->map.diff_w = (int *)malloc(sizeof(int) * (main->map.h + 1));
+	get_diff_width(main);
+	if (check_w(main->map.diff_w) == 0 || main->map.h == 0)
 		exit (ft_printf("Error\nMap not rectangular / nothing in it.\n"));
-	if (map->h > map->sc_s.y / 48)
-		exit (ft_printf("Error\nYour screen is too small for this map !"));
 }
 
 void	check_walls1(t_map *map)
@@ -46,8 +195,16 @@ void	check_walls1(t_map *map)
 	int	i;
 
 	i = 0;
-	while (i < map->w)
+	return ;
+	// while (map->grid[0][i] == ' ')
+	// 		i++;
+	while (i < map->diff_w[0])
 	{
+		// if (map->grid[0][i] == ' ')
+		// {
+		// 	while (map->grid[map->h - 1][i] == ' ')
+		// 		i++;
+		// }
 		if (map->grid[0][i] != '1')
 		{
 			free_grids(map);
@@ -56,8 +213,15 @@ void	check_walls1(t_map *map)
 		i++;
 	}
 	i = 0;
-	while (i < map->w)
+	// while (map->grid[map->h - 1][i] == ' ')
+	// 		i++;
+	while (i < map->diff_w[map->h - 1])
 	{
+		// if (map->grid[map->h - 1][i] == ' ')
+		// {
+		// 	while (map->grid[map->h - 1][i] == ' ')
+		// 		i++;
+		// }
 		if (map->grid[map->h - 1][i] != '1')
 		{
 			free_grids(map);
@@ -72,6 +236,7 @@ void	check_walls2(t_map *map)
 	int	i;
 
 	i = 1;
+	return ;
 	while (i < map->h - 1)
 	{
 		if (map->grid[i][0] != '1')
@@ -79,7 +244,7 @@ void	check_walls2(t_map *map)
 			free_grids(map);
 			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
 		}
-		if (map->grid[i][map->w - 1] != '1')
+		if (map->grid[i][map->diff_w[i] - 1] != '1')
 		{
 			free_grids(map);
 			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
@@ -88,9 +253,15 @@ void	check_walls2(t_map *map)
 	}
 }
 
-int	check_map_limits_epc(t_map *map, int y, int x)
+void	check_path(t_map *map, int x, int y)
 {
-	if (map->grid[y][x] != 'P' && map->grid[y][x] != '0' && map->grid[y][x] != '1')
-		return (0);
-	return (1);
+	if (map->grid[y][x] == '1' || map->highlight_grid[y][x] == '1'
+		|| x < 0 || y < 0 || x > map->w || y > map->h)
+		return ;
+	map->highlight_grid[y][x] = '1';
+	check_path(map, x - 1, y);
+	check_path(map, x + 1, y);
+	check_path(map, x, y - 1);
+	check_path(map, x, y + 1);
+	return ;
 }
