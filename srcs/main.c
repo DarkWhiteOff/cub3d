@@ -72,7 +72,14 @@ void	vars_init(t_main *main, char *map_path)
 void	check_fd_error(t_main *main)
 {
 	if (main->map.fd < 0 || read(main->map.fd, 0, 0) < 0)
+	{
+		free(main->map.diff_w);
+		free(main->tex.NO);
+		free(main->tex.SO);
+		free(main->tex.WE);
+		free(main->tex.EA);
 		exit (ft_printf("Error\nfd not working."));
+	}
 }
 
 int	strlenmap(char *line)
@@ -118,15 +125,15 @@ void	checks_inits(t_main *main)
 		i++;
 		j = 0;
 	}
-	check_walls1(&main->map);
-	check_walls2(&main->map);
+	check_walls1(main);
+	check_walls2(main);
 	check_epc(main, &main->p_pos);
 	main->map.px_player_pos.x = (size_t)main->p_pos.x * 48;
 	main->map.px_player_pos.y = (size_t)main->p_pos.y * 48;
 	main->map.d_player_pos.x = (float)(main->p_pos.x);
 	main->map.d_player_pos.y = (float)(main->p_pos.y);
 	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
-	check_path(&main->map, main->p_pos.x, main->p_pos.y);
+	check_path(main, main->p_pos.x, main->p_pos.y);
 }
 
 int	check_map_name(char *map_name)
@@ -148,6 +155,12 @@ void	render_init(t_main *main)
 	main->mlx_p = mlx_init();
 	if (!main->mlx_p)
 	{
+		free(main->map.diff_w);
+		free(main->tex.NO);
+		free(main->tex.SO);
+		free(main->tex.WE);
+		free(main->tex.EA);
+		free_grids(main);
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
@@ -155,18 +168,28 @@ void	render_init(t_main *main)
 			main->map.px_w, main->map.px_h, "cub3d");
 	if (!main->mlx_win)
 	{
+		free(main->map.diff_w);
+		free(main->tex.NO);
+		free(main->tex.SO);
+		free(main->tex.WE);
+		free(main->tex.EA);
+		free_grids(main);
 		mlx_destroy_display(main->mlx_p);
 		free(main->mlx_p);
-		free_grids(&main->map);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
 	main->img = mlx_new_image(main->mlx_p, main->map.px_w, main->map.px_h);
 	if (!main->img)
 	{
+		free(main->map.diff_w);
+		free(main->tex.NO);
+		free(main->tex.SO);
+		free(main->tex.WE);
+		free(main->tex.EA);
+		free_grids(main);
 		mlx_destroy_window(main->mlx_p, main->mlx_win);
 		mlx_destroy_display(main->mlx_p);
 		free(main->mlx_p);
-		free_grids(&main->map);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
 	main->addr = mlx_get_data_addr(main->img, &main->b, &main->ls, &main->end);

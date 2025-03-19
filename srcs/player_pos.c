@@ -10,7 +10,12 @@ int	close_window(t_main *main)
 	mlx_destroy_window(main->mlx_p, main->mlx_win);
 	mlx_destroy_display(main->mlx_p);
 	free(main->mlx_p);
-	free_grids(&main->map);
+	free_grids(main);
+	free(main->map.diff_w);
+	free(main->tex.NO);
+	free(main->tex.SO);
+	free(main->tex.WE);
+	free(main->tex.EA);
 	exit (ft_printf("Windows was killed.\n"));
 }
 

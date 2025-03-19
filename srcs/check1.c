@@ -39,7 +39,12 @@ void	check_epc(t_main *main, t_pxy *p_pos)
 			is_epc(main, i, j, p_pos);
 			if (check_other_char(&main->map, i, j) == 1)
 			{
-				free_grids(&main->map);
+				free(main->map.diff_w);
+				free(main->tex.NO);
+				free(main->tex.SO);
+				free(main->tex.WE);
+				free(main->tex.EA);
+				free_grids(main);
 				exit (ft_printf("Error\nMap contains unrecognized character.\n"));
 			}
 			j++;
@@ -49,7 +54,12 @@ void	check_epc(t_main *main, t_pxy *p_pos)
 	}
 	if (main->map.player_pos != 1)
 	{
-		free_grids(&main->map);
+		free(main->map.diff_w);
+		free(main->tex.NO);
+		free(main->tex.SO);
+		free(main->tex.WE);
+		free(main->tex.EA);
+		free_grids(main);
 		exit (ft_printf("Error\nNo player position.\n"));
 	}
 }
@@ -115,17 +125,17 @@ void	grid_init(t_main *main)
 	close(main->map.fd);
 }
 
-void	free_grids(t_map *map)
+void	free_grids(t_main *main)
 {
 	int	i;
 
 	i = 0;
-	while (i < map->h)
+	while (i < main->map.h)
 	{
-		free(map->grid[i]);
-		free(map->highlight_grid[i]);
+		free(main->map.grid[i]);
+		free(main->map.highlight_grid[i]);
 		i++;
 	}
-	free(map->grid);
-	free(map->highlight_grid);
+	free(main->map.grid);
+	free(main->map.highlight_grid);
 }
