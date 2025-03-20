@@ -54,6 +54,7 @@ void tex_init (t_tex *tex)
 
 void	sprites_init(t_main *main)
 {
+	// Sprites
 	main->spr_wall.img = mlx_xpm_file_to_image(main->mlx_p,
 			"spr_tiles/spr_wall.xpm", &main->spr_wall.w, &main->spr_wall.h);
 	main->spr_floor.img = mlx_xpm_file_to_image(main->mlx_p,
@@ -62,10 +63,21 @@ void	sprites_init(t_main *main)
 			"spr_tiles/spr_player.xpm", &main->spr_p.w, &main->spr_p.h);
 	main->spr_angle.img = mlx_xpm_file_to_image(main->mlx_p,
 		"spr_tiles/spr_angle.xpm", &main->spr_angle.w, &main->spr_angle.h);
+	// Textures
+	main->tex.tex_north.img = mlx_xpm_file_to_image(main->mlx_p,
+		main->tex.NO, &main->tex.tex_north.w, &main->tex.tex_north.h);
+	main->tex.tex_south.img = mlx_xpm_file_to_image(main->mlx_p,
+		main->tex.SO, &main->tex.tex_south.w, &main->tex.tex_south.h);
+	main->tex.tex_west.img = mlx_xpm_file_to_image(main->mlx_p,
+		main->tex.WE, &main->tex.tex_west.w, &main->tex.tex_west.h);
+	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
+		main->tex.EA, &main->tex.tex_east.w, &main->tex.tex_east.h);
 	if (!main->spr_p.img || !main->spr_wall.img
-		|| !main->spr_floor.img || !main->spr_angle.img)
+		|| !main->spr_floor.img || !main->spr_angle.img 
+		|| !main->tex.tex_north.img || !main->tex.tex_south.img
+		|| !main->tex.tex_west.img || !main->tex.tex_east.img)
 	{
 		free_sprites(main);
-		exit(ft_printf("Error\nSprites init FAILED"));
+		exit(ft_printf("Error\nSprites/Textures init FAILED"));
 	}
 }

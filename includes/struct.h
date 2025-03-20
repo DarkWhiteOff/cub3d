@@ -62,6 +62,10 @@ typedef struct s_tex
 	int color_f;
 	int color_c;
 	int map_start;
+	t_sprite tex_north;
+	t_sprite tex_south;
+	t_sprite tex_west;
+	t_sprite tex_east;
 }	t_tex;
 
 typedef struct s_ray
@@ -122,10 +126,10 @@ typedef struct s_main
 	t_sprite	spr_floor;
 	t_sprite	spr_angle;
 	t_sprite	spr_p;
-	int fdtest;
-	int fdtest1;
-	int fdtest2;
-	int fdtest3;
+	int fd;
+	int fd1;
+	int fd2;
+	int fd3;
 }	t_main;
 
 #endif

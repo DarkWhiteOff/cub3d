@@ -95,13 +95,13 @@ void	grid_init(t_main *main)
 
 	i = 0;
 	j = 0;
-	main->fdtest3 = open(main->map.path, O_RDONLY);
-	check_fd_error(main, main->fdtest3);
-	line = get_next_line(main->fdtest3);
+	main->fd3 = open(main->map.path, O_RDONLY);
+	check_fd_error(main, main->fd3);
+	line = get_next_line(main->fd3);
 	while (main->tex.map_start--)
 	{
 		free(line);
-		line = get_next_line(main->fdtest3);
+		line = get_next_line(main->fd3);
 	}
 	allocate_grids(&main->map);
 	while (i < main->map.h)
@@ -114,7 +114,7 @@ void	grid_init(t_main *main)
 		main->map.grid[i++][j] = '\0';
 		j = 0;
 		free(line);
-		line = get_next_line(main->fdtest3);
+		line = get_next_line(main->fd3);
 	}
-	close(main->fdtest3);
+	close(main->fd3);
 }

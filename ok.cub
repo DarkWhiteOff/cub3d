@@ -1,14 +1,14 @@
 
 
-NO north
+NO spr_tiles/tex_matrix.xpm
 
 
 
-SO south
+SO spr_tiles/tex_matrix.xpm
 
-WE west
+WE spr_tiles/tex_matrix.xpm
 
-EA east
+EA spr_tiles/tex_matrix.xpm
 
 
 

@@ -15,11 +15,10 @@ void	vars_init(t_main *main, char *map_path)
 	ray_init(&main->ray);
 	tex_init(&main->tex);
 	main->ray.diff_ray_angle = 2 * main->ray.HFOV / main->map.px_w;
-	//fd
-	main->fdtest = -1;
-	main->fdtest1 = -1;
-	main->fdtest2 = -1;
-	main->fdtest3 = -1;
+	main->fd = -1;
+	main->fd1 = -1;
+	main->fd2 = -1;
+	main->fd3 = -1;
 }
 
 void	checks_inits(t_main *main)

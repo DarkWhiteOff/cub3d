@@ -6,6 +6,10 @@ int	close_window(t_main *main)
 	mlx_destroy_image(main->mlx_p, main->spr_floor.img);
 	mlx_destroy_image(main->mlx_p, main->spr_p.img);
 	mlx_destroy_image(main->mlx_p, main->spr_angle.img);
+	mlx_destroy_image(main->mlx_p, main->tex.tex_north.img);
+	mlx_destroy_image(main->mlx_p, main->tex.tex_south.img);
+	mlx_destroy_image(main->mlx_p, main->tex.tex_west.img);
+	mlx_destroy_image(main->mlx_p, main->tex.tex_east.img);
 	mlx_destroy_image(main->mlx_p, main->img);
 	mlx_destroy_window(main->mlx_p, main->mlx_win);
 	mlx_destroy_display(main->mlx_p);
