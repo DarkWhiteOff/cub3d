@@ -1,131 +1,83 @@
 #include "../includes/cub3d.h"
 
-void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
+void	check_walls1(t_main *main)
 {
-	if (main->map.grid[i][j] == 'N' || main->map.grid[i][j] == 'S' || main->map.grid[i][j] == 'W' || main->map.grid[i][j] == 'E')
+	int	i;
+
+	i = 0;
+	while (i < main->map.diff_w[0])
 	{
-		main->map.player_pos++;
-		p_pos->x = j;
-		p_pos->y = i;
-		if (main->map.grid[i][j] == 'N')
-			main->ray.ray_angle = 270.0;
-		if (main->map.grid[i][j] == 'S')
-			main->ray.ray_angle = 90.0;
-		if (main->map.grid[i][j] == 'W')
-			main->ray.ray_angle = 180.0;
-		if (main->map.grid[i][j] == 'E')
-			main->ray.ray_angle = 0.0;
+		while (main->map.grid[0][i] == ' ')
+			i++;
+		if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' ' && i < main->map.diff_w[0]))
+		{
+			free(main->map.diff_w);
+			free_textures(main);
+			free_grids(main);
+			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
+		}
+		i++;
+	}
+	i = 0;
+	while (i < main->map.diff_w[main->map.h - 1])
+	{
+		while (main->map.grid[0][i] == ' ')
+			i++;
+		if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' ' && i < main->map.diff_w[0]))
+		{
+			free(main->map.diff_w);
+			free_textures(main);
+			free_grids(main);
+			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
+		}
+		i++;
 	}
 }
 
-int	check_other_char(t_map *map, int y, int x)
-{
-	if (map->grid[y][x] != 'N' && map->grid[y][x] != 'S' && map->grid[y][x] != 'W' && map->grid[y][x] != 'E' && map->grid[y][x] != '0' && map->grid[y][x] != '1' && map->grid[y][x] != ' ')
-		return (1);
-	return (0);
-}
-
-void	check_epc(t_main *main, t_pxy *p_pos)
+void	check_walls2(t_main *main)
 {
 	int	i;
-	int	j;
+	int j;
 
 	i = 1;
 	j = 0;
 	while (i < main->map.h - 1)
 	{
-		while (main->map.grid[i][j] != '\0')
-		{
-			is_epc(main, i, j, p_pos);
-			if (check_other_char(&main->map, i, j) == 1)
-			{
-				free_grids(&main->map);
-				exit (ft_printf("Error\nMap contains unrecognized character.\n"));
-			}
+		while (main->map.grid[i][j] == ' ')
 			j++;
+		if (main->map.grid[i][j] != '1')
+		{
+			free(main->map.diff_w);
+			free_textures(main);
+			free_grids(main);
+			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
+		}
+		if (main->map.grid[i][main->map.diff_w[i] - 1] != '1')
+		{
+			free(main->map.diff_w);
+			free_textures(main);
+			free_grids(main);
+			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
 		}
 		j = 0;
 		i++;
 	}
-	if (main->map.player_pos != 1)
-	{
-		free_grids(&main->map);
-		exit (ft_printf("Error\nNo player position.\n"));
-	}
 }
 
-void	allocate_grids(t_map *map)
+void	check_path(t_main *main, int x, int y)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	map->grid = (char **)malloc(sizeof(char *) * map->h + 1);
-	map->highlight_grid = (char **)malloc(sizeof(char *) * map->h + 1);
-	while (i < map->h)
+	if (main->map.grid[y][x] == ' ')
 	{
-		map->grid[i] = (char *)malloc(sizeof(char) * (map->diff_w[i] + 1));
-		map->highlight_grid[i] = (char *)malloc(sizeof(char) * (map->diff_w[i] + 1));
-		i++;
+		free(main->map.diff_w);
+		free_textures(main);
+		exit(printf("Error\nMap not closed.\n"));
 	}
-	i = 0;
-	while (i < map->h)
-	{
-		while (j < map->diff_w[i])
-		{
-			map->highlight_grid[i][j] = '0';
-			j++;
-		}
-		map->highlight_grid[i][j] = '\0';
-		i++;
-		j = 0;
-	}
-}
-
-void	grid_init(t_main *main)
-{
-	char	*line;
-	int		j;
-	int		i;
-
-	i = 0;
-	j = 0;
-	main->map.fd = open(main->map.path, O_RDONLY);
-	check_fd_error(main);
-	line = get_next_line(main->map.fd);
-	while (main->tex.map_start--)
-	{
-		free(line);
-		line = get_next_line(main->map.fd);
-	}
-	allocate_grids(&main->map);
-	while (i < main->map.h)
-	{
-		while (j < main->map.diff_w[i])
-		{
-			main->map.grid[i][j] = line[j];
-			j++;
-		}
-		main->map.grid[i++][j] = '\0';
-		j = 0;
-		free(line);
-		line = get_next_line(main->map.fd);
-	}
-	close(main->map.fd);
-}
-
-void	free_grids(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (i < map->h)
-	{
-		free(map->grid[i]);
-		free(map->highlight_grid[i]);
-		i++;
-	}
-	free(map->grid);
-	free(map->highlight_grid);
+	if (main->map.grid[y][x] == '1' || main->map.highlight_grid[y][x] == '1' || x < 0 || y < 0 || x > main->map.diff_w[y] || y > main->map.h)
+		return ;
+	main->map.highlight_grid[y][x] = '1';
+	check_path(main, x - 1, y);
+	check_path(main, x + 1, y);
+	check_path(main, x, y - 1);
+	check_path(main, x, y + 1);
+	return ;
 }

@@ -1,7 +1,17 @@
-NO north
-SO south
-WE west
-EA east
+NO spr_tiles/tex_matrix.xpm
+
+
+
+SO spr_tiles/tex_matrix.xpm
+
+WE spr_tiles/tex_matrix.xpm
+
+EA spr_tiles/tex_matrix.xpm
+F 255,0,6
+C 255,55,6
+
+
+
          11111111111111111111111111111
          10000000001100000000000000001
          10110000011100000001111111111

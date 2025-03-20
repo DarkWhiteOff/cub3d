@@ -17,11 +17,11 @@ void	draw_texture(t_main *main, int ray_count, int wall_height) //A refaire pour
 	int		z;
 	int		color;
 
-	dy = ((float)wall_height * 2) / (float)90;
+	dy = ((float)wall_height * 2) / (float)64;
 	ds = ((float)main->map.px_h / 2) - (float)wall_height;
 	cy[1] = ds;
 	z = -1;
-	while (++z < 90)
+	while (++z < 64)
 	{
 		color = blue;
 		cy[0] = cy[1];
@@ -33,6 +33,9 @@ void	draw_texture(t_main *main, int ray_count, int wall_height) //A refaire pour
 		}
 		cy[1] += dy;
 	}
+	// (void)ray_count;
+	// (void)wall_height;
+	// mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->tex.tex_north.img, ray_count, wall_height);
 }
 
 void	raycasting(t_main *main)

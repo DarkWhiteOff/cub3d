@@ -6,17 +6,18 @@ int	close_window(t_main *main)
 	mlx_destroy_image(main->mlx_p, main->spr_floor.img);
 	mlx_destroy_image(main->mlx_p, main->spr_p.img);
 	mlx_destroy_image(main->mlx_p, main->spr_angle.img);
+	mlx_destroy_image(main->mlx_p, main->tex.tex_north.img);
+	mlx_destroy_image(main->mlx_p, main->tex.tex_south.img);
+	mlx_destroy_image(main->mlx_p, main->tex.tex_west.img);
+	mlx_destroy_image(main->mlx_p, main->tex.tex_east.img);
 	mlx_destroy_image(main->mlx_p, main->img);
 	mlx_destroy_window(main->mlx_p, main->mlx_win);
 	mlx_destroy_display(main->mlx_p);
 	free(main->mlx_p);
-	free_grids(&main->map);
+	free_grids(main);
+	free(main->map.diff_w);
+	free_textures(main);
 	exit (ft_printf("Windows was killed.\n"));
-}
-
-float	degree_to_radians(float degree)
-{
-	return (degree * PI / 180);
 }
 
 void	move(float angle, t_main *main)
@@ -26,7 +27,7 @@ void	move(float angle, t_main *main)
 	float ray_cos;
 	float ray_sin;
 
-	ray_cos = cos(degree_to_radians(angle)) * 0.06; // 0.12?
+	ray_cos = cos(degree_to_radians(angle)) * 0.06;
 	ray_sin = sin(degree_to_radians(angle)) * 0.06;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))][(int)(x + 0.5)]))
 		main->map.d_player_pos.y += ray_sin;

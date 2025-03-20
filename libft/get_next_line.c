@@ -85,8 +85,8 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	save = prepare_nextline(n_l);
-	if (n_l[0] == '\0' || n_l[0] == '\n')
-		free(save);
+	// if (n_l[0] == '\0' || n_l[0] == '\n')
+	// 	free(save);
 	return (n_l);
 }
 

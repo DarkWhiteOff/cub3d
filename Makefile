@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cube3d
 
 LIBFT_PATH = ./libft/
 LIBFT_NAME = libft.a
@@ -7,7 +7,7 @@ LIBFT_LIB = $(addprefix $(LIBFT_PATH), $(LIBFT_NAME))
 MLX_PATH = ./mlx/
 MLX_LIB = $(addprefix $(MLX_PATH), $(MLX_NAME))
 
-SRC = srcs/main.c srcs/check.c srcs/check1.c srcs/sprites.c srcs/player_pos.c srcs/render.c
+SRC = srcs/main.c srcs/check.c srcs/check1.c srcs/check2.c srcs/player_pos.c srcs/render.c srcs/utils.c srcs/init.c srcs/color.c srcs/free.c
 
 OBJS := $(SRC:%.c=%.o)
 

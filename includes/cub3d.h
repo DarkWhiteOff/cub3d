@@ -5,38 +5,45 @@
 # include "struct.h"
 
 // CUB3D
-void    render_init(t_main *main);
-int     check_map_name(char *map_name);
+void	render_init(t_main *main);
 void	checks_inits(t_main *main);
-void	get_screen_size(t_map *map);
 void	vars_init(t_main *main, char *map_path);
-void	empty_line_check(char *line, int fd);
+void    tex_init (t_tex *tex);
+void    ray_init (t_ray *ray);
+void    map_init (t_map *map, char *map_path);
 void	get_infos(t_main *main);
+void    get_diff_width(t_main *main);
+int     check_w(int *array);
 void	parse_map(t_main *main);
-void	check_walls1(t_map *map);
-void	check_walls2(t_map *map);
-int     check_other_char(t_map *map, int y, int x);
+void	check_walls1(t_main *main);
+void	check_walls2(t_main *main);
+void	check_path(t_main *main, int x, int y);
 void	is_epc(t_main *main, int i, int j, t_pxy *p_pos);
+int     check_other_char(t_map *map, int y, int x);
 void	check_epc(t_main *main, t_pxy *p_pos);
-void	check_path(t_map *map, int x, int y);
 void	allocate_grids(t_map *map);
 void	grid_init(t_main *main);
-void	free_grids(t_map *map);
-int     strlenmap(char *line);
-void	check_fd_error(t_main *main);
-void	sprites_init(t_main *main);
-void	free_sprites(t_main *main);
-void	update_player_pos(t_main *main, char c);
+int     get_index_hex(char c);
+int     get_rgb(char *line, int rgb);
+int     rgbToHex(char *line);
+void	free_grids(t_main *main);
+void    free_textures(t_main *main);
+int	    key_manager_up(int keycode, t_main *main);
+int	    key_manager_down(int keycode, t_main *main);
 void	actualise_player(t_main *main);
 void	move(float angle, t_main *main);
-int     key_manager_down(int keycode, t_main *main);
-int     key_manager_up(int keycode, t_main *main);
-int     close_window(t_main *main);
-int     game_refresh(t_main *main);
+int	    close_window(t_main *main);
+int	    game_refresh(t_main *main);
 void	raycasting(t_main *main);
 void	draw_texture(t_main *main, int ray_count, int wall_height);
 void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int color);
+void	empty_line_check(t_main *main, char *line, int fd);
+void	check_fd_error(t_main *main, int fd);
+int	    strlenmap(char *line);
+int	    check_map_name(char *map_name);
 float	degree_to_radians(float degree);
+void	sprites_init(t_main *main);
+void	free_sprites(t_main *main);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE
@@ -72,5 +79,8 @@ int		ft_get_size_ptrarray(unsigned long long adress);
 int		ft_putstr(char *str);
 int		ft_putchar(char c);
 int		ft_strlen(const char *s);
+int     ft_isspace(int c);
+int     ft_isdigit(int c);
+size_t  ft_atoi(const char *str);
 
 #endif
