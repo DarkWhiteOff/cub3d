@@ -123,6 +123,9 @@ typedef struct s_main
 	t_sprite	spr_angle;
 	t_sprite	spr_p;
 	int fdtest;
+	int fdtest1;
+	int fdtest2;
+	int fdtest3;
 }	t_main;
 
 #endif

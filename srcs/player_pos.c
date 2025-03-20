@@ -12,16 +12,8 @@ int	close_window(t_main *main)
 	free(main->mlx_p);
 	free_grids(main);
 	free(main->map.diff_w);
-	free(main->tex.NO);
-	free(main->tex.SO);
-	free(main->tex.WE);
-	free(main->tex.EA);
+	free_textures(main);
 	exit (ft_printf("Windows was killed.\n"));
-}
-
-float	degree_to_radians(float degree)
-{
-	return (degree * PI / 180);
 }
 
 void	move(float angle, t_main *main)
@@ -31,7 +23,7 @@ void	move(float angle, t_main *main)
 	float ray_cos;
 	float ray_sin;
 
-	ray_cos = cos(degree_to_radians(angle)) * 0.06; // 0.12?
+	ray_cos = cos(degree_to_radians(angle)) * 0.06;
 	ray_sin = sin(degree_to_radians(angle)) * 0.06;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))][(int)(x + 0.5)]))
 		main->map.d_player_pos.y += ray_sin;

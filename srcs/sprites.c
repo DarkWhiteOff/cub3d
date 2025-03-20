@@ -16,10 +16,7 @@ void	free_sprites(t_main *main)
 	free(main->mlx_p);
 	free_grids(main);
 	free(main->map.diff_w);
-	free(main->tex.NO);
-	free(main->tex.SO);
-	free(main->tex.WE);
-	free(main->tex.EA);
+	free_textures(main);
 }
 
 void	sprites_init(t_main *main)
