@@ -19,6 +19,7 @@ void	vars_init(t_main *main, char *map_path)
 	main->fd1 = -1;
 	main->fd2 = -1;
 	main->fd3 = -1;
+	// main->tex_buf[0] = (int *)malloc(sizeof(int) * 64 * 64);
 }
 
 void	checks_inits(t_main *main)
@@ -55,6 +56,8 @@ void	checks_inits(t_main *main)
 	main->map.d_player_pos.y = (float)(main->p_pos.y);
 	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
 	check_path(main, main->p_pos.x, main->p_pos.y);
+	//
+
 }
 
 void	render_init(t_main *main)

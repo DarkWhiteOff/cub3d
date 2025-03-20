@@ -53,6 +53,17 @@ typedef struct s_sprite
 	void	*img;
 }	t_sprite;
 
+typedef struct s_img_i
+{
+	void		*img;
+	char		*addr;
+	int			b;
+	int			ls;
+	int			end;
+	int			w;
+	int			h;
+}	t_img_i;
+
 typedef struct s_tex
 {
 	char *NO;
@@ -62,10 +73,10 @@ typedef struct s_tex
 	int color_f;
 	int color_c;
 	int map_start;
-	t_sprite tex_north;
-	t_sprite tex_south;
-	t_sprite tex_west;
-	t_sprite tex_east;
+	t_img_i tex_north;
+	t_img_i tex_south;
+	t_img_i tex_west;
+	t_img_i tex_east;
 }	t_tex;
 
 typedef struct s_ray
@@ -130,6 +141,7 @@ typedef struct s_main
 	int fd1;
 	int fd2;
 	int fd3;
+	// int *tex_buf[1];
 }	t_main;
 
 #endif

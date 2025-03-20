@@ -9,6 +9,56 @@ void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int co
 	*(unsigned int *)dst = color;
 }
 
+unsigned char	*add_char_to_str(unsigned char *s, unsigned char c, int _free)
+{
+	unsigned char	*res;
+	int		len;
+	int		i;
+
+	len = unsigned_ft_strlen(s);
+	res = malloc((len + 2) * sizeof(unsigned char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		res[i] = s[i];
+		i++;
+	}
+	res[i++] = c;
+	res[i++] = '\0';
+	if (_free && s)
+		free(s);
+	printf("res %s\n s '%s' c '%c'\n", res, s, c);
+	return (res);
+}
+
+int	find_pxtex_pos(t_main *main, int z, int wall_height, int ray_count, float *cy, float dy)
+{
+	(void)wall_height;
+	(void)ray_count;
+	(void)cy;
+	// printf("%d\n", (((int)(cy[0] + dy) * main->map.px_w + z) / 64) / 64);
+	unsigned char r=0;
+	unsigned char g=0;
+	unsigned char b=0;
+	r = (unsigned char)main->tex.tex_east.addr[(int)(cy[0] + dy) * main->map.px_w + z + 2+];
+	g = (unsigned char)main->tex.tex_east.addr[(int)(cy[0] + dy) * main->map.px_w + z + 3];
+	b = (unsigned char)main->tex.tex_east.addr[(int)(cy[0] + dy) * main->map.px_w + z + 4];
+	// printf("r %d g %d b %d\n", r, g, b);
+	// printf("%s\n", ft_itoa(b));
+	char *r1 = ft_strjoin(ft_itoa(r), ",");
+	char *g1 = ft_strjoin(ft_itoa(g), ",");
+	char *tmp = NULL;
+	tmp = ft_strjoin(r1, g1);
+	free(r1);
+	free(g1);
+	char  *str = NULL;
+	str = ft_strjoin(tmp, ft_itoa(b));
+	int color = rgbToHex(str);
+	return (free(str), color);
+}
+
 void	draw_texture(t_main *main, int ray_count, int wall_height) //A refaire pour comprendre
 {
 	float	dy;
@@ -17,13 +67,13 @@ void	draw_texture(t_main *main, int ray_count, int wall_height) //A refaire pour
 	int		z;
 	int		color;
 
-	dy = ((float)wall_height * 2) / (float)64;
+	dy = ((float)wall_height * 2) / (float)main->tex.tex_north.w;
 	ds = ((float)main->map.px_h / 2) - (float)wall_height;
 	cy[1] = ds;
 	z = -1;
-	while (++z < 64)
+	while (++z < main->tex.tex_north.w)
 	{
-		color = blue;
+		color = find_pxtex_pos(main, z, wall_height, ray_count, cy, dy);
 		cy[0] = cy[1];
 		while (cy[0] < cy[1] + dy)
 		{
@@ -33,9 +83,6 @@ void	draw_texture(t_main *main, int ray_count, int wall_height) //A refaire pour
 		}
 		cy[1] += dy;
 	}
-	// (void)ray_count;
-	// (void)wall_height;
-	// mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->tex.tex_north.img, ray_count, wall_height);
 }
 
 void	raycasting(t_main *main)

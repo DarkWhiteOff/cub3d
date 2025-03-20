@@ -63,6 +63,7 @@ int    rgbToHex(char *line)
     char res[7] = "0000000";
 	int dec = 0;
 
+	printf("line rgb %s\n", line);
 	int r = get_rgb(line, 1);
 	int g = get_rgb(line, 2);
 	int b = get_rgb(line, 3);

@@ -58,6 +58,8 @@ int		ft(const char *s, unsigned char c);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
+unsigned char	*unsigned_ft_strjoin(unsigned char const *s1, unsigned char const *s2);
+int	unsigned_ft_strlen(unsigned const char *s);
 
 // FT_PRINTF
 int		ft_printf(const char *str, ...);

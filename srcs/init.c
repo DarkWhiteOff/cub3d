@@ -50,6 +50,25 @@ void tex_init (t_tex *tex)
 	tex->color_f = -1;
 	tex->color_c = -1;
 	tex->map_start = 0;
+	tex->tex_north.addr = NULL;
+	tex->tex_north.b = 0;
+	tex->tex_north.ls = 0;
+	tex->tex_north.end = 0;
+
+	tex->tex_south.addr = NULL;
+	tex->tex_south.b = 0;
+	tex->tex_south.ls = 0;
+	tex->tex_south.end = 0;
+
+	tex->tex_west.addr = NULL;
+	tex->tex_west.b = 0;
+	tex->tex_west.ls = 0;
+	tex->tex_west.end = 0;
+
+	tex->tex_east.addr = NULL;
+	tex->tex_east.b = 0;
+	tex->tex_east.ls = 0;
+	tex->tex_east.end = 0;
 }
 
 void	sprites_init(t_main *main)
@@ -71,7 +90,7 @@ void	sprites_init(t_main *main)
 	main->tex.tex_west.img = mlx_xpm_file_to_image(main->mlx_p,
 		main->tex.WE, &main->tex.tex_west.w, &main->tex.tex_west.h);
 	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
-		main->tex.EA, &main->tex.tex_east.w, &main->tex.tex_east.h);
+		"spr_tiles/test.xpm", &main->tex.tex_east.w, &main->tex.tex_east.h);
 	if (!main->spr_p.img || !main->spr_wall.img
 		|| !main->spr_floor.img || !main->spr_angle.img 
 		|| !main->tex.tex_north.img || !main->tex.tex_south.img
@@ -80,4 +99,12 @@ void	sprites_init(t_main *main)
 		free_sprites(main);
 		exit(ft_printf("Error\nSprites/Textures init FAILED"));
 	}
+	main->tex.tex_north.addr = mlx_get_data_addr(main->tex.tex_north.img, &main->tex.tex_north.b, &main->tex.tex_north.ls, &main->tex.tex_north.end);
+	main->tex.tex_south.addr = mlx_get_data_addr(main->tex.tex_south.img, &main->tex.tex_south.b, &main->tex.tex_south.ls, &main->tex.tex_south.end);
+	main->tex.tex_west.addr = mlx_get_data_addr(main->tex.tex_west.img, &main->tex.tex_west.b, &main->tex.tex_west.ls, &main->tex.tex_west.end);
+	main->tex.tex_east.addr = mlx_get_data_addr(main->tex.tex_east.img, &main->tex.tex_east.b, &main->tex.tex_east.ls, &main->tex.tex_east.end);
+	// int i = 0;
+	// while (i++ < 64 * 64)
+	// 	printf("%d\n", (unsigned char)main->tex.tex_east.addr[i]);
+	// exit(0);
 }
