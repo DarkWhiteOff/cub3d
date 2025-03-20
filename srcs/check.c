@@ -43,11 +43,9 @@ void	get_infos(t_main *main)
 		if (NO == 1 && SO == 1 && WE == 1 && EA == 1
 			&& main->tex.color_c != -1 && main->tex.color_f != -1)
 			break ;
-		// printf("iic : %d\n", main->tex.color_c);
-		// printf("iic : %d\n", main->tex.color_f);
 		line = get_next_line(main->fd);
 	}
-	if (NO != 1 && SO != 1 && WE != 1 && EA != 1 && main->tex.color_c == -1 && main->tex.color_f == -1)
+	if (NO != 1 || SO != 1 || WE != 1 || EA != 1 || main->tex.color_c == -1 || main->tex.color_f == -1)
 	{
 		free_textures(main);
 		exit(ft_printf("Error\nTextures missing.\n"));
