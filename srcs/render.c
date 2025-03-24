@@ -1,14 +1,5 @@
 #include "../includes/cub3d.h"
 
-void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int color)
-{
-	char	*dst;
-
-	(void)img;
-	dst = adrr + (y * ls + x * (b / 8));
-	*(unsigned int *)dst = color;
-}
-
 // unsigned char	*add_char_to_str(unsigned char *s, unsigned char c, int _free)
 // {
 // 	unsigned char	*res;
@@ -82,6 +73,22 @@ void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int co
 // 	}
 // }
 
+void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int color)
+{
+	char	*dst;
+
+	(void)img;
+	dst = adrr + (y * ls + x * (b / 8));
+	*(unsigned int *)dst = color;
+}
+
+int	my_mlx_pixel_get(t_main *main, int z)
+{
+	int color = 0;
+	color = main->tex.tex_east.addr[2 * main->tex.tex_east.ls + z * (main->tex.tex_east.b / 8)];
+	return (color);
+}
+
 int	texture(t_main *main, int wall_h, int i, int j, float ds)
 {
 	float ok = (float)wall_h / main->tex.tex_east.w;
@@ -92,8 +99,8 @@ int	texture(t_main *main, int wall_h, int i, int j, float ds)
 	(void)ds;
 	while (++z < main->tex.tex_east.w)
 	{
-		if ((int)end == i)
-			color = green;
+		if ((int)end >= i)
+			color = my_mlx_pixel_get(main, z);
 		end += ok;
 	}
 	return (color);
