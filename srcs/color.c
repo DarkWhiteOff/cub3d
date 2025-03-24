@@ -63,12 +63,12 @@ int    rgbToHex(char *line)
     char res[7] = "0000000";
 	int dec = 0;
 
-	printf("line rgb %s\n", line);
+	// printf("line rgb %s\n", line);
 	int r = get_rgb(line, 1);
 	int g = get_rgb(line, 2);
 	int b = get_rgb(line, 3);
 
-	printf("r %d g %d b %d\n", r, g, b);
+	// printf("r %d g %d b %d\n", r, g, b);
 
     int r0 = r/16;
     int g0 = g/16;
@@ -89,6 +89,6 @@ int    rgbToHex(char *line)
 		+ get_index_hex(res[3]) * pow(16, 2) + get_index_hex(res[2]) * pow(16, 3)
 		+ get_index_hex(res[1]) * pow(16, 4) + get_index_hex(res[0]) * pow(16, 5);
 	
-	printf("decimal color %d\n", dec);
+	// printf("decimal color %d\n", dec);
 	return (dec);
 }

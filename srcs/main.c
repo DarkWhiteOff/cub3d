@@ -27,26 +27,26 @@ void	checks_inits(t_main *main)
 	get_infos(main);
 	parse_map(main);
 	grid_init(main);
-	int i = 0;
-	int j = 0;
-	printf("main->map.h : %d\n", main->map.h);
-	while (main->map.diff_w[i] != -1)
-	{
-		printf("main->map.w : %d (%d)\n", main->map.diff_w[i], i);
-		i++;
-	}
-	i = 0;
-	while (i < main->map.h)
-	{
-		while (j < main->map.diff_w[i])
-		{
-			printf("%c", main->map.grid[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-		j = 0;
-	}
+	// int i = 0;
+	// int j = 0;
+	// printf("main->map.h : %d\n", main->map.h);
+	// while (main->map.diff_w[i] != -1)
+	// {
+	// 	printf("main->map.w : %d (%d)\n", main->map.diff_w[i], i);
+	// 	i++;
+	// }
+	// i = 0;
+	// while (i < main->map.h)
+	// {
+	// 	while (j < main->map.diff_w[i])
+	// 	{
+	// 		printf("%c", main->map.grid[i][j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	i++;
+	// 	j = 0;
+	// }
 	check_walls1(main);
 	check_walls2(main);
 	check_epc(main, &main->p_pos);
