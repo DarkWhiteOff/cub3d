@@ -3,7 +3,7 @@
 void	vars_init(t_main *main, char *map_path)
 {
 	main->mlx_p = NULL;
-	main->mlx_win= NULL;
+	main->mlx_win = NULL;
 	main->img = NULL;
 	main->addr = NULL;
 	main->b = 0;
@@ -19,7 +19,6 @@ void	vars_init(t_main *main, char *map_path)
 	main->fd1 = -1;
 	main->fd2 = -1;
 	main->fd3 = -1;
-	// main->tex_buf[0] = (int *)malloc(sizeof(int) * 64 * 64);
 }
 
 void	checks_inits(t_main *main)
@@ -27,26 +26,6 @@ void	checks_inits(t_main *main)
 	get_infos(main);
 	parse_map(main);
 	grid_init(main);
-	// int i = 0;
-	// int j = 0;
-	// printf("main->map.h : %d\n", main->map.h);
-	// while (main->map.diff_w[i] != -1)
-	// {
-	// 	printf("main->map.w : %d (%d)\n", main->map.diff_w[i], i);
-	// 	i++;
-	// }
-	// i = 0;
-	// while (i < main->map.h)
-	// {
-	// 	while (j < main->map.diff_w[i])
-	// 	{
-	// 		printf("%c", main->map.grid[i][j]);
-	// 		j++;
-	// 	}
-	// 	printf("\n");
-	// 	i++;
-	// 	j = 0;
-	// }
 	check_walls1(main);
 	check_walls2(main);
 	check_epc(main, &main->p_pos);
@@ -56,8 +35,13 @@ void	checks_inits(t_main *main)
 	main->map.d_player_pos.y = (float)(main->p_pos.y);
 	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
 	check_path(main, main->p_pos.x, main->p_pos.y);
-	//
+}
 
+void	ffree(t_main *main)
+{
+	free(main->map.diff_w);
+	free_textures(main);
+	free_grids(main);
 }
 
 void	render_init(t_main *main)
@@ -65,19 +49,14 @@ void	render_init(t_main *main)
 	main->mlx_p = mlx_init();
 	if (!main->mlx_p)
 	{
-		free(main->map.diff_w);
-		free_textures(main);
-		free_grids(main);
+		ffree(main);
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
-	main->mlx_win = mlx_new_window(main->mlx_p,
-			main->map.px_w, main->map.px_h, "cub3d");
+	main->mlx_win = mlx_new_window(main->mlx_p, main->map.px_w, main->map.px_h, "cub3d");
 	if (!main->mlx_win)
 	{
-		free(main->map.diff_w);
-		free_textures(main);
-		free_grids(main);
+		ffree(main);
 		mlx_destroy_display(main->mlx_p);
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
@@ -85,9 +64,7 @@ void	render_init(t_main *main)
 	main->img = mlx_new_image(main->mlx_p, main->map.px_w, main->map.px_h);
 	if (!main->img)
 	{
-		free(main->map.diff_w);
-		free_textures(main);
-		free_grids(main);
+		ffree(main);
 		mlx_destroy_window(main->mlx_p, main->mlx_win);
 		mlx_destroy_display(main->mlx_p);
 		free(main->mlx_p);
@@ -105,7 +82,7 @@ int	main(int argc, char *argv[])
 	if (check_map_name(argv[1]) == 1)
 		return (ft_printf("Error\nMap name is incorrect.\n"));
 	vars_init(&main, argv[1]);
-    checks_inits(&main);
+	checks_inits(&main);
 	render_init(&main);
 	sprites_init(&main);
 	game_refresh(&main);

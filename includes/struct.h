@@ -141,7 +141,6 @@ typedef struct s_main
 	int fd1;
 	int fd2;
 	int fd3;
-	// int *tex_buf[1];
 }	t_main;
 
 #endif
