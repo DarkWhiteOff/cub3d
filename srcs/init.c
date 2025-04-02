@@ -65,7 +65,7 @@ void	textures_init(t_main *main)
 	main->tex.tex_west.img = mlx_xpm_file_to_image(main->mlx_p,
 			main->tex.WE, &main->tex.tex_west.w, &main->tex.tex_west.h);
 	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
-			"spr_tiles/tex_matrix.xpm", &main->tex.tex_east.w, &main->tex.tex_east.h);
+			main->tex.EA, &main->tex.tex_east.w, &main->tex.tex_east.h);
 }
 
 void	sprites_init(t_main *main)
