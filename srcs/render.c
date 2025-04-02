@@ -83,8 +83,19 @@ void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int co
 unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 {
 	char	*dst;
+	t_img_i	tex;
 
-	dst = main->tex.tex_east.addr + (y * main->tex.tex_east.ls + x * (main->tex.tex_east.b / 8));
+	if (main->ray.ray_angle <= 60 && main->ray.ray_angle >= 120)
+		tex = main->tex.tex_north;
+	if (main->ray.ray_angle < 300 && main->ray.ray_angle > 60)
+		tex = main->tex.tex_east;
+	if (main->ray.ray_angle <= 300 && main->ray.ray_angle >= 240)
+		tex = main->tex.tex_south;
+	if (main->ray.ray_angle < 240 && main->ray.ray_angle > 120)
+		tex = main->tex.tex_west;
+	else
+		tex = main->tex.tex_east;
+	dst = tex.addr + (y * tex.ls + x * (tex.b / 8));
 	return (*(unsigned int *)dst);
 }
 
@@ -147,7 +158,7 @@ void	raycasting(t_main *main)
 		}
 		//Wall height calculations
 		distance = sqrt(powf(main->ray.d_ray_pos.x - main->map.d_player_pos.x - 0.5, 2.0) + powf(main->ray.d_ray_pos.y - main->map.d_player_pos.y - 0.5, 2.0));
-		distance = distance * cos(degree_to_radians(ray_angle - main->ray.ray_angle));	
+		distance = distance * cos(degree_to_radians(ray_angle - main->ray.ray_angle));
 		wall_h = (int)(main->map.px_h / (1.5 * distance));
 		ds = ((float)main->map.px_h / 2) - (float)wall_h;
 		//Put pixels on img (not window)
