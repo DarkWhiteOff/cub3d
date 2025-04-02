@@ -61,7 +61,7 @@
 // 	z = -1;
 // 	while (++z < main->tex.tex_north.w)
 // 	{
-// 		color = find_pxtex_pos(main, z, wall_height, ray_count, cy, dy);
+// 		color = find_pxtex_pos(main, z, ...);
 // 		cy[0] = cy[1];
 // 		while (cy[0] < cy[1] + dy)
 // 		{
@@ -73,6 +73,13 @@
 // 	}
 // }
 
+int	my_mlx_pixel_get(t_main *main, int z)
+{
+	int color = 0;
+	color = main->tex.tex_east.addr[2 * main->tex.tex_east.ls + z * (main->tex.tex_east.b / 8)];
+	return (color);
+}
+
 void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int color)
 {
 	char	*dst;
@@ -82,16 +89,10 @@ void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int co
 	*(unsigned int *)dst = color;
 }
 
-int	my_mlx_pixel_get(t_main *main, int z)
-{
-	int color = 0;
-	color = main->tex.tex_east.addr[2 * main->tex.tex_east.ls + z * (main->tex.tex_east.b / 8)];
-	return (color);
-}
 
 int	texture(t_main *main, int wall_h, int i, int j, float ds)
 {
-	float ok = (float)wall_h / main->tex.tex_east.w;
+	float ok = (float)wall_h / main->tex.tex_east.h;
 	int z = -1;
 	float end = 0.0;
 	int color = 0;
@@ -123,8 +124,7 @@ void	raycasting(t_main *main)
 		main->ray.d_ray_pos.x = main->map.d_player_pos.x + 0.5;
 		main->ray.d_ray_pos.y = main->map.d_player_pos.y + 0.5;
 		while (!ft_strchr("1", main->map.grid[(int)main->ray.d_ray_pos.y][(int)main->ray.d_ray_pos.x]))
-		{
-			
+		{	
 			main->ray.d_ray_pos.x += main->ray.cos;
 			main->ray.d_ray_pos.y += main->ray.sin;
 		}

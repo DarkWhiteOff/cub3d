@@ -103,8 +103,4 @@ void	sprites_init(t_main *main)
 	main->tex.tex_south.addr = mlx_get_data_addr(main->tex.tex_south.img, &main->tex.tex_south.b, &main->tex.tex_south.ls, &main->tex.tex_south.end);
 	main->tex.tex_west.addr = mlx_get_data_addr(main->tex.tex_west.img, &main->tex.tex_west.b, &main->tex.tex_west.ls, &main->tex.tex_west.end);
 	main->tex.tex_east.addr = mlx_get_data_addr(main->tex.tex_east.img, &main->tex.tex_east.b, &main->tex.tex_east.ls, &main->tex.tex_east.end);
-	// int i = 0;
-	// while (i++ < 64 * 64)
-	// 	printf("%d\n", (unsigned char)main->tex.tex_east.addr[i]);
-	// exit(0);
 }
