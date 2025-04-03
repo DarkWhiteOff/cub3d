@@ -60,14 +60,14 @@ void	actualise_player(t_main *main)
 	else if (main->map.left == 1)
 	{
 		if (main->ray.ray_angle <= 0)
-		main->ray.ray_angle = 360;
+			main->ray.ray_angle = 360;
 		else
 			main->ray.ray_angle -= 1;
 	}
 	else if (main->map.right == 1)
 	{
 		if (main->ray.ray_angle >= 360)
-		main->ray.ray_angle = 0;
+			main->ray.ray_angle = 0;
 		else
 			main->ray.ray_angle += 1;
 	}
