@@ -41,8 +41,8 @@ unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 	tex = main->tex.tex_south;
 	if (main->ray.ray_angle >= 60 && main->ray.ray_angle <= 120)
 		tex = main->tex.tex_north;
-	else if ((main->ray.ray_angle < 60 && main->ray.ray_angle > 0)
-			|| (main->ray.ray_angle > 300 && main->ray.ray_angle < 360))
+	else if ((main->ray.ray_angle < 60 && main->ray.ray_angle >= 0)
+			|| (main->ray.ray_angle > 300 && main->ray.ray_angle <= 360))
 		tex = main->tex.tex_east;
 	else if (main->ray.ray_angle <= 300 && main->ray.ray_angle >= 240)
 		tex = main->tex.tex_south;

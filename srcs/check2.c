@@ -12,9 +12,9 @@ void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
 		if (main->map.grid[i][j] == 'S')
 			main->ray.ray_angle = 270;
 		if (main->map.grid[i][j] == 'W')
-			main->ray.ray_angle = 0;
-		if (main->map.grid[i][j] == 'E')
 			main->ray.ray_angle = 180;
+		if (main->map.grid[i][j] == 'E')
+			main->ray.ray_angle = 0;
 	}
 }
 
