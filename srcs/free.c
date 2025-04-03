@@ -15,7 +15,7 @@ void	free_grids(t_main *main)
 	free(main->map.highlight_grid);
 }
 
-void free_textures(t_main *main)
+void	free_textures(t_main *main)
 {
 	if (main->tex.NO)
 		free(main->tex.NO);

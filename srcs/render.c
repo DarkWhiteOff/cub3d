@@ -130,7 +130,7 @@ void	raycasting(t_main *main)
 		// printf("bpp : %d | ls : %d | endian : %d\n", main->tex.tex_east.b, main->tex.tex_east.ls, main->tex.tex_east.end);
 		//Complexe mais la fonction dessine les murs sur l'img
 		draw_texture(main, i, wall_h);
-		printf("ANGLE = %f\n", main->ray.ray_angle);
+		//printf("ANGLE = %f\n", main->ray.ray_angle);
 		ray_angle += main->ray.diff_ray_angle;
 	}
 }

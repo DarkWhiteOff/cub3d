@@ -28,6 +28,8 @@
 # define blue  0x000000FF
 # define black 000000
 
+# define HEXA "0123456789ABCDEF"
+
 typedef struct s_pxy
 {
 	int	x;
