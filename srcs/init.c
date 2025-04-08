@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
+/*   Updated: 2025/04/08 18:42:11 by zamgar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	map_init(t_map *map, char *map_path)
@@ -70,24 +82,27 @@ void	textures_init(t_main *main)
 
 void	sprites_init(t_main *main)
 {
-	// Sprites
 	main->spr_wall.img = mlx_xpm_file_to_image(main->mlx_p,
 			"spr_tiles/spr_wall.xpm", &main->spr_wall.w, &main->spr_wall.h);
 	main->spr_floor.img = mlx_xpm_file_to_image(main->mlx_p,
 			"spr_tiles/spr_floor.xpm", &main->spr_floor.w, &main->spr_floor.h);
 	main->spr_p.img = mlx_xpm_file_to_image(main->mlx_p,
 			"spr_tiles/spr_player.xpm", &main->spr_p.w, &main->spr_p.h);
-	// Textures
 	textures_init(main);
 	if (!main->spr_p.img || !main->spr_wall.img
-		|| !main->spr_floor.img || !main->tex.tex_north.img || !main->tex.tex_south.img
-		|| !main->tex.tex_west.img || !main->tex.tex_east.img)
+		|| !main->spr_floor.img || !main->tex.tex_north.img
+		|| !main->tex.tex_south.img || !main->tex.tex_west.img
+		|| !main->tex.tex_east.img)
 	{
 		free_sprites(main);
 		exit(ft_printf("Error\nSprites/Textures init FAILED"));
 	}
-	main->tex.tex_north.addr = mlx_get_data_addr(main->tex.tex_north.img, &main->tex.tex_north.b, &main->tex.tex_north.ls, &main->tex.tex_north.end);
-	main->tex.tex_south.addr = mlx_get_data_addr(main->tex.tex_south.img, &main->tex.tex_south.b, &main->tex.tex_south.ls, &main->tex.tex_south.end);
-	main->tex.tex_west.addr = mlx_get_data_addr(main->tex.tex_west.img, &main->tex.tex_west.b, &main->tex.tex_west.ls, &main->tex.tex_west.end);
-	main->tex.tex_east.addr = mlx_get_data_addr(main->tex.tex_east.img, &main->tex.tex_east.b, &main->tex.tex_east.ls, &main->tex.tex_east.end);
+	main->tex.tex_north.addr = mlx_get_data_addr(main->tex.tex_north.img,
+			&main->tex.tex_north.b, &main->tex.tex_north.ls, &main->tex.tex_north.end);
+	main->tex.tex_south.addr = mlx_get_data_addr(main->tex.tex_south.img,
+			&main->tex.tex_south.b, &main->tex.tex_south.ls, &main->tex.tex_south.end);
+	main->tex.tex_west.addr = mlx_get_data_addr(main->tex.tex_west.img,
+			&main->tex.tex_west.b, &main->tex.tex_west.ls, &main->tex.tex_west.end);
+	main->tex.tex_east.addr = mlx_get_data_addr(main->tex.tex_east.img,
+			&main->tex.tex_east.b, &main->tex.tex_east.ls, &main->tex.tex_east.end);
 }

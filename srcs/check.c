@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
+/*   Updated: 2025/04/08 18:59:55 by zamgar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	get_infos(t_main *main)
 {
 	char	*line;
-	int 	NO;
-	int 	SO;
-	int 	WE;
-	int 	EA;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		check;
 
-	NO = 0;
-	SO = 0;
-	WE = 0;
-	EA = 0;
-
+	no = 0;
+	so = 0;
+	we = 0;
+	ea = 0;
+	check = 0; //utilite ??
 	main->fd = open(main->map.path, O_RDONLY);
 	if (main->fd < 0 || read(main->fd, 0, 0) < 0)
 		exit (ft_printf("Error\nfd not working."));
@@ -23,41 +36,39 @@ void	get_infos(t_main *main)
 		if (ft_strncmp(line, "NO ", 3) == 0)
 		{
 			main->tex.NO = ft_substr(line, 3, ft_strlen(line) - 4);
-			NO = 1;
+			no = 1;
 		}
 		if (ft_strncmp(line, "SO ", 3) == 0)
 		{
 			main->tex.SO = ft_substr(line, 3, ft_strlen(line) - 4);
-			SO = 1;
+			so = 1;
 		}
 		if (ft_strncmp(line, "WE ", 3) == 0)
 		{
 			main->tex.WE = ft_substr(line, 3, ft_strlen(line) - 4);
-			WE = 1;
+			we = 1;
 		}
 		if (ft_strncmp(line, "EA ", 3) == 0)
 		{
 			main->tex.EA = ft_substr(line, 3, ft_strlen(line) - 4);
-			EA = 1;
+			ea = 1;
 		}
 		if (!ft_strncmp(line, "C", 1) && main->tex.color_c == -1)
 			main->tex.color_c = rgbToHex(line);
 		if (!ft_strncmp(line, "F", 1) && main->tex.color_f == -1)
 			main->tex.color_f = rgbToHex(line);
 		free(line);
-		if (NO == 1 && SO == 1 && WE == 1 && EA == 1
+		if (no == 1 && so == 1 && we == 1 && ea == 1
 			&& main->tex.color_c != -1 && main->tex.color_f != -1)
 			break ;
-		// printf("iic : %d\n", main->tex.color_c);
-		// printf("iic : %d\n", main->tex.color_f);
 		line = get_next_line(main->fd);
 	}
-	if (NO != 1 && SO != 1 && WE != 1 && EA != 1 && main->tex.color_c == -1 && main->tex.color_f == -1)
+	if (no != 1 && so != 1 && we != 1 && ea != 1
+		&& main->tex.color_c == -1 && main->tex.color_f == -1)
 	{
 		free_textures(main);
 		exit(ft_printf("Error\nTextures missing.\n"));
 	}
-	int check = 0;//utilite ??
 	line = get_next_line(main->fd);
 	while (line)
 	{
@@ -70,7 +81,7 @@ void	get_infos(t_main *main)
 	}
 }
 
-void get_diff_width(t_main *main)
+void	get_diff_width(t_main *main)
 {
 	char	*l;
 	int		map_start;
@@ -114,7 +125,7 @@ void	parse_map(t_main *main)
 {
 	char	*l;
 	int		map_start;
-	
+
 	map_start = main->tex.map_start;
 	main->fd1 = open(main->map.path, O_RDONLY);
 	check_fd_error(main, main->fd1);

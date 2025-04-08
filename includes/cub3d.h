@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
+/*   Updated: 2025/04/08 19:03:58 by zamgar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -37,7 +49,7 @@ int	    close_window(t_main *main);
 int	    game_refresh(t_main *main);
 void	raycasting(t_main *main);
 void	draw_texture(t_main *main, int ray_count, int wall_height);
-void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int color);
+void	my_mlx_pixel_put(char *adrr, int ls, int b, int x, int y, int color);
 void	empty_line_check(t_main *main, char *line, int fd);
 void	check_fd_error(t_main *main, int fd);
 int	    strlenmap(char *line);

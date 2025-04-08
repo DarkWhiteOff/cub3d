@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_pos.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 18:39:11 by zamgar            #+#    #+#             */
+/*   Updated: 2025/04/08 18:39:11 by zamgar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int	close_window(t_main *main)
@@ -21,16 +33,20 @@ int	close_window(t_main *main)
 
 void	move(float angle, t_main *main)
 {
-	float x = main->map.d_player_pos.x;
-	float y = main->map.d_player_pos.y;
-	float ray_cos;
-	float ray_sin;
+	float	x;
+	float	y;
+	float	ray_cos;
+	float	ray_sin;
 
+	x = main->map.d_player_pos.x;
+	y = main->map.d_player_pos.y;
 	ray_cos = cos(degree_to_radians(angle)) * 0.02;
 	ray_sin = sin(degree_to_radians(angle)) * 0.02;
-	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))][(int)(x + 0.5)]))
+	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))]
+		[(int)(x + 0.5)]))
 		main->map.d_player_pos.y += ray_sin;
-	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))]))
+	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)]
+		[(int)(x + 0.5 + (3 * ray_cos))]))
 		main->map.d_player_pos.x += ray_cos;
 	main->p_pos.x = (int)main->map.d_player_pos.x;
 	main->p_pos.y = (int)main->map.d_player_pos.y;
@@ -38,7 +54,7 @@ void	move(float angle, t_main *main)
 
 void	actualise_player(t_main *main)
 {
-	float angle;
+	float	angle;
 
 	angle = main->ray.ray_angle;
 	if (main->map.z == 1)
@@ -102,9 +118,9 @@ int	key_manager_down(int keycode, t_main *main)
 {
 	if (keycode == 53 || keycode == 65307)
 		close_window(main);
-	if (keycode == 119) // 119
+	if (keycode == 119)
 		main->map.z = 1;
-	if (keycode == 97) // 97
+	if (keycode == 97)
 		main->map.q = 1;
 	if (keycode == 115)
 		main->map.s = 1;
@@ -119,9 +135,9 @@ int	key_manager_down(int keycode, t_main *main)
 
 int	key_manager_up(int keycode, t_main *main)
 {
-	if (keycode == 119) // 119
+	if (keycode == 119)
 		main->map.z = 0;
-	if (keycode == 97) // 97
+	if (keycode == 97)
 		main->map.q = 0;
 	if (keycode == 115)
 		main->map.s = 0;

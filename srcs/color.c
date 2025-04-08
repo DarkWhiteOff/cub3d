@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 18:38:49 by zamgar            #+#    #+#             */
+/*   Updated: 2025/04/08 18:49:03 by zamgar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int	get_index_hex(char c)
@@ -16,13 +28,18 @@ int	get_index_hex(char c)
 
 int	get_rgb(char *line, int rgb)
 {
-	int i = 0;
-	int j;
-	int r = 0;
-	int g = 0;
-	int b = 0;
-	int c = 0;
+	int	i;
+	int	j;
+	int	r;
+	int	g;
+	int	b;
+	int	c;
 
+	i = 0;
+	r = 0;
+	g = 0;
+	b = 0;
+	c = 0;
 	while (line[i] && line[i] != '\n')
 	{
 		if (line[i] < 58 && line[i] > 47)
@@ -59,10 +76,10 @@ int	get_rgb(char *line, int rgb)
 	return (b);
 }
 
-int    rgbToHex(char *line)
+int	rgbToHex(char *line)
 {
-    char 	res[7] = "0000000";
-	int 	dec;
+    char	res[7] = "0000000";
+	int		dec;
 
 	dec = 0;
 	int r = get_rgb(line, 1);
