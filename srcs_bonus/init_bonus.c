@@ -69,10 +69,8 @@ void	textures_init(t_main *main)
 			main->tex.EA, &main->tex.tex_east.w, &main->tex.tex_east.h);
 	if (main->tex.D)
 	{
-		printf("door path = '%s'\n", main->tex.D);
 		main->tex.tex_door.img = mlx_xpm_file_to_image(main->mlx_p,
 			main->tex.D, &main->tex.tex_door.w, &main->tex.tex_door.h);
-
 	}
 }
 

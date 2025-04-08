@@ -1,5 +1,5 @@
 NAME = cub3d
-NAME_BONUS = bonus_$(NAME)
+NAME_BONUS = $(NAME)_bonus
 
 LIBFT_PATH = ./libft/
 LIBFT_NAME = libft.a

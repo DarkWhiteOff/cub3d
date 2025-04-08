@@ -25,6 +25,8 @@ void	free_textures(t_main *main)
 		free(main->tex.WE);
 	if (main->tex.EA)
 		free(main->tex.EA);
+	if (main->tex.D)
+		free(main->tex.D);
 }
 
 void	free_sprites(t_main *main)
@@ -47,6 +49,8 @@ void	free_sprites(t_main *main)
 		mlx_destroy_image(main->mlx_p, main->tex.tex_west.img);
 	if (main->tex.tex_east.img)
 		mlx_destroy_image(main->mlx_p, main->tex.tex_east.img);
+	if (main->tex.tex_door.img)
+		mlx_destroy_image(main->mlx_p, main->tex.tex_door.img);
 	mlx_destroy_image(main->mlx_p, main->img);
 	mlx_destroy_window(main->mlx_p, main->mlx_win);
 	mlx_destroy_display(main->mlx_p);
