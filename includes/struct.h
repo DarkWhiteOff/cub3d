@@ -83,15 +83,15 @@ typedef struct s_tex
 
 typedef struct s_ray
 {
-	float FOV;
-	float HFOV;
-	float ray_angle;
+	float	FOV;
+	float	HFOV;
+	float	ray_angle;
 	float	diff_ray_angle;
-	float precision;
-	float limit;
-	float cos;
-	float sin;
-	t_d_pxy d_ray_pos;
+	float	precision;
+	float	limit;
+	float	cos;
+	float	sin;
+	t_d_pxy	d_ray_pos;
 }	t_ray;
 
 typedef struct s_map

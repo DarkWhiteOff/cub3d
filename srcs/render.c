@@ -1,29 +1,5 @@
 #include "../includes/cub3d.h"
 
-// int	my_mlx_pixel_get(t_main *main, int z)
-// {
-// 	int color = 0;
-// 	color = main->tex.tex_east.addr[2 * main->tex.tex_east.ls + z * (main->tex.tex_east.b / 8)];
-// 	return (color);
-// }
-
-// int	texture(t_main *main, int wall_h, int i, int j, float ds)
-// {
-// 	float ok = (float)wall_h / main->tex.tex_east.h;
-// 	int z = -1;
-// 	float end = 0.0;
-// 	int color = 0;
-// 	(void)j;
-// 	(void)ds;
-// 	while (++z < main->tex.tex_east.w)
-// 	{
-// 		if ((int)end >= i)
-// 			color = my_mlx_pixel_get(main, z);
-// 		end += ok;
-// 	}
-// 	return (color);
-// }
-
 void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int color)
 {
 	char	*dst;
@@ -35,19 +11,37 @@ void	my_mlx_pixel_put(void *img, char *adrr, int ls, int b, int x, int y, int co
 
 unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 {
+	float	ray_cos;
+	float	ray_sin;
 	char	*dst;
 	t_img_i	tex;
 
+	ray_cos = main->ray.cos;
+	if (ray_cos < 0)
+		ray_cos = -ray_cos;
+	ray_sin = main->ray.sin;
+	if (ray_sin < 0)
+		ray_sin = -ray_sin;
 	tex = main->tex.tex_south;
-	if (main->ray.ray_angle >= 60 && main->ray.ray_angle <= 120)
+	if (main->map.grid[(int)(main->ray.d_ray_pos.y - ray_sin)][(int)main->ray.d_ray_pos.x] != '1')
 		tex = main->tex.tex_north;
-	else if ((main->ray.ray_angle < 60 && main->ray.ray_angle >= 0)
-			|| (main->ray.ray_angle > 300 && main->ray.ray_angle <= 360))
-		tex = main->tex.tex_east;
-	else if (main->ray.ray_angle <= 300 && main->ray.ray_angle >= 240)
+	else if (main->map.grid[(int)(main->ray.d_ray_pos.y + ray_sin)][(int)main->ray.d_ray_pos.x] != '1')
 		tex = main->tex.tex_south;
-	else if (main->ray.ray_angle < 240 && main->ray.ray_angle > 120)
+	else if (main->map.grid[(int)main->ray.d_ray_pos.y][(int)(main->ray.d_ray_pos.x + ray_cos)] != '1')
+		tex = main->tex.tex_east;
+	else if (main->map.grid[(int)main->ray.d_ray_pos.y][(int)(main->ray.d_ray_pos.x - ray_cos)] != '1')
 		tex = main->tex.tex_west;
+
+	// tex = main->tex.tex_south;
+	// if (main->ray.ray_angle >= 60 && main->ray.ray_angle <= 120)
+	// 	tex = main->tex.tex_north;
+	// else if ((main->ray.ray_angle < 60 && main->ray.ray_angle >= 0)
+	// 		|| (main->ray.ray_angle > 300 && main->ray.ray_angle <= 360))
+	// 	tex = main->tex.tex_east;
+	// else if (main->ray.ray_angle <= 300 && main->ray.ray_angle >= 240)
+	// 	tex = main->tex.tex_south;
+	// else if (main->ray.ray_angle < 240 && main->ray.ray_angle > 120)
+	// 	tex = main->tex.tex_west;
 	dst = tex.addr + (y * tex.ls + x * (tex.b / 8));
 	return (*(unsigned int *)dst);
 }
@@ -62,7 +56,7 @@ int	get_tex_color(t_main *main, int z)
 	return (color);
 }
 
-void	draw_texture(t_main *main, int ray_count, int wall_height) //A refaire pour comprendre
+void	draw_texture(t_main *main, int ray_count, int wall_height)
 {
 	float	dy;
 	float	ds;
@@ -76,7 +70,7 @@ void	draw_texture(t_main *main, int ray_count, int wall_height) //A refaire pour
 	z = -1;
 	while (++z < main->tex.tex_north.w)
 	{
-		color = get_tex_color(main, z); //find_pxtex_pos(main, z, wall_height, ray_count, cy, dy);
+		color = get_tex_color(main, z);
 		cy[0] = cy[1];
 		while (cy[0] < cy[1] + dy)
 		{
@@ -116,20 +110,14 @@ void	raycasting(t_main *main)
 		ds = ((float)main->map.px_h / 2) - (float)wall_h; //drawStart
 		//Put pixels on img (not window)
 		j = -1;
-		//printf("wall_h : %d\n", wall_h);
 		while (++j < main->map.px_h)
 		{
 			if (j < ds)
 				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, main->tex.color_c); //Ceiling
-			// else if (j > ds && j < (main->map.px_h / 2) + wall_h)
-			// 	my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, texture(main, wall_h, i, j, ds)); // Wall
 			else if (j >= (main->map.px_h / 2) + wall_h)
 				my_mlx_pixel_put(&main->img, main->addr, main->ls, main->b, i, j, main->tex.color_f); //Floor
 		}
-		// printf("bpp : %d | ls : %d | endian : %d\n", main->b, main->ls, main->end);
-		// printf("bpp : %d | ls : %d | endian : %d\n", main->tex.tex_east.b, main->tex.tex_east.ls, main->tex.tex_east.end);
-		//Complexe mais la fonction dessine les murs sur l'img
-		draw_texture(main, i, wall_h);
+		draw_texture(main, i, wall_h); // Wall
 		//printf("ANGLE = %f\n", main->ray.ray_angle);
 		ray_angle += main->ray.diff_ray_angle;
 	}
