@@ -78,7 +78,15 @@ void	render_init(t_main *main)
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
 	main->img_minimap = mlx_new_image(main->mlx_p, main->map.w * 5, main->map.h * 5);
-	//free
+	if (!main->img)
+	{
+		ffree(main);
+		mlx_destroy_image(main->mlx_p, main->img);
+		mlx_destroy_window(main->mlx_p, main->mlx_win);
+		mlx_destroy_display(main->mlx_p);
+		free(main->mlx_p);
+		exit (ft_printf("Error\nMlx failed.\n"));
+	}
 	main->addr = mlx_get_data_addr(main->img, &main->b, &main->ls, &main->end);
 }
 
