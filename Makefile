@@ -1,4 +1,4 @@
-NAME = cube3d
+NAME = cub3d
 
 LIBFT_PATH = ./libft/
 LIBFT_NAME = libft.a

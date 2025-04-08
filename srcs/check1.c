@@ -37,7 +37,7 @@ void	check_walls1(t_main *main)
 void	check_walls2(t_main *main)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 1;
 	j = 0;

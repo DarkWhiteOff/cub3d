@@ -3,10 +3,15 @@
 void	get_infos(t_main *main)
 {
 	char	*line;
-	int NO = 0;
-	int SO = 0;
-	int WE = 0;
-	int EA = 0;
+	int 	NO;
+	int 	SO;
+	int 	WE;
+	int 	EA;
+
+	NO = 0;
+	SO = 0;
+	WE = 0;
+	EA = 0;
 
 	main->fd = open(main->map.path, O_RDONLY);
 	if (main->fd < 0 || read(main->fd, 0, 0) < 0)
@@ -35,22 +40,24 @@ void	get_infos(t_main *main)
 			main->tex.EA = ft_substr(line, 3, ft_strlen(line) - 4);
 			EA = 1;
 		}
-		if (!ft_strncmp(line, "C ", 2) && main->tex.color_c == -1)
-			main->tex.color_c = rgbToHex(&line[2]);
-		if (!ft_strncmp(line, "F ", 2) && main->tex.color_f == -1)
-			main->tex.color_f = rgbToHex(&line[2]);
+		if (!ft_strncmp(line, "C", 1) && main->tex.color_c == -1)
+			main->tex.color_c = rgbToHex(line);
+		if (!ft_strncmp(line, "F", 1) && main->tex.color_f == -1)
+			main->tex.color_f = rgbToHex(line);
 		free(line);
 		if (NO == 1 && SO == 1 && WE == 1 && EA == 1
 			&& main->tex.color_c != -1 && main->tex.color_f != -1)
 			break ;
+		// printf("iic : %d\n", main->tex.color_c);
+		// printf("iic : %d\n", main->tex.color_f);
 		line = get_next_line(main->fd);
 	}
-	if (NO != 1 || SO != 1 || WE != 1 || EA != 1 || main->tex.color_c == -1 || main->tex.color_f == -1)
+	if (NO != 1 && SO != 1 && WE != 1 && EA != 1 && main->tex.color_c == -1 && main->tex.color_f == -1)
 	{
 		free_textures(main);
 		exit(ft_printf("Error\nTextures missing.\n"));
 	}
-	int check = 0;
+	int check = 0;//utilite ??
 	line = get_next_line(main->fd);
 	while (line)
 	{
@@ -65,10 +72,12 @@ void	get_infos(t_main *main)
 
 void get_diff_width(t_main *main)
 {
-	int map_start = main->tex.map_start;
 	char	*l;
-	int i = 0;
+	int		map_start;
+	int		i;
 
+	i = 0;
+	map_start = main->tex.map_start;
 	main->fd2 = open(main->map.path, O_RDONLY);
 	check_fd_error(main, main->fd2);
 	l = get_next_line(main->fd2);
@@ -89,7 +98,9 @@ void get_diff_width(t_main *main)
 
 int	check_w(int *array)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (array[i] != -1)
 	{
 		if (array[i] == 0)
@@ -102,8 +113,9 @@ int	check_w(int *array)
 void	parse_map(t_main *main)
 {
 	char	*l;
-	int map_start = main->tex.map_start;
-
+	int		map_start;
+	
+	map_start = main->tex.map_start;
 	main->fd1 = open(main->map.path, O_RDONLY);
 	check_fd_error(main, main->fd1);
 	l = get_next_line(main->fd1);

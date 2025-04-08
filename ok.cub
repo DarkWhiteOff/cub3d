@@ -1,21 +1,21 @@
 
 
-NO wolftex/greystone.xpm
+NO spr_tiles/tex_matrix.xpm
 
 
 
-SO wolftex/wood.xpm
+SO spr_tiles/tex_matrix.xpm
 
-WE wolftex/eagle.xpm
+WE spr_tiles/tex_matrix.xpm
 
-EA wolftex/purplestone.xpm
+EA spr_tiles/tex_matrix.xpm
 
 
 
 F 255,0,6
 
 
-C 255,7,6
+C 255,70,6
 
 
 

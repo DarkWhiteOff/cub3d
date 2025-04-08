@@ -28,6 +28,8 @@
 # define blue  0x000000FF
 # define black 000000
 
+# define HEXA "0123456789ABCDEF"
+
 typedef struct s_pxy
 {
 	int	x;
@@ -53,6 +55,17 @@ typedef struct s_sprite
 	void	*img;
 }	t_sprite;
 
+typedef struct s_img_i
+{
+	void		*img;
+	char		*addr;
+	int			b;
+	int			ls;
+	int			end;
+	int			w;
+	int			h;
+}	t_img_i;
+
 typedef struct s_tex
 {
 	char *NO;
@@ -62,23 +75,23 @@ typedef struct s_tex
 	int color_f;
 	int color_c;
 	int map_start;
-	t_sprite tex_north;
-	t_sprite tex_south;
-	t_sprite tex_west;
-	t_sprite tex_east;
+	t_img_i tex_north;
+	t_img_i tex_south;
+	t_img_i tex_west;
+	t_img_i tex_east;
 }	t_tex;
 
 typedef struct s_ray
 {
-	float FOV;
-	float HFOV;
-	float ray_angle;
+	float	FOV;
+	float	HFOV;
+	float	ray_angle;
 	float	diff_ray_angle;
-	float precision;
-	float limit;
-	float cos;
-	float sin;
-	t_d_pxy d_ray_pos;
+	float	precision;
+	float	limit;
+	float	cos;
+	float	sin;
+	t_d_pxy	d_ray_pos;
 }	t_ray;
 
 typedef struct s_map

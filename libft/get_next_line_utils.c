@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 12:47:16 by zamgar            #+#    #+#             */
-/*   Updated: 2024/06/12 12:47:18 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:20:58 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,33 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = ft_strlen(s1) + ft_strlen(s2);
 	j = 0;
 	newstr = (char *)malloc(sizeof(char) * i + 1);
+	if (newstr == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		newstr[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		newstr[i] = s2[j];
+		j++;
+		i++;
+	}
+	newstr[i] = '\0';
+	return (newstr);
+}
+
+unsigned char	*unsigned_ft_strjoin(unsigned char const *s1, unsigned char const *s2)
+{
+	size_t		i;
+	size_t		j;
+	unsigned char		*newstr;
+
+	i = unsigned_ft_strlen(s1) + unsigned_ft_strlen(s2);
+	j = 0;
+	newstr = (unsigned char *)malloc(sizeof(unsigned char) * i + 1);
 	if (newstr == NULL)
 		return (NULL);
 	i = 0;

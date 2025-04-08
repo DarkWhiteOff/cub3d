@@ -1,6 +1,6 @@
 #include "../includes/cub3d.h"
 
-void map_init (t_map *map, char *map_path)
+void	map_init(t_map *map, char *map_path)
 {
 	//Checks
 	map->path = map_path;
@@ -27,7 +27,7 @@ void map_init (t_map *map, char *map_path)
 	map->d_player_pos.y = 0.0;
 }
 
-void ray_init (t_ray *ray)
+void	ray_init(t_ray *ray)
 {
 	ray->FOV = 60.0;
 	ray->HFOV = 30.0;
@@ -41,7 +41,7 @@ void ray_init (t_ray *ray)
 	ray->d_ray_pos.y = 0.0;
 }
 
-void tex_init (t_tex *tex)
+void	tex_init(t_tex *tex)
 {
 	tex->NO = NULL;
 	tex->SO = NULL;
@@ -50,6 +50,22 @@ void tex_init (t_tex *tex)
 	tex->color_f = -1;
 	tex->color_c = -1;
 	tex->map_start = 0;
+	tex->tex_north.addr = NULL;
+	tex->tex_north.b = 0;
+	tex->tex_north.ls = 0;
+	tex->tex_north.end = 0;
+}
+
+void	textures_init(t_main *main)
+{
+	main->tex.tex_north.img = mlx_xpm_file_to_image(main->mlx_p,
+			main->tex.NO, &main->tex.tex_north.w, &main->tex.tex_north.h);
+	main->tex.tex_south.img = mlx_xpm_file_to_image(main->mlx_p,
+			main->tex.SO, &main->tex.tex_south.w, &main->tex.tex_south.h);
+	main->tex.tex_west.img = mlx_xpm_file_to_image(main->mlx_p,
+			main->tex.WE, &main->tex.tex_west.w, &main->tex.tex_west.h);
+	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
+			main->tex.EA, &main->tex.tex_east.w, &main->tex.tex_east.h);
 }
 
 void	sprites_init(t_main *main)
@@ -62,22 +78,19 @@ void	sprites_init(t_main *main)
 	main->spr_p.img = mlx_xpm_file_to_image(main->mlx_p,
 			"spr_tiles/spr_player.xpm", &main->spr_p.w, &main->spr_p.h);
 	main->spr_angle.img = mlx_xpm_file_to_image(main->mlx_p,
-		"spr_tiles/spr_angle.xpm", &main->spr_angle.w, &main->spr_angle.h);
+			"spr_tiles/spr_angle.xpm", &main->spr_angle.w, &main->spr_angle.h);
 	// Textures
-	main->tex.tex_north.img = mlx_xpm_file_to_image(main->mlx_p,
-		main->tex.NO, &main->tex.tex_north.w, &main->tex.tex_north.h);
-	main->tex.tex_south.img = mlx_xpm_file_to_image(main->mlx_p,
-		main->tex.SO, &main->tex.tex_south.w, &main->tex.tex_south.h);
-	main->tex.tex_west.img = mlx_xpm_file_to_image(main->mlx_p,
-		main->tex.WE, &main->tex.tex_west.w, &main->tex.tex_west.h);
-	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
-		main->tex.EA, &main->tex.tex_east.w, &main->tex.tex_east.h);
+	textures_init(main);
 	if (!main->spr_p.img || !main->spr_wall.img
-		|| !main->spr_floor.img || !main->spr_angle.img 
+		|| !main->spr_floor.img || !main->spr_angle.img
 		|| !main->tex.tex_north.img || !main->tex.tex_south.img
 		|| !main->tex.tex_west.img || !main->tex.tex_east.img)
 	{
 		free_sprites(main);
 		exit(ft_printf("Error\nSprites/Textures init FAILED"));
 	}
+	main->tex.tex_north.addr = mlx_get_data_addr(main->tex.tex_north.img, &main->tex.tex_north.b, &main->tex.tex_north.ls, &main->tex.tex_north.end);
+	main->tex.tex_south.addr = mlx_get_data_addr(main->tex.tex_south.img, &main->tex.tex_south.b, &main->tex.tex_south.ls, &main->tex.tex_south.end);
+	main->tex.tex_west.addr = mlx_get_data_addr(main->tex.tex_west.img, &main->tex.tex_west.b, &main->tex.tex_west.ls, &main->tex.tex_west.end);
+	main->tex.tex_east.addr = mlx_get_data_addr(main->tex.tex_east.img, &main->tex.tex_east.b, &main->tex.tex_east.ls, &main->tex.tex_east.end);
 }

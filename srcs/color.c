@@ -1,12 +1,13 @@
 #include "../includes/cub3d.h"
 
-int get_index_hex(char c)
+int	get_index_hex(char c)
 {
-	int i = 0;
-	char hex[] = "0123456789ABCDEF";
+	int		i;
+
+	i = 0;
 	while (i < 16)
 	{
-		if (hex[i] == c)
+		if (HEXA[i] == c)
 			return (i);
 		i++;
 	}
@@ -21,12 +22,13 @@ int	get_rgb(char *line, int rgb)
 	int g = 0;
 	int b = 0;
 	int c = 0;
+
 	while (line[i] && line[i] != '\n')
 	{
-		if (ft_isdigit(line[i]))
+		if (line[i] < 58 && line[i] > 47)
 		{
 			j = 0;
-			while (line[i + j] && j < 3 && ft_isdigit(line[i + j]))
+			while (line[i + j] && j < 3 && (line[i + j] < 58 && line[i + j] > 47))
 			{
 				if (c == 0)
 				{
@@ -57,66 +59,27 @@ int	get_rgb(char *line, int rgb)
 	return (b);
 }
 
-int	check_tmp(char *tmp)
-{
-	if ((int)ft_atoi(tmp) < 0 || (int)ft_atoi(tmp) > 255)
-		return (free(tmp), 0);
-	return (free(tmp), 1);
-}
-
-int	check_line_rgb(char *line)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = 0;
-	while (line[i] && line[i] != '\n')
-	{
-		if (line[i] == '+' || line[i] == '-' || ft_isdigit(line[i]))
-		{
-			if (line[i] == '-' || line[i] == '+')
-				j = i + 1;
-			else
-				j = i;
-			while(line[j] && line[j] != '\n' && ft_isdigit(line[j]))
-				j++;
-			tmp = ft_substr(line, i, j - i);
-		}
-		if (!check_tmp(tmp))
-			return (0);
-		i += (j - i + 1);
-	}
-
-	return (1);
-}
-
 int    rgbToHex(char *line)
 {
-    char hex[] = "0123456789ABCDEF";
-    char res[7] = "0000000";
-	int dec = 0;
+    char 	res[7] = "0000000";
+	int 	dec;
 
-	if (!check_line_rgb(line))
-	{
-		printf("RGB ERROR\n");
-		return (-1);
-	}
+	dec = 0;
 	int r = get_rgb(line, 1);
 	int g = get_rgb(line, 2);
 	int b = get_rgb(line, 3);
     int r0 = r/16;
     int g0 = g/16;
     int b0 = b/16;
-    res[0] = hex[r0];
-    res[1] = hex[r - (16 * r0)];
-    res[2] = hex[g0];
-    res[3] = hex[g - (16 * g0)];
-    res[4] = hex[b0];
-    res[5] = hex[b - (16 * b0)];
+    res[0] = HEXA[r0];
+    res[1] = HEXA[r - (16 * r0)];
+    res[2] = HEXA[g0];
+    res[3] = HEXA[g - (16 * g0)];
+    res[4] = HEXA[b0];
+    res[5] = HEXA[b - (16 * b0)];
     res[6] = '\0';
 	dec = get_index_hex(res[5]) + get_index_hex(res[4]) * 16
 		+ get_index_hex(res[3]) * pow(16, 2) + get_index_hex(res[2]) * pow(16, 3)
 		+ get_index_hex(res[1]) * pow(16, 4) + get_index_hex(res[0]) * pow(16, 5);
-		return (dec);
+	return (dec);
 }
