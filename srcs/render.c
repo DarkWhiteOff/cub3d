@@ -146,5 +146,5 @@ void	update_map(t_main *main, int i, int px_h)
 		j++;
 		px_w += 5;
 	}
-	mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->spr_p.img, main->map.d_player_pos.x, main->map.d_player_pos.y);
+	mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->spr_p.img, main->map.d_player_pos.x * 5, main->map.d_player_pos.y * 5);
 }

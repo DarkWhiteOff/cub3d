@@ -32,6 +32,8 @@ void	move(float angle, t_main *main)
 		main->map.d_player_pos.y += ray_sin;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))]))
 		main->map.d_player_pos.x += ray_cos;
+	main->p_pos.x = (int)main->map.d_player_pos.x;
+	main->p_pos.y = (int)main->map.d_player_pos.y;
 }
 
 void	actualise_player(t_main *main)
