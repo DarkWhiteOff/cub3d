@@ -31,17 +31,6 @@ unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 		tex = main->tex.tex_east;
 	else if (main->map.grid[(int)main->ray.d_ray_pos.y][(int)(main->ray.d_ray_pos.x - ray_cos)] != '1')
 		tex = main->tex.tex_west;
-
-	// tex = main->tex.tex_south;
-	// if (main->ray.ray_angle >= 60 && main->ray.ray_angle <= 120)
-	// 	tex = main->tex.tex_north;
-	// else if ((main->ray.ray_angle < 60 && main->ray.ray_angle >= 0)
-	// 		|| (main->ray.ray_angle > 300 && main->ray.ray_angle <= 360))
-	// 	tex = main->tex.tex_east;
-	// else if (main->ray.ray_angle <= 300 && main->ray.ray_angle >= 240)
-	// 	tex = main->tex.tex_south;
-	// else if (main->ray.ray_angle < 240 && main->ray.ray_angle > 120)
-	// 	tex = main->tex.tex_west;
 	dst = tex.addr + (y * tex.ls + x * (tex.b / 8));
 	return (*(unsigned int *)dst);
 }
@@ -128,5 +117,34 @@ int	game_refresh(t_main *main)
 	actualise_player(main); // MOVES
 	raycasting(main); // RAYCAST
 	mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->img, 0, 0); // REFRESH IMG
+	int i = 0;
+	int px_h = 0;
+	while (i < main->map.h)
+	{
+		update_map(main, i, px_h);
+		i++;
+		px_h += 5;
+	}
 	return (0);
+}
+
+void	update_map(t_main *main, int i, int px_h)
+{
+	int	j;
+	int	px_w;
+
+	j = 0;
+	px_w = 0;
+	while (main->map.grid[i][j] != '\0')
+	{
+		if (main->map.grid[i][j] == '1')
+			mlx_put_image_to_window(main->mlx_p,
+				main->mlx_win, main->spr_wall.img, px_w, px_h);
+		if (main->map.grid[i][j] == '0')
+			mlx_put_image_to_window(main->mlx_p,
+				main->mlx_win, main->spr_floor.img, px_w, px_h);
+		j++;
+		px_w += 5;
+	}
+	mlx_put_image_to_window(main->mlx_p, main->mlx_win, main->spr_p.img, main->map.d_player_pos.x, main->map.d_player_pos.y);
 }

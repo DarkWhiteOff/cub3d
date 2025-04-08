@@ -5,7 +5,6 @@ int	close_window(t_main *main)
 	mlx_destroy_image(main->mlx_p, main->spr_wall.img);
 	mlx_destroy_image(main->mlx_p, main->spr_floor.img);
 	mlx_destroy_image(main->mlx_p, main->spr_p.img);
-	mlx_destroy_image(main->mlx_p, main->spr_angle.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_north.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_south.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_west.img);
@@ -27,8 +26,8 @@ void	move(float angle, t_main *main)
 	float ray_cos;
 	float ray_sin;
 
-	ray_cos = cos(degree_to_radians(angle)) * 0.06;
-	ray_sin = sin(degree_to_radians(angle)) * 0.06;
+	ray_cos = cos(degree_to_radians(angle)) * 0.02;
+	ray_sin = sin(degree_to_radians(angle)) * 0.02;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))][(int)(x + 0.5)]))
 		main->map.d_player_pos.y += ray_sin;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))]))
@@ -57,20 +56,44 @@ void	actualise_player(t_main *main)
 		angle = main->ray.ray_angle + 90;
 		move(angle, main);
 	}
-	else if (main->map.left == 1)
+	else if (main->map.left == 1 || main->m_left == 1)
 	{
-		if (main->ray.ray_angle <= 0)
-			main->ray.ray_angle = 360;
-		else
-			main->ray.ray_angle -= 1;
+		if (main->map.left == 1)
+		{
+			if (main->ray.ray_angle <= 0)
+				main->ray.ray_angle = 360;
+			else
+				main->ray.ray_angle -= 0.5;
+		}
+		else if (main->m_left == 1)
+		{
+			if (main->ray.ray_angle <= 0)
+				main->ray.ray_angle = 360;
+			else
+				main->ray.ray_angle -= 3;
+		}
 	}
-	else if (main->map.right == 1)
+	else if (main->map.right == 1 || main->m_right == 1)
 	{
-		if (main->ray.ray_angle >= 360)
-			main->ray.ray_angle = 0;
-		else
-			main->ray.ray_angle += 1;
+		if (main->map.right == 1)
+		{
+			if (main->ray.ray_angle >= 360)
+				main->ray.ray_angle = 0;
+			else
+				main->ray.ray_angle += 0.5;
+		}
+		else if (main->m_right == 1)
+		{
+			if (main->ray.ray_angle >= 360)
+				main->ray.ray_angle = 0;
+			else
+				main->ray.ray_angle += 3;
+		}
 	}
+	if (main->m_left == 1)
+		main->m_left = 0;
+	if (main->m_right == 1)
+		main->m_right = 0;
 }
 
 int	key_manager_down(int keycode, t_main *main)
@@ -106,5 +129,16 @@ int	key_manager_up(int keycode, t_main *main)
 		main->map.left = 0;
 	if (keycode == 65363)
 		main->map.right = 0;
+	return (0);
+}
+
+int	mouse_manager(int x, int y, t_main *main)
+{
+	if (x < main->prev_x)
+		main->m_left = 1;
+	if (x > main->prev_x)
+		main->m_right = 1;
+	main->prev_x = x;
+	main->prev_y = y;
 	return (0);
 }

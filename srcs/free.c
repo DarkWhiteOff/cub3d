@@ -36,8 +36,6 @@ void	free_sprites(t_main *main)
 		mlx_destroy_image(main->mlx_p, main->spr_wall.img);
 	if (main->spr_floor.img)
 		mlx_destroy_image(main->mlx_p, main->spr_floor.img);
-	if (main->spr_angle.img)
-		mlx_destroy_image(main->mlx_p, main->spr_angle.img);
 	// Textures
 	if (main->tex.tex_north.img)
 		mlx_destroy_image(main->mlx_p, main->tex.tex_north.img);

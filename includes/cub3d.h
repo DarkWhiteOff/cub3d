@@ -30,6 +30,7 @@ void	free_grids(t_main *main);
 void    free_textures(t_main *main);
 int	    key_manager_up(int keycode, t_main *main);
 int	    key_manager_down(int keycode, t_main *main);
+int     mouse_manager(int x, int y, t_main *main);
 void	actualise_player(t_main *main);
 void	move(float angle, t_main *main);
 int	    close_window(t_main *main);
@@ -44,6 +45,8 @@ int	    check_map_name(char *map_name);
 float	degree_to_radians(float degree);
 void	sprites_init(t_main *main);
 void	free_sprites(t_main *main);
+
+void	update_map(t_main *main, int i, int px_h);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE

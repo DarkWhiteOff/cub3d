@@ -36,7 +36,7 @@ void	get_infos(t_main *main)
 			WE = 1;
 		}
 		if (ft_strncmp(line, "EA ", 3) == 0)
-			{
+		{
 			main->tex.EA = ft_substr(line, 3, ft_strlen(line) - 4);
 			EA = 1;
 		}

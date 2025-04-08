@@ -125,6 +125,7 @@ typedef struct s_main
 	void		*mlx_p;
 	void		*mlx_win;
 	void		*img;
+	void		*img_minimap;
 	char		*addr;
 	int			b;
 	int			ls;
@@ -137,12 +138,17 @@ typedef struct s_main
 	//Sprites
 	t_sprite	spr_wall;
 	t_sprite	spr_floor;
-	t_sprite	spr_angle;
 	t_sprite	spr_p;
 	int fd;
 	int fd1;
 	int fd2;
 	int fd3;
+	int prev_x;
+	int prev_y;
+	int x;
+	int y;
+	int			m_left;
+	int			m_right;
 }	t_main;
 
 #endif

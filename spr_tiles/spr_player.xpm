@@ -1,23 +1,12 @@
 /* XPM */
-static char *_8ffdf47cc3449ddc1e6627db6521b7aNl409qDOd3eXD7QO[] = {
+static char *_aa579ad0d304afdd3bf3bf617fe37b9rcA3HFvBwNep2fCh[] = {
 /* columns rows colors chars-per-pixel */
-"16 16 1 1 ",
-"  c #E2FF00",
+"5 5 1 1 ",
+"  c #FFF200",
 /* pixels */
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                ",
-"                "
+"     ",
+"     ",
+"     ",
+"     ",
+"     "
 };
