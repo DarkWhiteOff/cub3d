@@ -76,6 +76,7 @@ void get_diff_width(t_main *main)
 	int		map_start;
 	int		i;
 
+	i = 0;
 	map_start = main->tex.map_start;
 	main->fd2 = open(main->map.path, O_RDONLY);
 	check_fd_error(main, main->fd2);
