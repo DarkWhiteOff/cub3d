@@ -21,6 +21,8 @@ int	close_window(t_main *main)
 	mlx_destroy_image(main->mlx_p, main->tex.tex_south.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_west.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_east.img);
+	if (main->tex.tex_door.img)
+		mlx_destroy_image(main->mlx_p, main->tex.tex_door.img);
 	mlx_destroy_image(main->mlx_p, main->img);
 	mlx_destroy_window(main->mlx_p, main->mlx_win);
 	mlx_destroy_display(main->mlx_p);
@@ -37,6 +39,8 @@ void	move(float angle, t_main *main)
 	float	y;
 	float	ray_cos;
 	float	ray_sin;
+	int prev_x;
+	int prev_y;
 
 	x = main->map.d_player_pos.x;
 	y = main->map.d_player_pos.y;
@@ -48,6 +52,15 @@ void	move(float angle, t_main *main)
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)]
 		[(int)(x + 0.5 + (3 * ray_cos))]))
 		main->map.d_player_pos.x += ray_cos;
+	if (ft_strchr("D", main->map.grid[(int)(y + 0.5)]
+		[(int)(x + 0.5 + (3 * ray_cos))]))
+	{
+		prev_x = (int)(x + 0.5 + (3 * ray_cos));
+		prev_y = (int)(y + 0.5);
+		main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))] = '0';
+		main->map.d_player_pos.x += ray_cos;
+		main->map.grid[prev_y][prev_x] = 'D';
+	}
 	main->p_pos.x = (int)main->map.d_player_pos.x;
 	main->p_pos.y = (int)main->map.d_player_pos.y;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 13:54:14 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:36:07 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	free_textures(t_main *main)
 		free(main->tex.WE);
 	if (main->tex.EA)
 		free(main->tex.EA);
+	if (main->tex.D)
+		free(main->tex.D);
 }
 
 void	free_sprites(t_main *main)
@@ -55,6 +57,8 @@ void	free_sprites(t_main *main)
 		mlx_destroy_image(main->mlx_p, main->tex.tex_west.img);
 	if (main->tex.tex_east.img)
 		mlx_destroy_image(main->mlx_p, main->tex.tex_east.img);
+	if (main->tex.tex_door.img)
+		mlx_destroy_image(main->mlx_p, main->tex.tex_door.img);
 	mlx_destroy_image(main->mlx_p, main->img);
 	mlx_destroy_window(main->mlx_p, main->mlx_win);
 	mlx_destroy_display(main->mlx_p);

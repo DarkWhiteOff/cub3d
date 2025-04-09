@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check2.c                                           :+:      :+:    :+:   */
+/*   check2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 13:54:16 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:48:16 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,23 @@ void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
 
 int	check_other_char(t_map *map, int y, int x)
 {
-	if (map->grid[y][x] != 'N' && map->grid[y][x] != 'S' && map->grid[y][x] != 'W' && map->grid[y][x] != 'E' && map->grid[y][x] != '0' && map->grid[y][x] != '1' && map->grid[y][x] != ' ')
-		return (1);
-	return (0);
+	if (map->grid[y][x] == 'N')
+		return (0);
+	if (map->grid[y][x] == 'S')
+		return (0);
+	if (map->grid[y][x] == 'W')
+		return (0);
+	if (map->grid[y][x] == 'E')
+		return (0);
+	if (map->grid[y][x] == '0')
+		return (0);
+	if (map->grid[y][x] == '1')
+		return (0);
+	if (map->grid[y][x] == ' ')
+		return (0);
+	if (map->grid[y][x] == 'D')
+		return (0);
+	return (1);
 }
 
 void	check_epc(t_main *main, t_pxy *p_pos)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   check_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 13:54:09 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:47:20 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	get_infos(t_main *main)
 	int		we;
 	int		ea;
 	int		check;
+	int		D;
 
 	no = 0;
 	so = 0;
 	we = 0;
 	ea = 0;
+	D = 0;
 	check = 0; //utilite ??
 	main->fd = open(main->map.path, O_RDONLY);
 	if (main->fd < 0 || read(main->fd, 0, 0) < 0)
@@ -52,6 +54,11 @@ void	get_infos(t_main *main)
 		{
 			main->tex.EA = ft_substr(line, 3, ft_strlen(line) - 4);
 			ea = 1;
+		}
+		if (ft_strncmp(line, "D ", 2) == 0 && !D)
+		{
+			main->tex.D = ft_substr(line, 4, ft_strlen(line) - 5);
+			D = 1;
 		}
 		if (!ft_strncmp(line, "C", 1) && main->tex.color_c == -1)
 			main->tex.color_c = rgbToHex(line);

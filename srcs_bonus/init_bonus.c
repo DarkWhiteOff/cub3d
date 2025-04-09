@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 13:54:13 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:40:36 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,10 @@ void	tex_init(t_tex *tex)
 	tex->SO = NULL;
 	tex->WE = NULL;
 	tex->EA = NULL;
+	tex->D = NULL;
 	tex->color_f = -1;
 	tex->color_c = -1;
 	tex->map_start = 0;
-	tex->tex_north.addr = NULL;
-	tex->tex_north.b = 0;
-	tex->tex_north.ls = 0;
-	tex->tex_north.end = 0;
 }
 
 void	textures_init(t_main *main)
@@ -78,6 +75,11 @@ void	textures_init(t_main *main)
 			main->tex.WE, &main->tex.tex_west.w, &main->tex.tex_west.h);
 	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
 			main->tex.EA, &main->tex.tex_east.w, &main->tex.tex_east.h);
+	if (main->tex.D)
+	{
+		main->tex.tex_door.img = mlx_xpm_file_to_image(main->mlx_p,
+			main->tex.D, &main->tex.tex_door.w, &main->tex.tex_door.h);
+	}
 }
 
 void	sprites_init(t_main *main)
@@ -104,5 +106,7 @@ void	sprites_init(t_main *main)
 	main->tex.tex_west.addr = mlx_get_data_addr(main->tex.tex_west.img,
 			&main->tex.tex_west.b, &main->tex.tex_west.ls, &main->tex.tex_west.end);
 	main->tex.tex_east.addr = mlx_get_data_addr(main->tex.tex_east.img,
-			&main->tex.tex_east.b, &main->tex.tex_east.ls, &main->tex.tex_east.end);
+		&main->tex.tex_east.b, &main->tex.tex_east.ls, &main->tex.tex_east.end);
+	if (main->tex.D && main->tex.tex_door.img)
+		main->tex.tex_door.addr = mlx_get_data_addr(main->tex.tex_door.img, &main->tex.tex_door.b, &main->tex.tex_door.ls, &main->tex.tex_door.end);
 }

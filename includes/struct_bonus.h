@@ -72,6 +72,7 @@ typedef struct s_tex
 	char *SO;
 	char *WE;
 	char *EA;
+	char	*D;
 	int color_f;
 	int color_c;
 	int map_start;
@@ -79,6 +80,7 @@ typedef struct s_tex
 	t_img_i tex_south;
 	t_img_i tex_west;
 	t_img_i tex_east;
+	t_img_i	tex_door;
 }	t_tex;
 
 typedef struct s_ray

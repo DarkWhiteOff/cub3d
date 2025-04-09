@@ -34,6 +34,12 @@ unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 	if (ray_sin < 0)
 		ray_sin = -ray_sin;
 	tex = main->tex.tex_south;
+	if (main->map.grid[(int)main->ray.d_ray_pos.y][(int)main->ray.d_ray_pos.x] == 'D')
+	{
+		tex = main->tex.tex_door;
+		dst = tex.addr + (y * tex.ls + x * (tex.b / 8));
+		return (*(unsigned int *)dst);
+	}
 	if (main->map.grid[(int)(main->ray.d_ray_pos.y - ray_sin)]
 		[(int)main->ray.d_ray_pos.x] != '1')
 		tex = main->tex.tex_north;
@@ -56,7 +62,9 @@ int	get_tex_color(t_main *main, int z)
 
 	color = 0x00000000;
 	if (main->map.grid[(int)main->ray.d_ray_pos.y]
-		[(int)main->ray.d_ray_pos.x] == '1')
+		[(int)main->ray.d_ray_pos.x] == '1'
+		|| main->map.grid[(int)main->ray.d_ray_pos.y]
+		[(int)main->ray.d_ray_pos.x] == 'D')
 		color = my_mlx_pixel_get2(main, (int)
 				(64 * (main->ray.d_ray_pos.x + main->ray.d_ray_pos.y)) % 64, z);
 	return (color);
@@ -112,6 +120,7 @@ void	raycasting(t_main *main)
 		main->ray.d_ray_pos.x = main->map.d_player_pos.x + 0.5;
 		main->ray.d_ray_pos.y = main->map.d_player_pos.y + 0.5;
 		while (!ft_strchr("1", main->map.grid[(int)main->ray.d_ray_pos.y]
+				[(int)main->ray.d_ray_pos.x]) && !ft_strchr("D", main->map.grid[(int)main->ray.d_ray_pos.y]
 				[(int)main->ray.d_ray_pos.x]))
 		{	
 			main->ray.d_ray_pos.x += main->ray.cos;
