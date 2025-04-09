@@ -6,17 +6,18 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 14:01:43 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/09 13:54:13 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 void	vars_init(t_main *main, char *map_path)
 {
 	main->mlx_p = NULL;
 	main->mlx_win = NULL;
 	main->img = NULL;
+	main->img_minimap = NULL;
 	main->addr = NULL;
 	main->b = 0;
 	main->ls = 0;
@@ -31,6 +32,12 @@ void	vars_init(t_main *main, char *map_path)
 	main->fd1 = -1;
 	main->fd2 = -1;
 	main->fd3 = -1;
+	main->prev_x = 0;
+	main->prev_y = 0;
+	main->x = 0;
+	main->y = 0;
+	main->m_left = 0;
+	main->m_right = 0;
 }
 
 void	checks_inits(t_main *main)
@@ -82,6 +89,16 @@ void	render_init(t_main *main)
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
+	main->img_minimap = mlx_new_image(main->mlx_p, main->map.w * 5, main->map.h * 5);
+	if (!main->img)
+	{
+		ffree(main);
+		mlx_destroy_image(main->mlx_p, main->img);
+		mlx_destroy_window(main->mlx_p, main->mlx_win);
+		mlx_destroy_display(main->mlx_p);
+		free(main->mlx_p);
+		exit (ft_printf("Error\nMlx failed.\n"));
+	}
 	main->addr = mlx_get_data_addr(main->img, &main->b, &main->ls, &main->end);
 }
 
@@ -100,6 +117,7 @@ int	main(int argc, char *argv[])
 	game_refresh(&main);
 	mlx_hook(main.mlx_win, 2, 1L << 0, key_manager_down, &main);
 	mlx_hook(main.mlx_win, 3, 1L << 1, key_manager_up, &main);
+	mlx_hook(main.mlx_win, 6, 1L << 6, mouse_manager, &main);
 	mlx_hook(main.mlx_win, 17, 0, close_window, &main);
 	mlx_loop_hook(main.mlx_p, game_refresh, &main);
 	mlx_loop(main.mlx_p);

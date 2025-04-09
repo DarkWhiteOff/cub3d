@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 int	close_window(t_main *main)
 {
@@ -74,20 +74,44 @@ void	actualise_player(t_main *main)
 		angle = main->ray.ray_angle + 90;
 		move(angle, main);
 	}
-	if (main->map.left == 1)
+	if (main->map.left == 1 || main->m_left == 1)
 	{
-		if (main->ray.ray_angle <= 0)
-			main->ray.ray_angle = 360;
-		else
-			main->ray.ray_angle -= 0.5;
+		if (main->map.left == 1)
+		{
+			if (main->ray.ray_angle <= 0)
+				main->ray.ray_angle = 360;
+			else
+				main->ray.ray_angle -= 0.5;
+		}
+		else if (main->m_left == 1)
+		{
+			if (main->ray.ray_angle <= 0)
+				main->ray.ray_angle = 360;
+			else
+				main->ray.ray_angle -= 3;
+		}
 	}
-	if (main->map.right == 1)
+	if (main->map.right == 1 || main->m_right == 1)
 	{
-		if (main->ray.ray_angle >= 360)
-			main->ray.ray_angle = 0;
-		else
-			main->ray.ray_angle += 0.5;
+		if (main->map.right == 1)
+		{
+			if (main->ray.ray_angle >= 360)
+				main->ray.ray_angle = 0;
+			else
+				main->ray.ray_angle += 0.5;
+		}
+		else if (main->m_right == 1)
+		{
+			if (main->ray.ray_angle >= 360)
+				main->ray.ray_angle = 0;
+			else
+				main->ray.ray_angle += 3;
+		}
 	}
+	if (main->m_left == 1)
+		main->m_left = 0;
+	if (main->m_right == 1)
+		main->m_right = 0;
 }
 
 int	key_manager_down(int keycode, t_main *main)
@@ -123,5 +147,16 @@ int	key_manager_up(int keycode, t_main *main)
 		main->map.left = 0;
 	if (keycode == 65363)
 		main->map.right = 0;
+	return (0);
+}
+
+int	mouse_manager(int x, int y, t_main *main)
+{
+	if (x < main->prev_x)
+		main->m_left = 1;
+	if (x > main->prev_x)
+		main->m_right = 1;
+	main->prev_x = x;
+	main->prev_y = y;
 	return (0);
 }
