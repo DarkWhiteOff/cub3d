@@ -59,22 +59,22 @@ void	actualise_player(t_main *main)
 	angle = main->ray.ray_angle;
 	if (main->map.z == 1)
 		move(angle, main);
-	else if (main->map.q == 1)
+	if (main->map.q == 1)
 	{
 		angle = main->ray.ray_angle - 90;
 		move(angle, main);
 	}
-	else if (main->map.s == 1)
+	if (main->map.s == 1)
 	{
 		angle = main->ray.ray_angle - 180;
 		move(angle, main);
 	}
-	else if (main->map.d == 1)
+	if (main->map.d == 1)
 	{
 		angle = main->ray.ray_angle + 90;
 		move(angle, main);
 	}
-	else if (main->map.left == 1 || main->m_left == 1)
+	if (main->map.left == 1 || main->m_left == 1)
 	{
 		if (main->map.left == 1)
 		{
@@ -91,7 +91,7 @@ void	actualise_player(t_main *main)
 				main->ray.ray_angle -= 3;
 		}
 	}
-	else if (main->map.right == 1 || main->m_right == 1)
+	if (main->map.right == 1 || main->m_right == 1)
 	{
 		if (main->map.right == 1)
 		{
