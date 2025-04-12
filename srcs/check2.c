@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/12 08:49:17 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/04/12 09:40:12 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int	check_other_char(t_map *map, int y, int x)
 	if (map->grid[y][x] == '1')
 		return (0);
 	if (map->grid[y][x] == ' ')
-		return (0);
-	if (map->grid[y][x] == 'D')
 		return (0);
 	return (1);
 }

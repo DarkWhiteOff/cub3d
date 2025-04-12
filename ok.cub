@@ -10,7 +10,7 @@ WE tex/tex_matrix.xpm
 
 EA tex/tex_matrix.xpm
 
-D = sprites/door.xpm
+D sprites/door.xpm
 
 
 

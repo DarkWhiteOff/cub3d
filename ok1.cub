@@ -2,7 +2,7 @@ NO tex/eagle.xpm
 SO tex/wood.xpm
 WE tex/redbrick.xpm
 EA tex/mossy.xpm
-D = sprites/door.xpm
+D sprites/door.xpm
 F 255,0,6
 C 0,0,255
 

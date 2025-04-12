@@ -6,37 +6,36 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:44 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/12 08:51:43 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/04/12 09:55:09 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-void	check_walls1(t_main *main)
+void	check_walls1half(t_main *main, int param)
 {
 	int	i;
-	int r;
-	int param;
 
 	i = 0;
-	param = 0;
-	while (r < 2)
+	while (i < main->map.diff_w[param])
 	{
-		while (i < main->map.diff_w[0])
-		{
-			while (main->map.grid[0][i] == ' ')
-				i++;
-			if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' ' && i < main->map.diff_w[0]))
-			{
-				free_diff_tex_grids(main);
-				exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
-			}
+		while (main->map.grid[0][i] == ' ')
 			i++;
+		if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' ' && i < main->map.diff_w[0]))
+		{
+			free(main->map.diff_w);
+			free_textures(main);
+			free_grids(main);
+			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
 		}
-		i = 0;
-		param = main->map.h - 1;
-		r++;
+		i++;
 	}
+}
+
+void	check_walls1(t_main *main)
+{
+	check_walls1half(main, 0);
+	check_walls1half(main, main->map.h - 1);
 }
 
 void	check_walls2(t_main *main)

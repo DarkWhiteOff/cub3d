@@ -50,6 +50,45 @@ unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
+void ray_pos_calc(t_main *main, int ray_angle)
+{
+	main->ray.d_ray_pos.x = main->map.d_player_pos.x + 0.5;
+	main->ray.d_ray_pos.y = main->map.d_player_pos.y + 0.5;
+	while (!ft_strchr("1", main->map.grid[(int)main->ray.d_ray_pos.y]
+			[(int)main->ray.d_ray_pos.x]))
+	{	
+		main->ray.d_ray_pos.x += main->ray.cos;
+		main->ray.d_ray_pos.y += main->ray.sin;
+	}
+}
+
+int	wall_height_calc(t_main *main, int ray_angle)
+{
+	float	distance;
+	int		wall_h;
+
+	distance = 0.0;
+	wall_h = 0;
+	distance = sqrt(powf(main->ray.d_ray_pos.x - main->map.d_player_pos.x - 0.5, 2.0) + powf(main->ray.d_ray_pos.y - main->map.d_player_pos.y - 0.5, 2.0));
+	distance = distance * cos(degree_to_radians(ray_angle - main->ray.ray_angle));
+	wall_h = (int)(main->map.px_h / (1.5 * distance));
+	return (wall_h);
+}
+
+void draw_ceiling_floor(t_main *main, int i, int wall_h, int ds)
+{
+	int		j;
+
+	j = -1;
+	while (++j < main->map.px_h)
+	{
+		if (j < ds)
+			my_mlx_pixel_put(main->addr, main->ls, main->b, i, j, main->tex.color_c); //Ceiling
+		else if (j >= (main->map.px_h / 2) + wall_h)
+			my_mlx_pixel_put(main->addr, main->ls, main->b, i, j, main->tex.color_f); //Floor
+	}
+}
+
 int	get_tex_color(t_main *main, int z)
 {
 	int	color;
@@ -91,47 +130,27 @@ void	draw_texture(t_main *main, int ray_count, int wall_height)
 
 void	raycasting(t_main *main)
 {
-	float	distance;
-	float	ray_angle;
 	int		i;
+	float	ray_angle;
 	int		wall_h;
 	float	ds;
-	int		j;
 
-	distance = 0.0;
-	ray_angle = main->ray.ray_angle - main->ray.HFOV;
 	i = -1;
+	ray_angle = main->ray.ray_angle - main->ray.HFOV;
 	wall_h = 0;
 	ds = 0.0;
-	j = -1;
 	while (++i < main->map.px_w)
 	{
 		//Ray end pos calculations
 		main->ray.cos = cos(degree_to_radians(ray_angle)) / main->ray.precision;
 		main->ray.sin = sin(degree_to_radians(ray_angle)) / main->ray.precision;
-		main->ray.d_ray_pos.x = main->map.d_player_pos.x + 0.5;
-		main->ray.d_ray_pos.y = main->map.d_player_pos.y + 0.5;
-		while (!ft_strchr("1", main->map.grid[(int)main->ray.d_ray_pos.y]
-				[(int)main->ray.d_ray_pos.x]))
-		{	
-			main->ray.d_ray_pos.x += main->ray.cos;
-			main->ray.d_ray_pos.y += main->ray.sin;
-		}
+		ray_pos_calc(main, ray_angle);
 		//Wall height calculations
-		distance = sqrt(powf(main->ray.d_ray_pos.x - main->map.d_player_pos.x - 0.5, 2.0) + powf(main->ray.d_ray_pos.y - main->map.d_player_pos.y - 0.5, 2.0));
-		distance = distance * cos(degree_to_radians(ray_angle - main->ray.ray_angle));
-		wall_h = (int)(main->map.px_h / (1.5 * distance));
+		wall_h = wall_height_calc(main, ray_angle);
 		ds = ((float)main->map.px_h / 2) - (float)wall_h; //drawStart
 		//Put pixels on img (not window)
-		j = -1;
-		while (++j < main->map.px_h)
-		{
-			if (j < ds)
-				my_mlx_pixel_put(main->addr, main->ls, main->b, i, j, main->tex.color_c); //Ceiling
-			else if (j >= (main->map.px_h / 2) + wall_h)
-				my_mlx_pixel_put(main->addr, main->ls, main->b, i, j, main->tex.color_f); //Floor
-		}
-		draw_texture(main, i, wall_h); // Wall
+		draw_ceiling_floor(main, i, wall_h, ds);
+		draw_texture(main, i, wall_h);
 		ray_angle += main->ray.diff_ray_angle;
 	}
 }
