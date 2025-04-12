@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   check2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 15:48:16 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/12 08:49:00 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+void free_diff_tex_grids(t_main *main)
+{
+	free(main->map.diff_w);
+	free_textures(main);
+	free_grids(main);
+}
 
 void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
 {
@@ -65,9 +72,7 @@ void	check_epc(t_main *main, t_pxy *p_pos)
 			is_epc(main, i, j, p_pos);
 			if (check_other_char(&main->map, i, j) == 1)
 			{
-				free(main->map.diff_w);
-				free_textures(main);
-				free_grids(main);
+				free_diff_tex_grids(main);
 				exit (ft_printf("Error\nMap contains unrecognized character.\n"));
 			}
 			j++;
@@ -77,9 +82,7 @@ void	check_epc(t_main *main, t_pxy *p_pos)
 	}
 	if (main->map.player_pos != 1)
 	{
-		free(main->map.diff_w);
-		free_textures(main);
-		free_grids(main);
+		free_diff_tex_grids(main);
 		exit (ft_printf("Error\nNo player position.\n"));
 	}
 }
@@ -133,10 +136,7 @@ void	grid_init(t_main *main)
 	while (i < main->map.h)
 	{
 		while (j < main->map.diff_w[i])
-		{
-			main->map.grid[i][j] = line[j];
-			j++;
-		}
+			main->map.grid[i][j++] = line[j];
 		main->map.grid[i++][j] = '\0';
 		j = 0;
 		free(line);

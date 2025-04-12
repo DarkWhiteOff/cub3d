@@ -46,6 +46,7 @@ float	degree_to_radians(float degree);
 void	sprites_init(t_main *main);
 void	free_sprites(t_main *main);
 void	update_map(t_main *main, int i, int px_h);
+void free_diff_tex_grids(t_main *main);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE

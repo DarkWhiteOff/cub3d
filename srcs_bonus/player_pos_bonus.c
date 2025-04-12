@@ -61,8 +61,47 @@ void	move(float angle, t_main *main)
 		main->map.d_player_pos.x += ray_cos;
 		main->map.grid[prev_y][prev_x] = 'D';
 	}
-	main->p_pos.x = (int)main->map.d_player_pos.x;
-	main->p_pos.y = (int)main->map.d_player_pos.y;
+}
+
+void	rotation_left(t_main *main)
+{
+	if (main->map.left == 1 || main->m_left == 1)
+	{
+		if (main->map.left == 1)
+		{
+			if (main->ray.ray_angle <= 0)
+				main->ray.ray_angle = 360;
+			else
+				main->ray.ray_angle -= 0.5;
+		}
+		else if (main->m_left == 1)
+		{
+			if (main->ray.ray_angle <= 0)
+				main->ray.ray_angle = 360;
+			else
+				main->ray.ray_angle -= 3;
+		}
+	}
+}
+void	rotation_right(t_main *main)
+{
+	if (main->map.right == 1 || main->m_right == 1)
+	{
+		if (main->map.right == 1)
+		{
+			if (main->ray.ray_angle >= 360)
+				main->ray.ray_angle = 0;
+			else
+				main->ray.ray_angle += 0.5;
+		}
+		else if (main->m_right == 1)
+		{
+			if (main->ray.ray_angle >= 360)
+				main->ray.ray_angle = 0;
+			else
+				main->ray.ray_angle += 3;
+		}
+	}
 }
 
 void	actualise_player(t_main *main)
@@ -87,44 +126,10 @@ void	actualise_player(t_main *main)
 		angle = main->ray.ray_angle + 90;
 		move(angle, main);
 	}
-	if (main->map.left == 1 || main->m_left == 1)
-	{
-		if (main->map.left == 1)
-		{
-			if (main->ray.ray_angle <= 0)
-				main->ray.ray_angle = 360;
-			else
-				main->ray.ray_angle -= 0.5;
-		}
-		else if (main->m_left == 1)
-		{
-			if (main->ray.ray_angle <= 0)
-				main->ray.ray_angle = 360;
-			else
-				main->ray.ray_angle -= 3;
-		}
-	}
-	if (main->map.right == 1 || main->m_right == 1)
-	{
-		if (main->map.right == 1)
-		{
-			if (main->ray.ray_angle >= 360)
-				main->ray.ray_angle = 0;
-			else
-				main->ray.ray_angle += 0.5;
-		}
-		else if (main->m_right == 1)
-		{
-			if (main->ray.ray_angle >= 360)
-				main->ray.ray_angle = 0;
-			else
-				main->ray.ray_angle += 3;
-		}
-	}
-	if (main->m_left == 1)
-		main->m_left = 0;
-	if (main->m_right == 1)
-		main->m_right = 0;
+	rotation_left(main);
+	rotation_right(main);
+	main->m_left = 0;
+	main->m_right = 0;
 }
 
 int	key_manager_down(int keycode, t_main *main)

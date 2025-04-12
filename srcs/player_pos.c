@@ -52,6 +52,24 @@ void	move(float angle, t_main *main)
 	main->p_pos.y = (int)main->map.d_player_pos.y;
 }
 
+void rotation(t_main *main)
+{
+	if (main->map.left == 1)
+	{
+		if (main->ray.ray_angle <= 0)
+			main->ray.ray_angle = 360;
+		else
+			main->ray.ray_angle -= 0.5;
+	}
+	if (main->map.right == 1)
+	{
+		if (main->ray.ray_angle >= 360)
+			main->ray.ray_angle = 0;
+		else
+			main->ray.ray_angle += 0.5;
+	}
+}
+
 void	actualise_player(t_main *main)
 {
 	float	angle;
@@ -74,20 +92,7 @@ void	actualise_player(t_main *main)
 		angle = main->ray.ray_angle + 90;
 		move(angle, main);
 	}
-	if (main->map.left == 1)
-	{
-		if (main->ray.ray_angle <= 0)
-			main->ray.ray_angle = 360;
-		else
-			main->ray.ray_angle -= 0.5;
-	}
-	if (main->map.right == 1)
-	{
-		if (main->ray.ray_angle >= 360)
-			main->ray.ray_angle = 0;
-		else
-			main->ray.ray_angle += 0.5;
-	}
+	rotation(main);
 }
 
 int	key_manager_down(int keycode, t_main *main)

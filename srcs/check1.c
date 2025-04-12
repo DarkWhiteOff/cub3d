@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:44 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/08 18:38:45 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/12 08:35:28 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,29 @@
 void	check_walls1(t_main *main)
 {
 	int	i;
+	int r;
+	int param;
 
 	i = 0;
-	while (i < main->map.diff_w[0])
+	param = 0;
+	while (r < 2)
 	{
-		while (main->map.grid[0][i] == ' ')
-			i++;
-		if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' ' && i < main->map.diff_w[0]))
+		while (i < main->map.diff_w[0])
 		{
-			free(main->map.diff_w);
-			free_textures(main);
-			free_grids(main);
-			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
-		}
-		i++;
-	}
-	i = 0;
-	while (i < main->map.diff_w[main->map.h - 1])
-	{
-		while (main->map.grid[0][i] == ' ')
+			while (main->map.grid[0][i] == ' ')
+				i++;
+			if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' ' && i < main->map.diff_w[0]))
+			{
+				free(main->map.diff_w);
+				free_textures(main);
+				free_grids(main);
+				exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
+			}
 			i++;
-		if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' ' && i < main->map.diff_w[0]))
-		{
-			free(main->map.diff_w);
-			free_textures(main);
-			free_grids(main);
-			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
 		}
-		i++;
+		i = 0;
+		param = main->map.h - 1;
+		r++;
 	}
 }
 
@@ -57,14 +52,7 @@ void	check_walls2(t_main *main)
 	{
 		while (main->map.grid[i][j] == ' ')
 			j++;
-		if (main->map.grid[i][j] != '1')
-		{
-			free(main->map.diff_w);
-			free_textures(main);
-			free_grids(main);
-			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
-		}
-		if (main->map.grid[i][main->map.diff_w[i] - 1] != '1')
+		if (main->map.grid[i][j] != '1' || main->map.grid[i][main->map.diff_w[i] - 1] != '1')
 		{
 			free(main->map.diff_w);
 			free_textures(main);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 14:00:05 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/12 08:52:29 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	    check_map_name(char *map_name);
 float	degree_to_radians(float degree);
 void	sprites_init(t_main *main);
 void	free_sprites(t_main *main);
+void free_diff_tex_grids(t_main *main);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE

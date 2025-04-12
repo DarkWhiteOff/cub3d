@@ -127,11 +127,15 @@ typedef struct s_main
 	void		*mlx_p;
 	void		*mlx_win;
 	void		*img;
-	void		*img_minimap;
 	char		*addr;
 	int			b;
 	int			ls;
 	int			end;
+	void		*img_minimap;
+	char		*addr_minimap;
+	int			b_minimap;
+	int			ls_minimap;
+	int			end_minimap;
 	//Map
 	t_map		map;
 	t_ray		ray;

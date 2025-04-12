@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   check2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/08 18:38:47 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/12 08:49:17 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void free_diff_tex_grids(t_main *main)
+{
+	free(main->map.diff_w);
+	free_textures(main);
+	free_grids(main);
+}
 
 void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
 {
@@ -32,9 +39,23 @@ void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
 
 int	check_other_char(t_map *map, int y, int x)
 {
-	if (map->grid[y][x] != 'N' && map->grid[y][x] != 'S' && map->grid[y][x] != 'W' && map->grid[y][x] != 'E' && map->grid[y][x] != '0' && map->grid[y][x] != '1' && map->grid[y][x] != ' ')
-		return (1);
-	return (0);
+	if (map->grid[y][x] == 'N')
+		return (0);
+	if (map->grid[y][x] == 'S')
+		return (0);
+	if (map->grid[y][x] == 'W')
+		return (0);
+	if (map->grid[y][x] == 'E')
+		return (0);
+	if (map->grid[y][x] == '0')
+		return (0);
+	if (map->grid[y][x] == '1')
+		return (0);
+	if (map->grid[y][x] == ' ')
+		return (0);
+	if (map->grid[y][x] == 'D')
+		return (0);
+	return (1);
 }
 
 void	check_epc(t_main *main, t_pxy *p_pos)
@@ -51,9 +72,7 @@ void	check_epc(t_main *main, t_pxy *p_pos)
 			is_epc(main, i, j, p_pos);
 			if (check_other_char(&main->map, i, j) == 1)
 			{
-				free(main->map.diff_w);
-				free_textures(main);
-				free_grids(main);
+				free_diff_tex_grids(main);
 				exit (ft_printf("Error\nMap contains unrecognized character.\n"));
 			}
 			j++;
@@ -63,9 +82,7 @@ void	check_epc(t_main *main, t_pxy *p_pos)
 	}
 	if (main->map.player_pos != 1)
 	{
-		free(main->map.diff_w);
-		free_textures(main);
-		free_grids(main);
+		free_diff_tex_grids(main);
 		exit (ft_printf("Error\nNo player position.\n"));
 	}
 }
@@ -119,10 +136,7 @@ void	grid_init(t_main *main)
 	while (i < main->map.h)
 	{
 		while (j < main->map.diff_w[i])
-		{
-			main->map.grid[i][j] = line[j];
-			j++;
-		}
+			main->map.grid[i][j++] = line[j];
 		main->map.grid[i++][j] = '\0';
 		j = 0;
 		free(line);

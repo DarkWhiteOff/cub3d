@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 13:54:13 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/04/12 08:58:50 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,43 +56,12 @@ void	checks_inits(t_main *main)
 	check_path(main, main->p_pos.x, main->p_pos.y);
 }
 
-void	ffree(t_main *main)
+void init_minimap(t_main *main)
 {
-	free(main->map.diff_w);
-	free_textures(main);
-	free_grids(main);
-}
-
-void	render_init(t_main *main)
-{
-	main->mlx_p = mlx_init();
-	if (!main->mlx_p)
-	{
-		ffree(main);
-		free(main->mlx_p);
-		exit (ft_printf("Error\nMlx failed.\n"));
-	}
-	main->mlx_win = mlx_new_window(main->mlx_p, main->map.px_w, main->map.px_h, "cub3d");
-	if (!main->mlx_win)
-	{
-		ffree(main);
-		mlx_destroy_display(main->mlx_p);
-		free(main->mlx_p);
-		exit (ft_printf("Error\nMlx failed.\n"));
-	}
-	main->img = mlx_new_image(main->mlx_p, main->map.px_w, main->map.px_h);
-	if (!main->img)
-	{
-		ffree(main);
-		mlx_destroy_window(main->mlx_p, main->mlx_win);
-		mlx_destroy_display(main->mlx_p);
-		free(main->mlx_p);
-		exit (ft_printf("Error\nMlx failed.\n"));
-	}
 	main->img_minimap = mlx_new_image(main->mlx_p, main->map.w * 5, main->map.h * 5);
 	if (!main->img)
 	{
-		ffree(main);
+		free_diff_tex_grids(main);
 		mlx_destroy_image(main->mlx_p, main->img);
 		mlx_destroy_window(main->mlx_p, main->mlx_win);
 		mlx_destroy_display(main->mlx_p);
@@ -100,6 +69,36 @@ void	render_init(t_main *main)
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
 	main->addr = mlx_get_data_addr(main->img, &main->b, &main->ls, &main->end);
+	main->addr_minimap = mlx_get_data_addr(main->img_minimap, &main->b_minimap, &main->ls_minimap, &main->end_minimap);
+}
+
+void	render_init(t_main *main)
+{
+	main->mlx_p = mlx_init();
+	if (!main->mlx_p)
+	{
+		free_diff_tex_grids(main);
+		free(main->mlx_p);
+		exit (ft_printf("Error\nMlx failed.\n"));
+	}
+	main->mlx_win = mlx_new_window(main->mlx_p, main->map.px_w, main->map.px_h, "cub3d");
+	if (!main->mlx_win)
+	{
+		free_diff_tex_grids(main);
+		mlx_destroy_display(main->mlx_p);
+		free(main->mlx_p);
+		exit (ft_printf("Error\nMlx failed.\n"));
+	}
+	main->img = mlx_new_image(main->mlx_p, main->map.px_w, main->map.px_h);
+	if (!main->img)
+	{
+		free_diff_tex_grids(main);
+		mlx_destroy_window(main->mlx_p, main->mlx_win);
+		mlx_destroy_display(main->mlx_p);
+		free(main->mlx_p);
+		exit (ft_printf("Error\nMlx failed.\n"));
+	}
+	init_minimap(main);
 }
 
 int	main(int argc, char *argv[])
