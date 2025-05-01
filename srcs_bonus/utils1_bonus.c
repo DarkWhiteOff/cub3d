@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 11:47:02 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/01 14:04:51 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,12 @@ void	check_w_h(t_main *main)
 		free_textures(main);
 		exit (ft_printf("Error\nMap not rectangular / nothing in it.\n"));
 	}
+}
+
+void	my_mlx_pixel_put(char *adrr, int ls, int b, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = adrr + (y * ls + x * (b / 8));
+	*(unsigned int *)dst = color;
 }

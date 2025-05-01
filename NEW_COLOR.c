@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_bonus.c                                      :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:49 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 13:52:36 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/01 13:42:46 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d_bonus.h"
+#include "../includes/cub3d.h"
 
 int	get_index_hex(char c)
 {
@@ -112,7 +112,7 @@ int	get_blue(char *line)
 	return (b);
 }
 
-int	rgb_to_hex(char *line)
+int	rgbToHex(char *line)
 {
 	char		res[7];
 	int			dec;
@@ -138,3 +138,4 @@ int	rgb_to_hex(char *line)
 		+ get_index_hex(res[0]) * pow(16, 5);
 	return (dec);
 }
+

@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 11:46:54 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/01 13:51:03 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	get_params(t_main *main, char *line)
 	if (ft_strncmp(line, "D ", 2) == 0)
 		main->tex.D = ft_substr(line, 2, ft_strlen(line) - 3);
 	if (!ft_strncmp(line, "C", 1) && main->tex.color_c == -1)
-		main->tex.color_c = rgbToHex(line);
+		main->tex.color_c = rgb_to_hex(line);
 	if (!ft_strncmp(line, "F", 1) && main->tex.color_f == -1)
-		main->tex.color_f = rgbToHex(line);
+		main->tex.color_f = rgb_to_hex(line);
 }
 
 void	get_map_start(t_main *main)

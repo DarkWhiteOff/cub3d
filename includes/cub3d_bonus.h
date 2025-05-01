@@ -25,7 +25,7 @@ void	allocate_grids(t_map *map);
 void	grid_init(t_main *main);
 int	get_index_hex(char c);
 int	get_rgb(char *line, int rgb);
-int	rgbToHex(char *line);
+int	rgb_to_hex(char *line);
 void	free_grids(t_main *main);
 void	free_textures(t_main *main);
 int	key_manager_up(int keycode, t_main *main);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/12 08:58:50 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/05/01 13:29:19 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ void	checks_inits(t_main *main)
 	check_path(main, main->p_pos.x, main->p_pos.y);
 }
 
-void init_minimap(t_main *main)
+void	init_minimap(t_main *main)
 {
-	main->img_minimap = mlx_new_image(main->mlx_p, main->map.w * 5, main->map.h * 5);
+	main->img_minimap = mlx_new_image(main->mlx_p,
+			main->map.w * 5, main->map.h * 5);
 	if (!main->img)
 	{
 		free_diff_tex_grids(main);
@@ -68,8 +69,10 @@ void init_minimap(t_main *main)
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
-	main->addr = mlx_get_data_addr(main->img, &main->b, &main->ls, &main->end);
-	main->addr_minimap = mlx_get_data_addr(main->img_minimap, &main->b_minimap, &main->ls_minimap, &main->end_minimap);
+	main->addr = mlx_get_data_addr(main->img, &main->b,
+			&main->ls, &main->end);
+	main->addr_minimap = mlx_get_data_addr(main->img_minimap,
+			&main->b_minimap, &main->ls_minimap, &main->end_minimap);
 }
 
 void	render_init(t_main *main)

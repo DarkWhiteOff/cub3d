@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 11:29:54 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/01 13:51:03 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	allocate_grids(t_map *map);
 void	grid_init(t_main *main);
 int		get_index_hex(char c);
 int		get_rgb(char *line, int rgb);
-int		rgbToHex(char *line);
+int		rgb_to_hex(char *line);
 void	free_grids(t_main *main);
 void	free_textures(t_main *main);
 int		key_manager_up(int keycode, t_main *main);

@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 11:29:29 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/01 14:09:31 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	map_init(t_map *map, char *map_path)
 {
-	//Checks
 	map->path = map_path;
 	map->h = 0;
 	map->w = 0;
@@ -25,14 +24,12 @@ void	map_init(t_map *map, char *map_path)
 	map->fd = -1;
 	map->grid = NULL;
 	map->highlight_grid = NULL;
-	//Controls
 	map->z = 0;
 	map->q = 0;
 	map->s = 0;
 	map->d = 0;
 	map->left = 0;
 	map->right = 0;
-	//Math
 	map->px_player_pos.x = 0;
 	map->px_player_pos.y = 0;
 	map->d_player_pos.x = 0.0;

@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 11:44:26 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/01 14:11:14 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
 {
-	if (main->map.grid[i][j] == 'N' || main->map.grid[i][j] == 'S' || main->map.grid[i][j] == 'W' || main->map.grid[i][j] == 'E')
+	if (main->map.grid[i][j] == 'N'
+		|| main->map.grid[i][j] == 'S'
+		|| main->map.grid[i][j] == 'W'
+		|| main->map.grid[i][j] == 'E')
 	{
 		main->map.player_pos++;
 		p_pos->x = j;
