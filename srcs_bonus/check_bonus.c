@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/12 08:24:31 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/05/01 11:46:54 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-void get_params(t_main *main, char *line)
+void	get_params(t_main *main, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		main->tex.NO = ft_substr(line, 3, ft_strlen(line) - 4);
@@ -30,7 +30,7 @@ void get_params(t_main *main, char *line)
 		main->tex.color_f = rgbToHex(line);
 }
 
-void get_map_start(t_main *main)
+void	get_map_start(t_main *main)
 {
 	char	*line;
 	int		check;
@@ -62,7 +62,8 @@ void	get_infos(t_main *main)
 		get_params(main, line);
 		free(line);
 		if (main->tex.NO && main->tex.SO && main->tex.WE && main->tex.EA
-			&& main->tex.D && main->tex.color_c != -1 && main->tex.color_f != -1)
+			&& main->tex.D && main->tex.color_c != -1
+			&& main->tex.color_f != -1)
 			break ;
 		line = get_next_line(main->fd);
 	}
@@ -100,30 +101,6 @@ void	get_diff_width(t_main *main)
 	}
 	close(main->fd2);
 	main->map.diff_w[i] = -1;
-}
-
-int	check_w(int *array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i] != -1)
-	{
-		if (array[i] == 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void check_w_h(t_main *main)
-{
-	if (check_w(main->map.diff_w) == 0 || main->map.h == 0)
-	{
-		free(main->map.diff_w);
-		free_textures(main);
-		exit (ft_printf("Error\nMap not rectangular / nothing in it.\n"));
-	}
 }
 
 void	parse_map(t_main *main)

@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 15:40:36 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/01 11:25:59 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	textures_init(t_main *main)
 	if (main->tex.D)
 	{
 		main->tex.tex_door.img = mlx_xpm_file_to_image(main->mlx_p,
-			main->tex.D, &main->tex.tex_door.w, &main->tex.tex_door.h);
+				main->tex.D, &main->tex.tex_door.w, &main->tex.tex_door.h);
 	}
 }
 
@@ -99,14 +99,5 @@ void	sprites_init(t_main *main)
 		free_sprites(main);
 		exit(ft_printf("Error\nSprites/Textures init FAILED"));
 	}
-	main->tex.tex_north.addr = mlx_get_data_addr(main->tex.tex_north.img,
-			&main->tex.tex_north.b, &main->tex.tex_north.ls, &main->tex.tex_north.end);
-	main->tex.tex_south.addr = mlx_get_data_addr(main->tex.tex_south.img,
-			&main->tex.tex_south.b, &main->tex.tex_south.ls, &main->tex.tex_south.end);
-	main->tex.tex_west.addr = mlx_get_data_addr(main->tex.tex_west.img,
-			&main->tex.tex_west.b, &main->tex.tex_west.ls, &main->tex.tex_west.end);
-	main->tex.tex_east.addr = mlx_get_data_addr(main->tex.tex_east.img,
-		&main->tex.tex_east.b, &main->tex.tex_east.ls, &main->tex.tex_east.end);
-	if (main->tex.D && main->tex.tex_door.img)
-		main->tex.tex_door.addr = mlx_get_data_addr(main->tex.tex_door.img, &main->tex.tex_door.b, &main->tex.tex_door.ls, &main->tex.tex_door.end);
+	get_img_addr(main);
 }

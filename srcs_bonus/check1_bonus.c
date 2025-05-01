@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check1_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:44 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/12 09:55:09 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/05/01 11:32:38 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	check_walls1half(t_main *main, int param)
 	{
 		while (main->map.grid[0][i] == ' ')
 			i++;
-		if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' ' && i < main->map.diff_w[0]))
+		if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' '
+			&& i < main->map.diff_w[0]))
 		{
 			free(main->map.diff_w);
 			free_textures(main);
@@ -49,7 +50,8 @@ void	check_walls2(t_main *main)
 	{
 		while (main->map.grid[i][j] == ' ')
 			j++;
-		if (main->map.grid[i][j] != '1' || main->map.grid[i][main->map.diff_w[i] - 1] != '1')
+		if (main->map.grid[i][j] != '1'
+			|| main->map.grid[i][main->map.diff_w[i] - 1] != '1')
 		{
 			free_diff_tex_grids(main);
 			exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
@@ -67,7 +69,8 @@ void	check_path(t_main *main, int x, int y)
 		free_textures(main);
 		exit(printf("Error\nMap not closed.\n"));
 	}
-	if (main->map.grid[y][x] == '1' || main->map.highlight_grid[y][x] == '1' || x < 0 || y < 0 || x > main->map.diff_w[y] || y > main->map.h)
+	if (main->map.grid[y][x] == '1' || main->map.highlight_grid[y][x] == '1'
+		|| x < 0 || y < 0 || x > main->map.diff_w[y] || y > main->map.h)
 		return ;
 	main->map.highlight_grid[y][x] = '1';
 	check_path(main, x - 1, y);

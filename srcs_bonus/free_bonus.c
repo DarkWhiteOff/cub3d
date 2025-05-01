@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/09 15:36:07 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/01 11:39:55 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,11 @@ void	free_sprites(t_main *main)
 	free_grids(main);
 	free(main->map.diff_w);
 	free_textures(main);
+}
+
+void free_diff_tex_grids(t_main *main)
+{
+	free(main->map.diff_w);
+	free_textures(main);
+	free_grids(main);
 }

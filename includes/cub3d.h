@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/12 10:02:08 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/05/01 11:29:54 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	sprites_init(t_main *main);
 void	free_sprites(t_main *main);
 void	update_map(t_main *main, int i, int px_h);
 void	free_diff_tex_grids(t_main *main);
+void    get_img_addr(t_main *main);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE

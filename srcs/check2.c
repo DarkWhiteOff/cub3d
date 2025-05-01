@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/12 09:40:12 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/05/01 11:44:26 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void free_diff_tex_grids(t_main *main)
-{
-	free(main->map.diff_w);
-	free_textures(main);
-	free_grids(main);
-}
 
 void	is_epc(t_main *main, int i, int j, t_pxy *p_pos)
 {
@@ -91,18 +84,19 @@ void	allocate_grids(t_map *map)
 	int	j;
 
 	i = 0;
-	j = 0;
 	map->grid = (char **)malloc(sizeof(char *) * map->h + 1);
 	map->highlight_grid = (char **)malloc(sizeof(char *) * map->h + 1);
 	while (i < map->h)
 	{
 		map->grid[i] = (char *)malloc(sizeof(char) * (map->diff_w[i] + 1));
-		map->highlight_grid[i] = (char *)malloc(sizeof(char) * (map->diff_w[i] + 1));
+		map->highlight_grid[i] = (char *)malloc(sizeof(char)
+				* (map->diff_w[i] + 1));
 		i++;
 	}
 	i = 0;
 	while (i < map->h)
 	{
+		j = 0;
 		while (j < map->diff_w[i])
 		{
 			map->highlight_grid[i][j] = '0';
@@ -110,7 +104,6 @@ void	allocate_grids(t_map *map)
 		}
 		map->highlight_grid[i][j] = '\0';
 		i++;
-		j = 0;
 	}
 }
 
