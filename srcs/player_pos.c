@@ -52,7 +52,7 @@ void	move(float angle, t_main *main)
 	main->p_pos.y = (int)main->map.d_player_pos.y;
 }
 
-void rotation(t_main *main)
+void	rotation(t_main *main)
 {
 	if (main->map.left == 1)
 	{
@@ -94,4 +94,3 @@ void	actualise_player(t_main *main)
 	}
 	rotation(main);
 }
-

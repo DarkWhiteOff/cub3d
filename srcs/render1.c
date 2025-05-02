@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:13 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 14:08:57 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/02 16:37:18 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 {
 	float	ray_cos;
 	float	ray_sin;
-	char	*dst;
 	t_img_i	tex;
 
 	ray_cos = main->ray.cos;
@@ -46,11 +45,11 @@ unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 	else if (main->map.grid[(int)main->ray.d_ray_pos.y]
 		[(int)(main->ray.d_ray_pos.x - ray_cos)] != '1')
 		tex = main->tex.tex_west;
-	dst = tex.addr + (y * tex.ls + x * (tex.b / 8));
-	return (*(unsigned int *)dst);
+	return (*(unsigned int *)
+		(tex.addr + (y * tex.ls + x * (tex.b / 8))));
 }
 
-void ray_pos_calc(t_main *main, int ray_angle)
+void	ray_pos_calc(t_main *main, int ray_angle)
 {
 	main->ray.d_ray_pos.x = main->map.d_player_pos.x + 0.5;
 	main->ray.d_ray_pos.y = main->map.d_player_pos.y + 0.5;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 14:05:46 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/05/02 16:38:38 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	get_img_addr(t_main *main)
 {
 	main->tex.tex_north.addr = mlx_get_data_addr(main->tex.tex_north.img,
-		&main->tex.tex_north.b, &main->tex.tex_north.ls,
-		&main->tex.tex_north.end);
+			&main->tex.tex_north.b, &main->tex.tex_north.ls,
+			&main->tex.tex_north.end);
 	main->tex.tex_south.addr = mlx_get_data_addr(main->tex.tex_south.img,
-		&main->tex.tex_south.b, &main->tex.tex_south.ls,
-		&main->tex.tex_south.end);
+			&main->tex.tex_south.b, &main->tex.tex_south.ls,
+			&main->tex.tex_south.end);
 	main->tex.tex_west.addr = mlx_get_data_addr(main->tex.tex_west.img,
-		&main->tex.tex_west.b, &main->tex.tex_west.ls, 
-		&main->tex.tex_west.end);
+			&main->tex.tex_west.b, &main->tex.tex_west.ls,
+			&main->tex.tex_west.end);
 	main->tex.tex_east.addr = mlx_get_data_addr(main->tex.tex_east.img,
-		&main->tex.tex_east.b, &main->tex.tex_east.ls,
-		&main->tex.tex_east.end);
+			&main->tex.tex_east.b, &main->tex.tex_east.ls,
+			&main->tex.tex_east.end);
 }
 
 int	check_w(int *array)
@@ -42,7 +42,7 @@ int	check_w(int *array)
 	return (1);
 }
 
-void check_w_h(t_main *main)
+void	check_w_h(t_main *main)
 {
 	if (check_w(main->map.diff_w) == 0 || main->map.h == 0)
 	{
