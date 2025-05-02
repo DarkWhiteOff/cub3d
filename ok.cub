@@ -1,16 +1,16 @@
 
 
-NO spr_tiles/tex_matrix.xpm
+NO tex/tex_matrix.xpm
 
 
 
-SO spr_tiles/tex_matrix.xpm
+SO tex/tex_matrix.xpm
 
-WE spr_tiles/tex_matrix.xpm
+WE tex/tex_matrix.xpm
 
-EA spr_tiles/tex_matrix.xpm
+EA tex/tex_matrix.xpm
 
-D = wolftex/door.xpm
+D sprites/door.xpm
 
 
 

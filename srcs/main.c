@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
+/*   Updated: 2025/05/02 16:34:58 by tzizi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	vars_init(t_main *main, char *map_path)
@@ -53,7 +65,8 @@ void	render_init(t_main *main)
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
-	main->mlx_win = mlx_new_window(main->mlx_p, main->map.px_w, main->map.px_h, "cub3d");
+	main->mlx_win = mlx_new_window(main->mlx_p,
+			main->map.px_w, main->map.px_h, "cub3d");
 	if (!main->mlx_win)
 	{
 		ffree(main);
@@ -70,7 +83,6 @@ void	render_init(t_main *main)
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
-	main->addr = mlx_get_data_addr(main->img, &main->b, &main->ls, &main->end);
 }
 
 int	main(int argc, char *argv[])
@@ -84,6 +96,7 @@ int	main(int argc, char *argv[])
 	vars_init(&main, argv[1]);
 	checks_inits(&main);
 	render_init(&main);
+	main.addr = mlx_get_data_addr(main.img, &main.b, &main.ls, &main.end);
 	sprites_init(&main);
 	game_refresh(&main);
 	mlx_hook(main.mlx_win, 2, 1L << 0, key_manager_down, &main);

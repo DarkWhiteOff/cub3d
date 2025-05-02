@@ -137,7 +137,6 @@ typedef struct s_main
 	//Sprites
 	t_sprite	spr_wall;
 	t_sprite	spr_floor;
-	t_sprite	spr_angle;
 	t_sprite	spr_p;
 	int fd;
 	int fd1;

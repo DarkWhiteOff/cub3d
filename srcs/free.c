@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
+/*   Updated: 2025/05/01 13:44:52 by zamgar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	free_grids(t_main *main)
@@ -29,16 +41,12 @@ void	free_textures(t_main *main)
 
 void	free_sprites(t_main *main)
 {
-	// Sprites
 	if (main->spr_p.img)
 		mlx_destroy_image(main->mlx_p, main->spr_p.img);
 	if (main->spr_wall.img)
 		mlx_destroy_image(main->mlx_p, main->spr_wall.img);
 	if (main->spr_floor.img)
 		mlx_destroy_image(main->mlx_p, main->spr_floor.img);
-	if (main->spr_angle.img)
-		mlx_destroy_image(main->mlx_p, main->spr_angle.img);
-	// Textures
 	if (main->tex.tex_north.img)
 		mlx_destroy_image(main->mlx_p, main->tex.tex_north.img);
 	if (main->tex.tex_south.img)
@@ -54,4 +62,11 @@ void	free_sprites(t_main *main)
 	free_grids(main);
 	free(main->map.diff_w);
 	free_textures(main);
+}
+
+void	free_diff_tex_grids(t_main *main)
+{
+	free(main->map.diff_w);
+	free_textures(main);
+	free_grids(main);
 }

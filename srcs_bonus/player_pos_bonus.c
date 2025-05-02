@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_pos.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 18:39:11 by zamgar            #+#    #+#             */
+/*   Updated: 2025/04/08 18:39:11 by zamgar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d_bonus.h"
 
 int	close_window(t_main *main)
@@ -5,7 +17,6 @@ int	close_window(t_main *main)
 	mlx_destroy_image(main->mlx_p, main->spr_wall.img);
 	mlx_destroy_image(main->mlx_p, main->spr_floor.img);
 	mlx_destroy_image(main->mlx_p, main->spr_p.img);
-	mlx_destroy_image(main->mlx_p, main->spr_angle.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_north.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_south.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_west.img);
@@ -24,21 +35,25 @@ int	close_window(t_main *main)
 
 void	move(float angle, t_main *main)
 {
-	float x = main->map.d_player_pos.x;
-	float y = main->map.d_player_pos.y;
-	float ray_cos;
-	float ray_sin;
-	int prev_x;
-	int prev_y;
+	float	x;
+	float	y;
+	float	ray_cos;
+	float	ray_sin;
+	int		prev_x;
+	int		prev_y;
 
-	ray_cos = cos(degree_to_radians(angle)) * 0.06;
-	ray_sin = sin(degree_to_radians(angle)) * 0.06;
-	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))][(int)(x + 0.5)]))
+	x = main->map.d_player_pos.x;
+	y = main->map.d_player_pos.y;
+	ray_cos = cos(degree_to_radians(angle)) * 0.02;
+	ray_sin = sin(degree_to_radians(angle)) * 0.02;
+	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))]
+		[(int)(x + 0.5)]))
 		main->map.d_player_pos.y += ray_sin;
-	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))])
-		&& !ft_strchr("D", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))]))
+	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)]
+		[(int)(x + 0.5 + (3 * ray_cos))]))
 		main->map.d_player_pos.x += ray_cos;
-	if (ft_strchr("D", main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))]))
+	if (ft_strchr("D", main->map.grid[(int)(y + 0.5)]
+		[(int)(x + 0.5 + (3 * ray_cos))]))
 	{
 		prev_x = (int)(x + 0.5 + (3 * ray_cos));
 		prev_y = (int)(y + 0.5);
@@ -48,76 +63,72 @@ void	move(float angle, t_main *main)
 	}
 }
 
+void	rotation_left(t_main *main)
+{
+	if (main->map.left == 1 || main->m_left == 1)
+	{
+		if (main->map.left == 1)
+		{
+			if (main->ray.ray_angle <= 0)
+				main->ray.ray_angle = 360;
+			else
+				main->ray.ray_angle -= 0.5;
+		}
+		else if (main->m_left == 1)
+		{
+			if (main->ray.ray_angle <= 0)
+				main->ray.ray_angle = 360;
+			else
+				main->ray.ray_angle -= 3;
+		}
+	}
+}
+
+void	rotation_right(t_main *main)
+{
+	if (main->map.right == 1 || main->m_right == 1)
+	{
+		if (main->map.right == 1)
+		{
+			if (main->ray.ray_angle >= 360)
+				main->ray.ray_angle = 0;
+			else
+				main->ray.ray_angle += 0.5;
+		}
+		else if (main->m_right == 1)
+		{
+			if (main->ray.ray_angle >= 360)
+				main->ray.ray_angle = 0;
+			else
+				main->ray.ray_angle += 3;
+		}
+	}
+}
+
 void	actualise_player(t_main *main)
 {
-	float angle;
+	float	angle;
 
 	angle = main->ray.ray_angle;
 	if (main->map.z == 1)
 		move(angle, main);
-	else if (main->map.q == 1)
+	if (main->map.q == 1)
 	{
 		angle = main->ray.ray_angle - 90;
 		move(angle, main);
 	}
-	else if (main->map.s == 1)
+	if (main->map.s == 1)
 	{
 		angle = main->ray.ray_angle - 180;
 		move(angle, main);
 	}
-	else if (main->map.d == 1)
+	if (main->map.d == 1)
 	{
 		angle = main->ray.ray_angle + 90;
 		move(angle, main);
 	}
-	else if (main->map.left == 1)
-	{
-		if (main->ray.ray_angle <= 0)
-			main->ray.ray_angle = 360;
-		else
-			main->ray.ray_angle -= 1;
-	}
-	else if (main->map.right == 1)
-	{
-		if (main->ray.ray_angle >= 360)
-			main->ray.ray_angle = 0;
-		else
-			main->ray.ray_angle += 1;
-	}
-}
-
-int	key_manager_down(int keycode, t_main *main)
-{
-	if (keycode == 53 || keycode == 65307)
-		close_window(main);
-	if (keycode == 119) // 119
-		main->map.z = 1;
-	if (keycode == 97) // 97
-		main->map.q = 1;
-	if (keycode == 115)
-		main->map.s = 1;
-	if (keycode == 100)
-		main->map.d = 1;
-	if (keycode == 65361)
-		main->map.left = 1;
-	if (keycode == 65363)
-		main->map.right = 1;
-	return (0);
-}
-
-int	key_manager_up(int keycode, t_main *main)
-{
-	if (keycode == 119) // 119
-		main->map.z = 0;
-	if (keycode == 97) // 97
-		main->map.q = 0;
-	if (keycode == 115)
-		main->map.s = 0;
-	if (keycode == 100)
-		main->map.d = 0;
-	if (keycode == 65361)
-		main->map.left = 0;
-	if (keycode == 65363)
-		main->map.right = 0;
-	return (0);
+	rotation_left(main);
+	rotation_right(main);
+	main->m_left = 0;
+	main->m_right = 0;
 }
