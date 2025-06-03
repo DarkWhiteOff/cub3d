@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus1.c                                     :+:      :+:    :+:   */
+/*   utils1_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 14:04:51 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/03 13:21:11 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	check_w_h(t_main *main)
 	}
 }
 
-void	my_mlx_pixel_put(char *adrr, int ls, int b, int x, int y, int color)
+void	my_mlx_pixel_put(t_img_data *img_data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = adrr + (y * ls + x * (b / 8));
+	dst = img_data->addr + (y * img_data->ls + x * (img_data->b / 8));
 	*(unsigned int *)dst = color;
 }

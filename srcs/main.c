@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/02 16:34:58 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/03 13:01:06 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	vars_init(t_main *main, char *map_path)
 	main->mlx_p = NULL;
 	main->mlx_win = NULL;
 	main->img = NULL;
-	main->addr = NULL;
-	main->b = 0;
-	main->ls = 0;
-	main->end = 0;
+	main->img_data.addr = NULL;
+	main->img_data.b = 0;
+	main->img_data.ls = 0;
+	main->img_data.end = 0;
 	main->p_pos.x = -1;
 	main->p_pos.y = -1;
 	map_init(&main->map, map_path);
@@ -96,7 +96,8 @@ int	main(int argc, char *argv[])
 	vars_init(&main, argv[1]);
 	checks_inits(&main);
 	render_init(&main);
-	main.addr = mlx_get_data_addr(main.img, &main.b, &main.ls, &main.end);
+	main.img_data.addr = mlx_get_data_addr(main.img, &main.img_data.b,
+			&main.img_data.ls, &main.img_data.end);
 	sprites_init(&main);
 	game_refresh(&main);
 	mlx_hook(main.mlx_win, 2, 1L << 0, key_manager_down, &main);

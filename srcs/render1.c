@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   render1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:13 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/02 16:45:35 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/03 12:53:34 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	my_mlx_pixel_put(char *adrr, int ls, int b, int x, int y, int color)
+void	my_mlx_pixel_put(t_img_data *img_data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = adrr + (y * ls + x * (b / 8));
+	dst = img_data->addr + (y * img_data->ls + x * (img_data->b / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -86,10 +86,10 @@ void	draw_ceiling_floor(t_main *main, int i, int wall_h, int ds)
 	while (++j < main->map.px_h)
 	{
 		if (j < ds)
-			my_mlx_pixel_put(main->addr, main->ls, main->b,
+			my_mlx_pixel_put(&main->img_data,
 				i, j, main->tex.color_c);
 		else if (j >= (main->map.px_h / 2) + wall_h)
-			my_mlx_pixel_put(main->addr, main->ls, main->b,
+			my_mlx_pixel_put(&main->img_data,
 				i, j, main->tex.color_f);
 	}
 }

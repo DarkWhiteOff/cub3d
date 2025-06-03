@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/02 16:48:23 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/03 12:59:20 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "../mlx/mlx.h"
-# include "struct_bonus.h"
+# include "struct.h"
 
 // CUB3D
 void	render_init(t_main *main);
@@ -48,9 +48,9 @@ int		close_window(t_main *main);
 int		game_refresh(t_main *main);
 void	raycasting(t_main *main);
 void	draw_texture(t_main *main, int ray_count, int wall_height);
-void	my_mlx_pixel_put(char *adrr, int ls, int b, int x, int y, int color);
+void	my_mlx_pixel_put(t_img_data *img_data, int x, int y, int color);
 void	empty_line_check(t_main *main, char *line, int fd);
-void	check_fd_error(t_main *main, int fd);
+void	check_fd_error(t_main *main, int fdm);
 int		strlenmap(char *line);
 int		check_map_name(char *map_name);
 float	degree_to_radians(float degree);
@@ -62,6 +62,8 @@ void    get_img_addr(t_main *main);
 void	ray_pos_calc(t_main *main, int ray_angle);
 void	draw_ceiling_floor(t_main *main, int i, int wall_h, int ds);
 int     wall_height_calc(t_main *main, int ray_angle);
+void	check_w_h(t_main *main);
+unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE

@@ -37,7 +37,7 @@ int	close_window(t_main *main);
 int	game_refresh(t_main *main);
 void	raycasting(t_main *main);
 void	draw_texture(t_main *main, int ray_count, int wall_height);
-void	my_mlx_pixel_put(char *adrr, int ls, int b, int x, int y, int color);
+void	my_mlx_pixel_put(t_img_data *img_data, int x, int y, int color);
 void	empty_line_check(t_main *main, char *line, int fd);
 void	check_fd_error(t_main *main, int fd);
 int	strlenmap(char *line);
@@ -48,6 +48,12 @@ void	free_sprites(t_main *main);
 void	update_map(t_main *main, int i, int px_h);
 void	free_diff_tex_grids(t_main *main);
 void    get_img_addr(t_main *main);
+int     get_tex_color(t_main *main, int z);
+void	ray_pos_calc(t_main *main, int ray_angle);
+int	wall_height_calc(t_main *main, int ray_angle);
+
+void	check_w_h(t_main *main);
+unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE

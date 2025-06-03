@@ -121,21 +121,23 @@ typedef struct s_map
 	t_d_pxy d_player_pos;
 }	t_map;
 
+typedef struct s_img_data
+{
+	char		*addr;
+	int			b;
+	int			ls;
+	int			end;
+}	t_img_data;
+
 typedef struct s_main
 {
 	//Mlx
 	void		*mlx_p;
 	void		*mlx_win;
 	void		*img;
-	char		*addr;
-	int			b;
-	int			ls;
-	int			end;
+	t_img_data	img_data;
 	void		*img_minimap;
-	char		*addr_minimap;
-	int			b_minimap;
-	int			ls_minimap;
-	int			end_minimap;
+	t_img_data	minimap_data;
 	//Map
 	t_map		map;
 	t_ray		ray;

@@ -43,8 +43,7 @@ void	draw_texture(t_main *main, int ray_count, int wall_height)
 		while (cy[0] < cy[1] + dy)
 		{
 			if (cy[0] >= 0 && cy[0] < (float)main->map.px_h)
-				my_mlx_pixel_put(main->addr, main->ls, main->b,
-					ray_count, cy[0], color);
+				my_mlx_pixel_put(&main->img_data, ray_count, cy[0], color);
 			cy[0]++;
 		}
 		cy[1] += dy;

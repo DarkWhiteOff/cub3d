@@ -31,7 +31,7 @@ void	draw_texture(t_main *main, int ray_count, int wall_height)
 		while (cy[0] < cy[1] + dy)
 		{
 			if (cy[0] >= 0 && cy[0] < (float)main->map.px_h)
-				my_mlx_pixel_put(main->addr, main->ls, main->b,
+				my_mlx_pixel_put(&main->img_data,
 					ray_count, cy[0], color);
 			cy[0]++;
 		}
@@ -47,10 +47,10 @@ void	draw_ceiling_floor(t_main *main, int i, int wall_h, int ds)
 	while (++j < main->map.px_h)
 	{
 		if (j < ds)
-			my_mlx_pixel_put(main->addr, main->ls, main->b,
+			my_mlx_pixel_put(&main->img_data,
 				i, j, main->tex.color_c);
 		else if (j >= (main->map.px_h / 2) + wall_h)
-			my_mlx_pixel_put(main->addr, main->ls, main->b,
+			my_mlx_pixel_put(&main->img_data,
 				i, j, main->tex.color_f);
 	}
 }

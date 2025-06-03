@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/02 16:39:31 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/03 13:27:05 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	vars_init(t_main *main, char *map_path)
 	main->mlx_win = NULL;
 	main->img = NULL;
 	main->img_minimap = NULL;
-	main->addr = NULL;
-	main->b = 0;
-	main->ls = 0;
-	main->end = 0;
+	main->img_data.addr = NULL;
+	main->img_data.b = 0;
+	main->img_data.ls = 0;
+	main->img_data.end = 0;
 	main->p_pos.x = -1;
 	main->p_pos.y = -1;
 	map_init(&main->map, map_path);
@@ -69,10 +69,11 @@ void	init_minimap(t_main *main)
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
-	main->addr = mlx_get_data_addr(main->img, &main->b,
-			&main->ls, &main->end);
-	main->addr_minimap = mlx_get_data_addr(main->img_minimap,
-			&main->b_minimap, &main->ls_minimap, &main->end_minimap);
+	main->img_data.addr = mlx_get_data_addr(main->img, &main->img_data.b,
+			&main->img_data.ls, &main->img_data.end);
+	main->minimap_data.addr = mlx_get_data_addr(main->img_minimap,
+			&main->minimap_data.b, &main->minimap_data.ls,
+			&main->minimap_data.end);
 }
 
 void	render_init(t_main *main)
@@ -84,7 +85,8 @@ void	render_init(t_main *main)
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
-	main->mlx_win = mlx_new_window(main->mlx_p, main->map.px_w, main->map.px_h, "cub3d");
+	main->mlx_win = mlx_new_window(main->mlx_p, main->map.px_w,
+			main->map.px_h, "cub3d");
 	if (!main->mlx_win)
 	{
 		free_diff_tex_grids(main);
@@ -101,7 +103,6 @@ void	render_init(t_main *main)
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
-	init_minimap(main);
 }
 
 int	main(int argc, char *argv[])
@@ -115,6 +116,7 @@ int	main(int argc, char *argv[])
 	vars_init(&main, argv[1]);
 	checks_inits(&main);
 	render_init(&main);
+	init_minimap(&main);
 	sprites_init(&main);
 	game_refresh(&main);
 	mlx_hook(main.mlx_win, 2, 1L << 0, key_manager_down, &main);
