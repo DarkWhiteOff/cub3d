@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render1_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:13 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/03 15:46:25 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/03 23:36:53 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ray_pos_calc(t_main *main, int ray_angle)
 	while (!ft_strchr("1", main->map.grid[(int)main->ray.d_ray_pos.y]
 			[(int)main->ray.d_ray_pos.x])
 		&& !ft_strchr("D", main->map.grid[(int)main->ray.d_ray_pos.y]
-			[(int)main->ray.d_ray_pos.x]))
+			[(int)main->ray.d_ray_pos.x])) // essayer d'enlever la ligne D, var ray angle impact la draw du ceiling et floor
 	{	
 		main->ray.d_ray_pos.x += main->ray.cos;
 		main->ray.d_ray_pos.y += main->ray.sin;
@@ -94,8 +94,8 @@ int	get_tex_color(t_main *main, int z)
 	if (main->map.grid[(int)main->ray.d_ray_pos.y]
 		[(int)main->ray.d_ray_pos.x] == '1'
 		|| main->map.grid[(int)main->ray.d_ray_pos.y]
-		[(int)main->ray.d_ray_pos.x] == 'D')
-		color = my_mlx_pixel_get2(main, (int)
+		[(int)main->ray.d_ray_pos.x] == 'D') // pareil ici faire quelque chose avec la ligne D, quand on est dans la porte la ligne est toujours active donc on essaie d'aller chercher une texture, ca doit faire tout bug
+		color = my_mlx_pixel_get2(main, (int) // essayer de l'enlever ou de metter un || (... && que le player ne soit pas a la pos de la porte) vous etes pas contents ? triplé
 				(64 * (main->ray.d_ray_pos.x + main->ray.d_ray_pos.y)) % 64, z);
 	return (color);
 }
