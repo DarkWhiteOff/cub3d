@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:13 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 14:04:41 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/03 15:46:25 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 		ray_sin = -ray_sin;
 	tex = main->tex.tex_south;
 	if (main->map.grid[(int)main->ray.d_ray_pos.y]
-		[(int)main->ray.d_ray_pos.x] == 'D')
+		[(int)main->ray.d_ray_pos.x] == 'D' && main->map.grid[(int)main->map.d_player_pos.y]
+			[(int)main->map.d_player_pos.x] != 'D')
 	{
 		tex = main->tex.tex_door;
 		dst = tex.addr + (y * tex.ls + x * (tex.b / 8));

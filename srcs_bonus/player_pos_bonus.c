@@ -55,11 +55,11 @@ void	move(float angle, t_main *main)
 	if (ft_strchr("D", main->map.grid[(int)(y + 0.5)]
 		[(int)(x + 0.5 + (3 * ray_cos))]))
 	{
-		prev_x = (int)(x + 0.5 + (3 * ray_cos));
-		prev_y = (int)(y + 0.5);
-		main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))] = '0';
-		main->map.d_player_pos.x += ray_cos;
-		main->map.grid[prev_y][prev_x] = 'D';
+		// prev_x = (int)(x + 0.5 + (3 * ray_cos));
+		// prev_y = (int)(y + 0.5);
+		// main->map.grid[(int)(y + 0.5)][(int)(x + 0.5 + (3 * ray_cos))] = '0';
+		//main->map.d_player_pos.x += ray_cos;
+		// main->map.grid[prev_y][prev_x] = 'D';
 	}
 }
 
