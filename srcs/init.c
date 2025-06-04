@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 14:09:31 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:41:21 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	map_init(t_map *map, char *map_path)
 
 void	ray_init(t_ray *ray)
 {
-	ray->FOV = 60.0;
-	ray->HFOV = 30.0;
+	ray->fov = 60.0;
+	ray->hfov = 30.0;
 	ray->ray_angle = 0.0;
 	ray->diff_ray_angle = 0.0;
 	ray->precision = 50.0;

@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 14:05:04 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:49:21 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	map_init(t_map *map, char *map_path)
 
 void	ray_init(t_ray *ray)
 {
-	ray->FOV = 60.0;
-	ray->HFOV = 30.0;
+	ray->fov = 60.0;
+	ray->hfov = 30.0;
 	ray->ray_angle = 0.0;
 	ray->diff_ray_angle = 0.0;
 	ray->precision = 50.0;
@@ -52,10 +52,10 @@ void	ray_init(t_ray *ray)
 
 void	tex_init(t_tex *tex)
 {
-	tex->NO = NULL;
-	tex->SO = NULL;
-	tex->WE = NULL;
-	tex->EA = NULL;
+	tex->no = NULL;
+	tex->so = NULL;
+	tex->we = NULL;
+	tex->ea = NULL;
 	tex->D = NULL;
 	tex->color_f = -1;
 	tex->color_c = -1;
@@ -65,13 +65,13 @@ void	tex_init(t_tex *tex)
 void	textures_init(t_main *main)
 {
 	main->tex.tex_north.img = mlx_xpm_file_to_image(main->mlx_p,
-			main->tex.NO, &main->tex.tex_north.w, &main->tex.tex_north.h);
+			main->tex.no, &main->tex.tex_north.w, &main->tex.tex_north.h);
 	main->tex.tex_south.img = mlx_xpm_file_to_image(main->mlx_p,
-			main->tex.SO, &main->tex.tex_south.w, &main->tex.tex_south.h);
+			main->tex.so, &main->tex.tex_south.w, &main->tex.tex_south.h);
 	main->tex.tex_west.img = mlx_xpm_file_to_image(main->mlx_p,
-			main->tex.WE, &main->tex.tex_west.w, &main->tex.tex_west.h);
+			main->tex.we, &main->tex.tex_west.w, &main->tex.tex_west.h);
 	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
-			main->tex.EA, &main->tex.tex_east.w, &main->tex.tex_east.h);
+			main->tex.ea, &main->tex.tex_east.w, &main->tex.tex_east.h);
 	if (main->tex.D)
 	{
 		main->tex.tex_door.img = mlx_xpm_file_to_image(main->mlx_p,

@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/03 13:27:05 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:41:03 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	vars_init(t_main *main, char *map_path)
 	map_init(&main->map, map_path);
 	ray_init(&main->ray);
 	tex_init(&main->tex);
-	main->ray.diff_ray_angle = 2 * main->ray.HFOV / main->map.px_w;
+	main->ray.diff_ray_angle = 2 * main->ray.hfov / main->map.px_w;
 	main->fd = -1;
 	main->fd1 = -1;
 	main->fd2 = -1;

@@ -58,7 +58,7 @@ void	raycasting(t_main *main)
 	float	ds;
 
 	i = -1;
-	ray_angle = main->ray.ray_angle - main->ray.HFOV;
+	ray_angle = main->ray.ray_angle - main->ray.hfov;
 	wall_h = 0;
 	ds = 0.0;
 	while (++i < main->map.px_w)

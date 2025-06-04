@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 13:51:03 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:48:36 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	get_params(t_main *main, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
-		main->tex.NO = ft_substr(line, 3, ft_strlen(line) - 4);
+		main->tex.no = ft_substr(line, 3, ft_strlen(line) - 4);
 	if (ft_strncmp(line, "SO ", 3) == 0)
-		main->tex.SO = ft_substr(line, 3, ft_strlen(line) - 4);
+		main->tex.so = ft_substr(line, 3, ft_strlen(line) - 4);
 	if (ft_strncmp(line, "WE ", 3) == 0)
-		main->tex.WE = ft_substr(line, 3, ft_strlen(line) - 4);
+		main->tex.we = ft_substr(line, 3, ft_strlen(line) - 4);
 	if (ft_strncmp(line, "EA ", 3) == 0)
-		main->tex.EA = ft_substr(line, 3, ft_strlen(line) - 4);
+		main->tex.ea = ft_substr(line, 3, ft_strlen(line) - 4);
 	if (ft_strncmp(line, "D ", 2) == 0)
 		main->tex.D = ft_substr(line, 2, ft_strlen(line) - 3);
 	if (!ft_strncmp(line, "C", 1) && main->tex.color_c == -1)
@@ -61,13 +61,13 @@ void	get_infos(t_main *main)
 		main->tex.map_start++;
 		get_params(main, line);
 		free(line);
-		if (main->tex.NO && main->tex.SO && main->tex.WE && main->tex.EA
+		if (main->tex.no && main->tex.so && main->tex.we && main->tex.ea
 			&& main->tex.D && main->tex.color_c != -1
 			&& main->tex.color_f != -1)
 			break ;
 		line = get_next_line(main->fd);
 	}
-	if (!main->tex.NO || !main->tex.SO || !main->tex.WE || !main->tex.EA
+	if (!main->tex.no || !main->tex.so || !main->tex.we || !main->tex.ea
 		|| !main->tex.D || main->tex.color_c == -1 || main->tex.color_f == -1)
 	{
 		free_textures(main);
