@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 11:59:05 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:13:54 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 void			render_init(t_main *main);
 void			checks_inits(t_main *main);
 void			vars_init(t_main *main, char *map_path);
-void			tex_init (t_tex *tex);
-void			ray_init (t_ray *ray);
-void			map_init (t_map *map, char *map_path);
+void			tex_init(t_tex *tex);
+void			ray_init(t_ray *ray);
+void			map_init(t_map *map, char *map_path);
 void			get_infos(t_main *main);
 void			get_diff_width(t_main *main);
 int				check_w(int *array);
