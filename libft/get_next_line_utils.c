@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 12:47:16 by zamgar            #+#    #+#             */
-/*   Updated: 2025/03/20 16:20:58 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:25:22 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (newstr);
 }
 
-unsigned char	*unsigned_ft_strjoin(unsigned char const *s1, unsigned char const *s2)
+unsigned char	*unsigned_ft_strjoin(unsigned char const *s1,
+					unsigned char const *s2)
 {
-	size_t		i;
-	size_t		j;
-	unsigned char		*newstr;
+	size_t			i;
+	size_t			j;
+	unsigned char	*newstr;
 
 	i = unsigned_ft_strlen(s1) + unsigned_ft_strlen(s2);
 	j = 0;

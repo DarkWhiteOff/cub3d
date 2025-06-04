@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 12:47:04 by zamgar            #+#    #+#             */
-/*   Updated: 2024/06/24 13:24:00 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:24:45 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	save = prepare_nextline(n_l);
-	// if (n_l[0] == '\0' || n_l[0] == '\n')
-	// 	free(save);
 	return (n_l);
 }
 

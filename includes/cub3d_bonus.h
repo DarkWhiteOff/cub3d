@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:58:07 by tzizi             #+#    #+#             */
-/*   Updated: 2025/06/04 13:09:21 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/04 13:23:19 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int				ft(const char *s, unsigned char c);
 char			*ft_strdup(const char *s);
 char			*ft_substr(char const *str, unsigned int start, size_t len);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-unsigned char	*unsigned_ft_strjoin(unsigned char const *s1, unsigned char const *s2);
+unsigned char	*unsigned_ft_strjoin(unsigned char const *s1,
+					unsigned char const *s2);
 int				unsigned_ft_strlen(unsigned const char *s);
 
 // FT_PRINTF
@@ -97,7 +98,8 @@ int				ft_unsigned_itoa2(unsigned int n);
 char			*ft_unsigned_itoa(unsigned int n);
 int				ft_unsigned_count(unsigned int n);
 int				ft_putptr(unsigned long long adress);
-char			*ft_fill_ptrarray(unsigned long long adress, char *string, char *array);
+char			*ft_fill_ptrarray(unsigned long long adress,
+					char *string, char *array);
 int				ft_get_size_ptrarray(unsigned long long adress);
 int				ft_putstr(char *str);
 int				ft_putchar(char c);
