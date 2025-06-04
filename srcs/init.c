@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 12:41:21 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:56:05 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	ray_init(t_ray *ray)
 
 void	tex_init(t_tex *tex)
 {
-	tex->NO = NULL;
-	tex->SO = NULL;
-	tex->WE = NULL;
-	tex->EA = NULL;
+	tex->no = NULL;
+	tex->so = NULL;
+	tex->we = NULL;
+	tex->ea = NULL;
 	tex->color_f = -1;
 	tex->color_c = -1;
 	tex->map_start = 0;
@@ -68,13 +68,13 @@ void	tex_init(t_tex *tex)
 void	textures_init(t_main *main)
 {
 	main->tex.tex_north.img = mlx_xpm_file_to_image(main->mlx_p,
-			main->tex.NO, &main->tex.tex_north.w, &main->tex.tex_north.h);
+			main->tex.no, &main->tex.tex_north.w, &main->tex.tex_north.h);
 	main->tex.tex_south.img = mlx_xpm_file_to_image(main->mlx_p,
-			main->tex.SO, &main->tex.tex_south.w, &main->tex.tex_south.h);
+			main->tex.so, &main->tex.tex_south.w, &main->tex.tex_south.h);
 	main->tex.tex_west.img = mlx_xpm_file_to_image(main->mlx_p,
-			main->tex.WE, &main->tex.tex_west.w, &main->tex.tex_west.h);
+			main->tex.we, &main->tex.tex_west.w, &main->tex.tex_west.h);
 	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
-			main->tex.EA, &main->tex.tex_east.w, &main->tex.tex_east.h);
+			main->tex.ea, &main->tex.tex_east.w, &main->tex.tex_east.h);
 }
 
 void	sprites_init(t_main *main)

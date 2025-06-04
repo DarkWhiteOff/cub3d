@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 13:44:04 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:55:01 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	free_grids(t_main *main)
 
 void	free_textures(t_main *main)
 {
-	if (main->tex.NO)
-		free(main->tex.NO);
-	if (main->tex.SO)
-		free(main->tex.SO);
-	if (main->tex.WE)
-		free(main->tex.WE);
-	if (main->tex.EA)
-		free(main->tex.EA);
+	if (main->tex.no)
+		free(main->tex.no);
+	if (main->tex.so)
+		free(main->tex.so);
+	if (main->tex.we)
+		free(main->tex.we);
+	if (main->tex.ea)
+		free(main->tex.ea);
 	if (main->tex.D)
 		free(main->tex.D);
 }
