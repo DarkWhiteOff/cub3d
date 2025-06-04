@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 12:55:01 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:10:50 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	free_textures(t_main *main)
 		free(main->tex.we);
 	if (main->tex.ea)
 		free(main->tex.ea);
-	if (main->tex.D)
-		free(main->tex.D);
+	if (main->tex.d)
+		free(main->tex.d);
 }
 
 void	free_sprites(t_main *main)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 12:49:21 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:10:50 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	tex_init(t_tex *tex)
 	tex->so = NULL;
 	tex->we = NULL;
 	tex->ea = NULL;
-	tex->D = NULL;
+	tex->d = NULL;
 	tex->color_f = -1;
 	tex->color_c = -1;
 	tex->map_start = 0;
@@ -72,10 +72,10 @@ void	textures_init(t_main *main)
 			main->tex.we, &main->tex.tex_west.w, &main->tex.tex_west.h);
 	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
 			main->tex.ea, &main->tex.tex_east.w, &main->tex.tex_east.h);
-	if (main->tex.D)
+	if (main->tex.d)
 	{
 		main->tex.tex_door.img = mlx_xpm_file_to_image(main->mlx_p,
-				main->tex.D, &main->tex.tex_door.w, &main->tex.tex_door.h);
+				main->tex.d, &main->tex.tex_door.w, &main->tex.tex_door.h);
 	}
 }
 

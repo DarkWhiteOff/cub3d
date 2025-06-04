@@ -1,5 +1,17 @@
-#ifndef STRUCT_H
-# define STRUCT_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_bonus.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/04 12:58:41 by tzizi             #+#    #+#             */
+/*   Updated: 2025/06/04 12:58:41 by tzizi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCT_BONUS_H
+# define STRUCT_BONUS_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -8,13 +20,13 @@
 # include <stdarg.h>
 # include <math.h>
 
-# define PI 3.1415926535
+# define PI	3.1415926535
 
-# define WHITE 0xFFFFFF
-# define RED   0x00FF0000
-# define GEEN 0x0000FF00
-# define BLUE  0x000000FF
-# define BLACK 000000
+# define WHITE	0xFFFFFF
+# define RED	0x00FF0000
+# define GEEN	0x0000FF00
+# define BLUE	0x000000FF
+# define BLACK	000000
 
 # define HEXA "0123456789ABCDEF"
 
@@ -60,7 +72,7 @@ typedef struct s_tex
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	*D;
+	char	*d;
 	int		color_f;
 	int		color_c;
 	int		map_start;

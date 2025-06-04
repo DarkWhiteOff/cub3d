@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 12:48:36 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:10:50 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	get_params(t_main *main, char *line)
 	if (ft_strncmp(line, "EA ", 3) == 0)
 		main->tex.ea = ft_substr(line, 3, ft_strlen(line) - 4);
 	if (ft_strncmp(line, "D ", 2) == 0)
-		main->tex.D = ft_substr(line, 2, ft_strlen(line) - 3);
+		main->tex.d = ft_substr(line, 2, ft_strlen(line) - 3);
 	if (!ft_strncmp(line, "C", 1) && main->tex.color_c == -1)
 		main->tex.color_c = rgb_to_hex(line);
 	if (!ft_strncmp(line, "F", 1) && main->tex.color_f == -1)
@@ -62,13 +62,13 @@ void	get_infos(t_main *main)
 		get_params(main, line);
 		free(line);
 		if (main->tex.no && main->tex.so && main->tex.we && main->tex.ea
-			&& main->tex.D && main->tex.color_c != -1
+			&& main->tex.d && main->tex.color_c != -1
 			&& main->tex.color_f != -1)
 			break ;
 		line = get_next_line(main->fd);
 	}
 	if (!main->tex.no || !main->tex.so || !main->tex.we || !main->tex.ea
-		|| !main->tex.D || main->tex.color_c == -1 || main->tex.color_f == -1)
+		|| !main->tex.d || main->tex.color_c == -1 || main->tex.color_f == -1)
 	{
 		free_textures(main);
 		exit(ft_printf("Error\nTextures missing.\n"));

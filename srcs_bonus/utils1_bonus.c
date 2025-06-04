@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/03 13:21:11 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:10:50 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	get_img_addr(t_main *main)
 	main->tex.tex_east.addr = mlx_get_data_addr(main->tex.tex_east.img,
 			&main->tex.tex_east.b, &main->tex.tex_east.ls,
 			&main->tex.tex_east.end);
-	if (main->tex.D && main->tex.tex_door.img)
+	if (main->tex.d && main->tex.tex_door.img)
 		main->tex.tex_door.addr = mlx_get_data_addr(main->tex.tex_door.img,
 				&main->tex.tex_door.b, &main->tex.tex_door.ls,
 				&main->tex.tex_door.end);

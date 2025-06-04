@@ -1,5 +1,17 @@
-#ifndef CUB3D_H
-# define CUB3D_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/04 12:58:07 by tzizi             #+#    #+#             */
+/*   Updated: 2025/06/04 13:09:21 by tzizi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../mlx/mlx.h"
 # include "struct_bonus.h"
@@ -8,18 +20,18 @@
 void			render_init(t_main *main);
 void			checks_inits(t_main *main);
 void			vars_init(t_main *main, char *map_path);
-void			tex_init (t_tex *tex);
-void			ray_init (t_ray *ray);
-void			map_init (t_map *map, char *map_path);
+void			tex_init(t_tex *tex);
+void			ray_init(t_ray *ray);
+void			map_init(t_map *map, char *map_path);
 void			get_infos(t_main *main);
 void			get_diff_width(t_main *main);
-int	    		check_w(int *array);
+int				check_w(int *array);
 void			parse_map(t_main *main);
 void			check_walls1(t_main *main);
 void			check_walls2(t_main *main);
 void			check_path(t_main *main, int x, int y);
 void			is_epc(t_main *main, int i, int j, t_pxy *p_pos);
-int	    		check_other_char(t_map *map, int y, int x);
+int				check_other_char(t_map *map, int y, int x);
 void			check_epc(t_main *main, t_pxy *p_pos);
 void			allocate_grids(t_map *map);
 void			grid_init(t_main *main);
