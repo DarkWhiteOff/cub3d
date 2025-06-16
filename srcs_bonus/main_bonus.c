@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 12:41:03 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:59:43 by zz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ void	checks_inits(t_main *main)
 	grid_init(main);
 	check_walls1(main);
 	check_walls2(main);
+	check_horizontal(main);
+	check_vertical(main);
 	check_epc(main, &main->p_pos);
 	main->map.px_player_pos.x = (size_t)main->p_pos.x * 48;
 	main->map.px_player_pos.y = (size_t)main->p_pos.y * 48;
 	main->map.d_player_pos.x = (float)(main->p_pos.x);
 	main->map.d_player_pos.y = (float)(main->p_pos.y);
 	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
-	check_path(main, main->p_pos.x, main->p_pos.y);
 }
 
 void	init_minimap(t_main *main)

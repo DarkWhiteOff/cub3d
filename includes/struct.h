@@ -106,7 +106,6 @@ typedef struct s_map
 	int			player_pos;
 	int			fd;
 	char		**grid;
-	char		**highlight_grid;
 	int			z;
 	int			q;
 	int			s;

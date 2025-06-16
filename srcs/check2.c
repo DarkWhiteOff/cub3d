@@ -6,7 +6,7 @@
 /*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 17:27:49 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/16 23:04:20 by zz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,26 +87,10 @@ void	allocate_grids(t_map *map)
 	int	j;
 
 	i = 0;
-	printf("map->w_max : %d\n", map->w_max);
 	map->grid = (char **)malloc(sizeof(char *) * map->h + 1);
-	map->highlight_grid = (char **)malloc(sizeof(char *) * map->h + 1);
 	while (i < map->h)
 	{
-		map->grid[i] = (char *)malloc(sizeof(char) * map->w_max + 1);
-		map->highlight_grid[i] = (char *)malloc(sizeof(char)
-				* (map->diff_w[i] + 1));
-		i++;
-	}
-	i = 0;
-	while (i < map->h)
-	{
-		j = 0;
-		while (j < map->diff_w[i])
-		{
-			map->highlight_grid[i][j] = '0';
-			j++;
-		}
-		map->highlight_grid[i][j] = '\0';
+		map->grid[i] = (char *)malloc(sizeof(char) * (map->w_max + 1));
 		i++;
 	}
 }

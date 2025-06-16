@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 13:23:50 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:39:14 by zz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int				check_w(int *array);
 void			parse_map(t_main *main);
 void			check_walls1(t_main *main);
 void			check_walls2(t_main *main);
-void			check_path(t_main *main, int x, int y);
+void			check_horizontal(t_main *main);
+void			check_vertical(t_main *main);
 void			is_epc(t_main *main, int i, int j, t_pxy *p_pos);
 int				check_other_char(t_map *map, int y, int x);
 void			check_epc(t_main *main, t_pxy *p_pos);

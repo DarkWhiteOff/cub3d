@@ -6,7 +6,7 @@
 /*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 17:10:41 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/16 23:04:34 by zz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	map_init(t_map *map, char *map_path)
 	map->player_pos = 0;
 	map->fd = -1;
 	map->grid = NULL;
-	map->highlight_grid = NULL;
 	map->z = 0;
 	map->q = 0;
 	map->s = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 13:10:50 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/16 23:04:55 by zz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ void	free_grids(t_main *main)
 	while (i < main->map.h)
 	{
 		free(main->map.grid[i]);
-		free(main->map.highlight_grid[i]);
 		i++;
 	}
 	free(main->map.grid);
-	free(main->map.highlight_grid);
 }
 
 void	free_textures(t_main *main)
