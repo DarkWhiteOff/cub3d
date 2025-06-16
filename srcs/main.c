@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 12:40:57 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/16 20:43:52 by zz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,106 @@ void	vars_init(t_main *main, char *map_path)
 	main->fd2 = -1;
 	main->fd3 = -1;
 }
+void	check_horizontal(t_main *main)
+{
+	int	i;
+	int	j;
+	char debut;
+	char end;
+
+	i = 1;
+	j = 0;
+
+	while (i < main->map.h - 1)
+	{
+		while (j < main->map.diff_w[i])
+		{
+			if (main->map.grid[i][j] == ' ')
+			{
+				debut = main->map.grid[i][j - 1];
+				while (main->map.grid[i][j] == ' ')
+					j++;
+				end = main->map.grid[i][j];
+				if (debut != '1' && end != '1')
+				{
+					free(main->map.diff_w);
+					free_textures(main);
+					free_grids(main);
+					exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
+				}
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
+void	check_vertical(t_main *main)
+{
+	int	i;
+	int	j;
+	char debut;
+	char end;
+
+	i = 0;
+	j = 1;
+
+	while (j < main->map.w_max - 1)
+	{
+		while (i < main->map.h)
+		{
+			if (main->map.grid[i][j] == ' ')
+			{
+				if (i == 0)
+					debut = '1';
+				else
+					debut = main->map.grid[i - 1][j];
+				while (main->map.grid[i][j] == ' ' && i < main->map.h - 1)
+					i++;
+				if (i == 18 && main->map.grid[i][j] != '0')
+					end = '1';
+				else
+					end = main->map.grid[i][j];
+				if (debut != '1' || end != '1')
+				{
+					free(main->map.diff_w);
+					free_textures(main);
+					free_grids(main);
+					exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
+				}
+			}
+			i++;
+		}
+		i = 0;
+		j++;
+	}
+}
 
 void	checks_inits(t_main *main)
 {
 	get_infos(main);
 	parse_map(main);
 	grid_init(main);
-	check_walls1(main);
+	int i = 0;
+	int j = 0;
+	while (i < main->map.h)
+	{
+		printf("'");
+		while (main->map.grid[i][j])
+		{
+			printf("%c", main->map.grid[i][j]);
+			j++;
+		}
+		printf("'\n");
+		j = 0;
+		i++;
+	}
+	// check_walls1(main);
 	check_walls2(main);
+	check_horizontal(main);
+	check_vertical(main);
+	exit(0);
 	check_epc(main, &main->p_pos);
 	main->map.px_player_pos.x = (size_t)main->p_pos.x * 48;
 	main->map.px_player_pos.y = (size_t)main->p_pos.y * 48;

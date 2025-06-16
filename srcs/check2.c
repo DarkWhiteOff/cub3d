@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 14:11:14 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/16 17:27:49 by zz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,12 @@ void	allocate_grids(t_map *map)
 	int	j;
 
 	i = 0;
+	printf("map->w_max : %d\n", map->w_max);
 	map->grid = (char **)malloc(sizeof(char *) * map->h + 1);
 	map->highlight_grid = (char **)malloc(sizeof(char *) * map->h + 1);
 	while (i < map->h)
 	{
-		map->grid[i] = (char *)malloc(sizeof(char) * (map->diff_w[i] + 1));
+		map->grid[i] = (char *)malloc(sizeof(char) * map->w_max + 1);
 		map->highlight_grid[i] = (char *)malloc(sizeof(char)
 				* (map->diff_w[i] + 1));
 		i++;
@@ -131,6 +132,8 @@ void	grid_init(t_main *main)
 	{
 		while (j < main->map.diff_w[i])
 			main->map.grid[i][j++] = line[j];
+		while (j < main->map.w_max)
+			main->map.grid[i][j++] = ' ';
 		main->map.grid[i++][j] = '\0';
 		j = 0;
 		free(line);

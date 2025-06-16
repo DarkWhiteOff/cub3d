@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:44 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 14:10:52 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/16 18:50:33 by zz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	check_walls1half(t_main *main, int param)
 	i = 0;
 	while (i < main->map.diff_w[param])
 	{
-		while (main->map.grid[0][i] == ' ')
+		while (main->map.grid[param][i] == ' ')
 			i++;
-		if (main->map.grid[0][i] != '1' && (main->map.grid[0][i] != ' '
-			&& i < main->map.diff_w[0]))
+		if (main->map.grid[param][i] != '1' && (main->map.grid[param][i] != ' '
+			&& i < main->map.diff_w[param]))
 		{
 			free(main->map.diff_w);
 			free_textures(main);

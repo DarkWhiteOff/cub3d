@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 12:44:52 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/16 17:24:48 by zz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	get_diff_width(t_main *main)
 	while (l)
 	{
 		main->map.diff_w[i++] = strlenmap(l);
+		if (strlenmap(l) > main->map.w_max)
+			main->map.w_max = strlenmap(l);
 		free(l);
 		l = get_next_line(main->fd2);
 	}

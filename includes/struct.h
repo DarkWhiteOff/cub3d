@@ -102,6 +102,7 @@ typedef struct s_map
 	int			px_h;
 	int			px_w;
 	int			*diff_w;
+	int			w_max;
 	int			player_pos;
 	int			fd;
 	char		**grid;
