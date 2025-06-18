@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check1_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:44 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 23:01:06 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/18 15:26:01 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,15 @@ void	check_horizontal(t_main *main)
 			if (main->map.grid[i][j] == ' ')
 			{
 				if (j == 0)
-				{
-					printf("i : %d | j : %d\n", i, j);
 					debut = '1';
-				}
 				else
-				{
-					printf("i : %d | j : %d\n", i, j - 1);
 					debut = main->map.grid[i][j - 1];
-				}
 				while (main->map.grid[i][j] == ' ' && i < main->map.diff_w[i])
 					j++;
-				printf("i : %d | j : %d\n", i, j);
 				if (j == (main->map.diff_w[i] - 1) && main->map.grid[i][j] != '0')
 					end = '1';
 				else
 					end = main->map.grid[i][j];
-				printf("debut : %c | end : %c\n", debut, end);
 				if (debut != '1' || end != '1')
 				{
 					free(main->map.diff_w);

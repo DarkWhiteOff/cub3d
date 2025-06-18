@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 22:50:13 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/18 14:51:09 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	checks_inits(t_main *main)
 	check_horizontal(main);
 	check_vertical(main);
 	check_epc(main, &main->p_pos);
+	full_map(main);
 	main->map.px_player_pos.x = (size_t)main->p_pos.x * 48;
 	main->map.px_player_pos.y = (size_t)main->p_pos.y * 48;
 	main->map.d_player_pos.x = (float)(main->p_pos.x);

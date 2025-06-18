@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 22:39:14 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/18 14:27:31 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,13 @@ int				check_w(int *array);
 void			parse_map(t_main *main);
 void			check_walls1(t_main *main);
 void			check_walls2(t_main *main);
+char			get_debut_h(t_main *main, int i, int j);
+char			get_end_h(t_main *main, int i, int j);
+char			get_debut_v(t_main *main, int i, int j);
+char			get_end_v(t_main *main, int i, int j);
 void			check_horizontal(t_main *main);
 void			check_vertical(t_main *main);
+void			full_map(t_main *main);
 void			is_epc(t_main *main, int i, int j, t_pxy *p_pos);
 int				check_other_char(t_map *map, int y, int x);
 void			check_epc(t_main *main, t_pxy *p_pos);
@@ -58,7 +63,7 @@ float			degree_to_radians(float degree);
 void			sprites_init(t_main *main);
 void			free_sprites(t_main *main);
 void			update_map(t_main *main, int i, int px_h);
-void			free_diff_tex_grids(t_main *main);
+void			free_diff_tex_grids(t_main *main, int check);
 void			get_img_addr(t_main *main);
 void			ray_pos_calc(t_main *main, int ray_angle);
 void			draw_ceiling_floor(t_main *main, int i, int wall_h, int ds);

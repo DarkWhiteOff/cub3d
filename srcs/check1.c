@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:44 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 22:39:54 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/18 14:45:52 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,38 +72,18 @@ void	check_horizontal(t_main *main)
 
 	i = 1;
 	j = 0;
-
 	while (i < main->map.h - 1)
 	{
 		while (j < main->map.diff_w[i])
 		{
 			if (main->map.grid[i][j] == ' ')
 			{
-				if (j == 0)
-				{
-					printf("i : %d | j : %d\n", i, j);
-					debut = '1';
-				}
-				else
-				{
-					printf("i : %d | j : %d\n", i, j - 1);
-					debut = main->map.grid[i][j - 1];
-				}
+				debut = get_debut_h(main, i, j);
 				while (main->map.grid[i][j] == ' ' && i < main->map.diff_w[i])
 					j++;
-				printf("i : %d | j : %d\n", i, j);
-				if (j == (main->map.diff_w[i] - 1) && main->map.grid[i][j] != '0')
-					end = '1';
-				else
-					end = main->map.grid[i][j];
-				printf("debut : %c | end : %c\n", debut, end);
+				end = get_end_h(main, i, j);
 				if (debut != '1' || end != '1')
-				{
-					free(main->map.diff_w);
-					free_textures(main);
-					free_grids(main);
-					exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
-				}
+					free_diff_tex_grids(main, 1);
 			}
 			j++;
 		}
@@ -121,30 +101,18 @@ void	check_vertical(t_main *main)
 
 	i = 0;
 	j = 1;
-
 	while (j < main->map.w_max - 1)
 	{
 		while (i < main->map.h)
 		{
 			if (main->map.grid[i][j] == ' ')
 			{
-				if (i == 0)
-					debut = '1';
-				else
-					debut = main->map.grid[i - 1][j];
+				debut = get_debut_v(main, i, j);
 				while (main->map.grid[i][j] == ' ' && i < main->map.h - 1)
 					i++;
-				if (i == (main->map.h - 1) && main->map.grid[i][j] != '0')
-					end = '1';
-				else
-					end = main->map.grid[i][j];
+				end = get_end_v(main, i, j);
 				if (debut != '1' || end != '1')
-				{
-					free(main->map.diff_w);
-					free_textures(main);
-					free_grids(main);
-					exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
-				}
+					free_diff_tex_grids(main, 1);
 			}
 			i++;
 		}

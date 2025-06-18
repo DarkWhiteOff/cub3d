@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 23:04:31 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/18 14:07:45 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ void	free_sprites(t_main *main)
 	free_textures(main);
 }
 
-void	free_diff_tex_grids(t_main *main)
+void	free_diff_tex_grids(t_main *main, int check)
 {
 	free(main->map.diff_w);
 	free_textures(main);
 	free_grids(main);
+	if (check == 1)
+		exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
 }

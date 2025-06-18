@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 23:04:20 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/18 14:08:32 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	check_epc(t_main *main, t_pxy *p_pos)
 			is_epc(main, i, j, p_pos);
 			if (check_other_char(&main->map, i, j) == 1)
 			{
-				free_diff_tex_grids(main);
+				free_diff_tex_grids(main, 0);
 				exit (ft_printf("Error\nMap contains unrecognized character.\n"));
 			}
 			j++;
@@ -76,7 +76,7 @@ void	check_epc(t_main *main, t_pxy *p_pos)
 	}
 	if (main->map.player_pos != 1)
 	{
-		free_diff_tex_grids(main);
+		free_diff_tex_grids(main, 0);
 		exit (ft_printf("Error\nNo player position.\n"));
 	}
 }

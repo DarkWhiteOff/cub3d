@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 22:59:43 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/18 15:25:37 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	init_minimap(t_main *main)
 			main->map.w * 5, main->map.h * 5);
 	if (!main->img)
 	{
-		free_diff_tex_grids(main);
+		free_diff_tex_grids(main, 0);
 		mlx_destroy_image(main->mlx_p, main->img);
 		mlx_destroy_window(main->mlx_p, main->mlx_win);
 		mlx_destroy_display(main->mlx_p);
@@ -82,7 +82,7 @@ void	render_init(t_main *main)
 	main->mlx_p = mlx_init();
 	if (!main->mlx_p)
 	{
-		free_diff_tex_grids(main);
+		free_diff_tex_grids(main, 0);
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
@@ -90,7 +90,7 @@ void	render_init(t_main *main)
 			main->map.px_h, "cub3d");
 	if (!main->mlx_win)
 	{
-		free_diff_tex_grids(main);
+		free_diff_tex_grids(main, 0);
 		mlx_destroy_display(main->mlx_p);
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
@@ -98,7 +98,7 @@ void	render_init(t_main *main)
 	main->img = mlx_new_image(main->mlx_p, main->map.px_w, main->map.px_h);
 	if (!main->img)
 	{
-		free_diff_tex_grids(main);
+		free_diff_tex_grids(main, 0);
 		mlx_destroy_window(main->mlx_p, main->mlx_win);
 		mlx_destroy_display(main->mlx_p);
 		free(main->mlx_p);
