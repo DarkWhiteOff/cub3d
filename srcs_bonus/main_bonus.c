@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/18 15:25:37 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/19 11:41:18 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,10 @@ void	vars_init(t_main *main, char *map_path)
 	main->mlx_win = NULL;
 	main->img = NULL;
 	main->img_minimap = NULL;
-	main->img_data.addr = NULL;
-	main->img_data.b = 0;
-	main->img_data.ls = 0;
-	main->img_data.end = 0;
 	main->p_pos.x = -1;
 	main->p_pos.y = -1;
 	map_init(&main->map, map_path);
-	ray_init(&main->ray);
+	ray_init(&main->ray, &main->map);
 	tex_init(&main->tex);
 	main->ray.diff_ray_angle = 2 * main->ray.hfov / main->map.px_w;
 	main->fd = -1;

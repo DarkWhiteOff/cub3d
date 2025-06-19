@@ -130,17 +130,17 @@ typedef struct s_main
 	void		*mlx_win;
 	void		*img;
 	t_img_data	img_data;
+	t_pxy		p_pos;
 	t_map		map;
 	t_ray		ray;
 	t_tex		tex;
-	t_pxy		p_pos;
-	t_sprite	spr_wall;
-	t_sprite	spr_floor;
-	t_sprite	spr_p;
 	int			fd;
 	int			fd1;
 	int			fd2;
 	int			fd3;
+	t_sprite	spr_wall;
+	t_sprite	spr_floor;
+	t_sprite	spr_p;
 }	t_main;
 
 #endif

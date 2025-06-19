@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:58:07 by tzizi             #+#    #+#             */
-/*   Updated: 2025/06/18 14:46:43 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/19 11:41:39 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			render_init(t_main *main);
 void			checks_inits(t_main *main);
 void			vars_init(t_main *main, char *map_path);
 void			tex_init(t_tex *tex);
-void			ray_init(t_ray *ray);
+void			ray_init(t_ray *ray, t_map *map);
 void			map_init(t_map *map, char *map_path);
 void			get_infos(t_main *main);
 void			get_diff_width(t_main *main);

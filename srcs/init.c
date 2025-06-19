@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 23:04:34 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/19 11:29:57 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	map_init(t_map *map, char *map_path)
 	map->d_player_pos.y = 0.0;
 }
 
-void	ray_init(t_ray *ray)
+void	ray_init(t_ray *ray, t_map *map)
 {
 	ray->fov = 60.0;
 	ray->hfov = 30.0;
 	ray->ray_angle = 0.0;
-	ray->diff_ray_angle = 0.0;
+	ray->diff_ray_angle = 2 * ray->hfov / map->px_w;
 	ray->precision = 50.0;
 	ray->limit = 11.0;
 	ray->cos = 0.0;

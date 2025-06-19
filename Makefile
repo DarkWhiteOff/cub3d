@@ -8,7 +8,7 @@ LIBFT_LIB = $(addprefix $(LIBFT_PATH), $(LIBFT_NAME))
 MLX_PATH = ./mlx/
 MLX_LIB = $(addprefix $(MLX_PATH), $(MLX_NAME))
 
-SRC = srcs/render1.c srcs/main.c srcs/check.c srcs/check1.c srcs/check2.c srcs/player_pos.c srcs/render.c srcs/utils.c srcs/init.c srcs/color.c srcs/free.c srcs/utils1.c srcs/key.c
+SRC = srcs/render1.c srcs/main.c srcs/check.c srcs/check1.c srcs/check2.c srcs/check3.c srcs/player_pos.c srcs/render.c srcs/utils.c srcs/init.c srcs/color.c srcs/free.c srcs/utils1.c srcs/key.c
 
 SRC_BONUS = $(addprefix srcs_bonus/, \
 	check_bonus.c check1_bonus.c check2_bonus.c \

@@ -134,13 +134,10 @@ typedef struct s_main
 	t_img_data	img_data;
 	void		*img_minimap;
 	t_img_data	minimap_data;
+	t_pxy		p_pos;
 	t_map		map;
 	t_ray		ray;
 	t_tex		tex;
-	t_pxy		p_pos;
-	t_sprite	spr_wall;
-	t_sprite	spr_floor;
-	t_sprite	spr_p;
 	int			fd;
 	int			fd1;
 	int			fd2;
@@ -151,6 +148,9 @@ typedef struct s_main
 	int			y;
 	int			m_left;
 	int			m_right;
+	t_sprite	spr_wall;
+	t_sprite	spr_floor;
+	t_sprite	spr_p;
 }	t_main;
 
 #endif
