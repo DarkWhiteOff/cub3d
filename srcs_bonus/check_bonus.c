@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zz <zz@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/16 23:00:20 by zz               ###   ########.fr       */
+/*   Updated: 2025/06/21 14:18:41 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	get_infos(t_main *main)
 		get_params(main, line);
 		free(line);
 		if (main->tex.no && main->tex.so && main->tex.we && main->tex.ea
-			&& main->tex.d && main->tex.color_c != -1
-			&& main->tex.color_f != -1)
+			&& main->tex.color_c != -1 && main->tex.color_f != -1
+			&& main->tex.d)
 			break ;
 		line = get_next_line(main->fd);
 	}
 	if (!main->tex.no || !main->tex.so || !main->tex.we || !main->tex.ea
-		|| !main->tex.d || main->tex.color_c == -1 || main->tex.color_f == -1)
+		|| main->tex.color_c == -1 || main->tex.color_f == -1 || !main->tex.d)
 	{
 		free_textures(main);
 		exit(ft_printf("Error\nTextures missing.\n"));

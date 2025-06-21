@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:13 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/03 12:53:34 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/20 17:51:57 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 {
 	float	ray_cos;
 	float	ray_sin;
-	t_img_i	tex;
+	t_tex_data	tex;
 
 	ray_cos = main->ray.cos;
 	if (ray_cos < 0)

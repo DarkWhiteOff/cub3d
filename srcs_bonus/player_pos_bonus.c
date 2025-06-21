@@ -23,6 +23,7 @@ int	close_window(t_main *main)
 	mlx_destroy_image(main->mlx_p, main->tex.tex_east.img);
 	if (main->tex.tex_door.img)
 		mlx_destroy_image(main->mlx_p, main->tex.tex_door.img);
+	mlx_destroy_image(main->mlx_p, main->img_minimap);
 	mlx_destroy_image(main->mlx_p, main->img);
 	mlx_destroy_window(main->mlx_p, main->mlx_win);
 	mlx_destroy_display(main->mlx_p);
@@ -50,6 +51,8 @@ void	move(float angle, t_main *main)
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5)]
 		[(int)(x + 0.5 + (3 * ray_cos))]))
 		main->map.d_player_pos.x += ray_cos;
+	main->p_pos.x = (int)main->map.d_player_pos.x;
+	main->p_pos.y = (int)main->map.d_player_pos.y;
 }
 
 void	rotation_left(t_main *main)

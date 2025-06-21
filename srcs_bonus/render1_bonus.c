@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render1_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:13 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/04 13:21:57 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/20 17:52:03 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-void	find_tex(t_main *main, t_img_i *tex, float ray_sin, float ray_cos)
+void	find_tex(t_main *main, t_tex_data *tex, float ray_sin, float ray_cos)
 {
 	if (main->map.grid[(int)(main->ray.d_ray_pos.y - ray_sin)]
 		[(int)main->ray.d_ray_pos.x] != '1')
@@ -33,7 +33,7 @@ unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 	float	ray_cos;
 	float	ray_sin;
 	char	*dst;
-	t_img_i	tex;
+	t_tex_data	tex;
 
 	ray_cos = main->ray.cos;
 	if (ray_cos < 0)

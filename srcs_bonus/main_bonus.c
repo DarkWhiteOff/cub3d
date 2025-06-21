@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/19 11:41:18 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/21 13:28:23 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	vars_init(t_main *main, char *map_path)
 	map_init(&main->map, map_path);
 	ray_init(&main->ray, &main->map);
 	tex_init(&main->tex);
-	main->ray.diff_ray_angle = 2 * main->ray.hfov / main->map.px_w;
 	main->fd = -1;
 	main->fd1 = -1;
 	main->fd2 = -1;
@@ -46,6 +45,7 @@ void	checks_inits(t_main *main)
 	check_horizontal(main);
 	check_vertical(main);
 	check_epc(main, &main->p_pos);
+	full_map(main);
 	main->map.px_player_pos.x = (size_t)main->p_pos.x * 48;
 	main->map.px_player_pos.y = (size_t)main->p_pos.y * 48;
 	main->map.d_player_pos.x = (float)(main->p_pos.x);
@@ -56,7 +56,7 @@ void	checks_inits(t_main *main)
 void	init_minimap(t_main *main)
 {
 	main->img_minimap = mlx_new_image(main->mlx_p,
-			main->map.w * 5, main->map.h * 5);
+			main->map.px_w / 5, main->map.px_h / 5);
 	if (!main->img)
 	{
 		free_diff_tex_grids(main, 0);

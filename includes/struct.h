@@ -22,11 +22,11 @@
 
 # define PI 3.1415926535
 
-# define WHITE 0xFFFFFF
-# define RED   0x00FF0000
-# define GEEN 0x0000FF00
-# define BLUE  0x000000FF
-# define BLACK 000000
+# define WHITE	0xFFFFFF
+# define RED	0x00FF0000
+# define GEEN	0x0000FF00
+# define BLUE	0x000000FF
+# define BLACK	000000
 
 # define HEXA "0123456789ABCDEF"
 
@@ -55,7 +55,7 @@ typedef struct s_sprite
 	void	*img;
 }	t_sprite;
 
-typedef struct s_img_i
+typedef struct s_tex_data
 {
 	void	*img;
 	char	*addr;
@@ -64,7 +64,7 @@ typedef struct s_img_i
 	int		end;
 	int		w;
 	int		h;
-}	t_img_i;
+}	t_tex_data;
 
 typedef struct s_tex
 {
@@ -75,10 +75,10 @@ typedef struct s_tex
 	int		color_f;
 	int		color_c;
 	int		map_start;
-	t_img_i	tex_north;
-	t_img_i	tex_south;
-	t_img_i	tex_west;
-	t_img_i	tex_east;
+	t_tex_data	tex_north;
+	t_tex_data	tex_south;
+	t_tex_data	tex_west;
+	t_tex_data	tex_east;
 }	t_tex;
 
 typedef struct s_ray

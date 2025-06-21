@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/19 11:29:57 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/20 14:46:59 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,6 @@ void	tex_init(t_tex *tex)
 	tex->color_f = -1;
 	tex->color_c = -1;
 	tex->map_start = 0;
-	tex->tex_north.addr = NULL;
-	tex->tex_north.b = 0;
-	tex->tex_north.ls = 0;
-	tex->tex_north.end = 0;
 }
 
 void	textures_init(t_main *main)
