@@ -1,7 +1,7 @@
-NO ./textures/north.xpm
-SO ./textures/south.xpm
-WE ./textures/west.xpm
-EA ./textures/east.xpm
+NO tex/eagle.xpm
+SO tex/wood.xpm
+WE tex/redbrick.xpm
+EA tex/mossy.xpm
 
 F 48,48,48
 C 206,206,206
