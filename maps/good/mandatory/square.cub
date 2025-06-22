@@ -1,17 +1,10 @@
-   WE                            ./textures/east.xpm
-NO      ./textures/north.xpm
+NO tex/eagle.xpm
+SO tex/wood.xpm
+WE tex/redbrick.xpm
+EA tex/mossy.xpm
 
-
-
-SO ./textures/south.xpm
-
-F   69, 222, 199
-
-EA ./textures/east.xpm
-
-
-
-C 235, 198, 52
+F 255,0,6
+C 0,0,255
 
 111111111111111111111111
 100000000000000000000001

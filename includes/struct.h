@@ -138,6 +138,7 @@ typedef struct s_main
 	int			fd1;
 	int			fd2;
 	int			fd3;
+	int			empty_line;
 	t_sprite	spr_wall;
 	t_sprite	spr_floor;
 	t_sprite	spr_p;

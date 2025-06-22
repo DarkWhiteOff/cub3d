@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/04/08 18:39:16 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/22 19:21:01 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,27 @@ void	check_fd_error(t_main *main, int fd)
 	}
 }
 
-void	empty_line_check(t_main *main, char *line, int fd)
+void	empty_line_check(t_main *main, char *line, int fd, int check)
 {
-	if (line == NULL)
+	if (check == 0)
 	{
-		free_textures(main);
-		exit (ft_printf("Error\nYou entered an empty map !\n"));
+		if (line == NULL)
+		{
+			free_textures(main);
+			close(fd);
+			exit (ft_printf("Error\nYou entered an empty map !\n"));
+		}
+		if (line[0] == '\n' || line[0] == '\0')
+			main->empty_line = 1;
 	}
-	if (line[0] == '\n' || line[0] == '\0')
+	if (check == 1)
 	{
-		free_textures(main);
-		free(line);
-		close(fd);
-		exit (ft_printf("Error\nYour map has one or more empty lines.\n"));
+		if (main->empty_line == 1)
+		{
+			free_textures(main);
+			exit (ft_printf("Error\nYour map has one or more empty lines.\n"));
+		}
 	}
+	
 }
+

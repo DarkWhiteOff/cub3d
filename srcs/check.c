@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/20 18:02:07 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/22 19:21:32 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,12 @@ void	parse_map(t_main *main)
 	while (l)
 	{
 		main->map.h++;
-		empty_line_check(main, l, main->fd1);
+		empty_line_check(main, l, main->fd1, 0);
 		free(l);
 		l = get_next_line(main->fd1);
 	}
 	close(main->fd1);
+	empty_line_check(main, l, main->fd1, 1);
 	get_diff_width(main);
 	check_w_h(main);
 }

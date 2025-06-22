@@ -1,9 +1,5 @@
-NO tests/textures/wall.xpm
-SO tests/textures/bricks.xpm
-WE tests/textures/gold.xpm
-EA tests/textures/wood.xpm
-F 220,111,119
-C 225,111
+F 255,0,6
+C 0,0,255
 
  11111111111111111111111111111111111111
 1000000000000000000000000000000000000001

@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/21 13:30:01 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/22 19:14:33 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	vars_init(t_main *main, char *map_path)
 	main->fd1 = -1;
 	main->fd2 = -1;
 	main->fd3 = -1;
+	main->empty_line = 0;
 }
 
 void	checks_inits(t_main *main)

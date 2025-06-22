@@ -1,21 +1,21 @@
 NO tex/eagle.xpm
 SO tex/wood.xpm
 WE tex/redbrick.xpm
-EA tex/
+EA tex/mossy.xpm
 
-F 20,20,20
-C 200,200,200
+F        255,0,6
+C   0,0,255
 
 11111
 10001
-10S01
+10S01                
 10001
 10001
 10001
-11001
+11001               
 10001
 10001
 10001
 10001
 10001
-11111
+11111           

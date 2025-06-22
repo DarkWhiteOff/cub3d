@@ -1,9 +1,10 @@
-NO tests/textures/wall.xpm
-SO tests/textures/bricks.xpm
-WE tests/textures/gold.xpm
-EA tests/textures/wood.xpm
+NO tex/eagle.xpm
+SO tex/wood.xpm
+WE tex/redbrick.xpm
+EA tex/mossy.xpm
+
 F 220,111,119
-C 225,111.255
+C 225,111
 
  11111111111111111111111111111111111111
 1000000000000000000000000000000000000001
