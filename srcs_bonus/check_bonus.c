@@ -6,27 +6,61 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/21 14:18:41 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/23 00:40:06 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
+void	check_double(t_main *main, char *line, int check)
+{
+	if (check == 0)
+	{
+		if (ft_strncmp(line, "NO ", 3) == 0 && main->tex.no)
+			main->double_tex = 1;
+		if (ft_strncmp(line, "SO ", 3) == 0 && main->tex.so)
+			main->double_tex = 1;
+		if (ft_strncmp(line, "WE ", 3) == 0 && main->tex.we)
+			main->double_tex = 1;
+		if (ft_strncmp(line, "EA ", 3) == 0 && main->tex.ea)
+			main->double_tex = 1;
+		if (ft_strncmp(line, "DO ", 2) == 0 && main->tex.d)
+			main->double_tex = 1;
+		if (!ft_strncmp(line, "C ", 2) && main->tex.color_c != -1)
+			main->double_tex = 1;
+		if (!ft_strncmp(line, "F ", 2) && main->tex.color_f != -1)
+			main->double_tex = 1;
+		printf("main->double_tex : %d\n", main->double_tex);
+	}
+	if (check == 1 && main->double_tex == 1)
+	{
+		close(main->fd);
+		free_textures(main);
+		exit(printf("Error\nDouble texture.\n"));
+	}
+}
+
 void	get_params(t_main *main, char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		main->tex.no = ft_substr(line, 3, ft_strlen(line) - 4);
-	if (ft_strncmp(line, "SO ", 3) == 0)
-		main->tex.so = ft_substr(line, 3, ft_strlen(line) - 4);
-	if (ft_strncmp(line, "WE ", 3) == 0)
-		main->tex.we = ft_substr(line, 3, ft_strlen(line) - 4);
-	if (ft_strncmp(line, "EA ", 3) == 0)
-		main->tex.ea = ft_substr(line, 3, ft_strlen(line) - 4);
-	if (ft_strncmp(line, "D ", 2) == 0)
-		main->tex.d = ft_substr(line, 2, ft_strlen(line) - 3);
-	if (!ft_strncmp(line, "C", 1) && main->tex.color_c == -1)
+	int	i;
+
+	i = 2;
+	check_double(main, line, 0);
+	while (line[i] == ' ')
+		i++;
+	if (ft_strncmp(line, "NO ", 3) == 0 && main->double_tex == 0)
+		main->tex.no = ft_substr(line, i, ft_strlen(line) - (i + 1));
+	if (ft_strncmp(line, "SO ", 3) == 0 && main->double_tex == 0)
+		main->tex.so = ft_substr(line, i, ft_strlen(line) - (i + 1));
+	if (ft_strncmp(line, "WE ", 3) == 0 && main->double_tex == 0)
+		main->tex.we = ft_substr(line, i, ft_strlen(line) - (i + 1));
+	if (ft_strncmp(line, "EA ", 3) == 0 && main->double_tex == 0)
+		main->tex.ea = ft_substr(line, i, ft_strlen(line) - (i + 1));
+	if (ft_strncmp(line, "DO ", 2) == 0 && main->double_tex == 0)
+		main->tex.d = ft_substr(line, i, ft_strlen(line) - (i + 1));
+	if (!ft_strncmp(line, "C ", 2) && main->tex.color_c == -1)
 		main->tex.color_c = rgb_to_hex(line);
-	if (!ft_strncmp(line, "F", 1) && main->tex.color_f == -1)
+	if (!ft_strncmp(line, "F ", 2) && main->tex.color_f == -1)
 		main->tex.color_f = rgb_to_hex(line);
 }
 
@@ -46,6 +80,7 @@ void	get_map_start(t_main *main)
 		free(line);
 		line = get_next_line(main->fd);
 	}
+	close(main->fd);
 }
 
 void	get_infos(t_main *main)
@@ -67,13 +102,15 @@ void	get_infos(t_main *main)
 			break ;
 		line = get_next_line(main->fd);
 	}
+	get_map_start(main);
+	check_double(main, line, 1);
 	if (!main->tex.no || !main->tex.so || !main->tex.we || !main->tex.ea
 		|| main->tex.color_c == -1 || main->tex.color_f == -1 || !main->tex.d)
 	{
 		free_textures(main);
+		close(main->fd);
 		exit(ft_printf("Error\nTextures missing.\n"));
 	}
-	get_map_start(main);
 }
 
 void	get_diff_width(t_main *main)
@@ -122,11 +159,12 @@ void	parse_map(t_main *main)
 	while (l)
 	{
 		main->map.h++;
-		empty_line_check(main, l, main->fd1);
+		empty_line_check(main, l, main->fd1, 0);
 		free(l);
 		l = get_next_line(main->fd1);
 	}
 	close(main->fd1);
+	empty_line_check(main, l, main->fd1, 1);
 	get_diff_width(main);
 	check_w_h(main);
 }

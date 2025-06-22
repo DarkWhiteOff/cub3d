@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:58:07 by tzizi             #+#    #+#             */
-/*   Updated: 2025/06/19 11:41:39 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/22 21:35:11 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				game_refresh(t_main *main);
 void			raycasting(t_main *main);
 void			draw_texture(t_main *main, int ray_count, int wall_height);
 void			my_mlx_pixel_put(t_img_data *img_data, int x, int y, int color);
-void			empty_line_check(t_main *main, char *line, int fd);
+void			empty_line_check(t_main *main, char *line, int fd, int ckeck);
 void			check_fd_error(t_main *main, int fd);
 int				strlenmap(char *line);
 int				check_map_name(char *map_name);

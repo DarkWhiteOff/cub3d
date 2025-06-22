@@ -2,7 +2,7 @@ NO tex/tex_matrix.xpm
 SO tex/tex_matrix.xpm
 WE tex/tex_matrix.xpm
 EA tex/tex_matrix.xpm
-D sprites/door.xpm
+DO sprites/door.xpm
 
 F 255,0,6
 C 255,70,6

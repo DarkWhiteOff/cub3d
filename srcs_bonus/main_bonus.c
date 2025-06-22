@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/21 13:28:23 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/22 23:11:02 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	vars_init(t_main *main, char *map_path)
 	main->fd1 = -1;
 	main->fd2 = -1;
 	main->fd3 = -1;
+	main->empty_line = 0;
+	main->double_tex = 0;
 	main->prev_x = 0;
 	main->prev_y = 0;
 	main->x = 0;
