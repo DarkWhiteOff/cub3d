@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/02 16:38:38 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/23 01:18:25 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,34 @@ void	check_w_h(t_main *main)
 		free(main->map.diff_w);
 		free_textures(main);
 		exit (ft_printf("Error\nMap not rectangular / nothing in it.\n"));
+	}
+}
+
+void	check_double(t_main *main, char *line, int check)
+{
+	if (check == 0)
+	{
+		if (ft_strncmp(line, "NO ", 3) == 0 && main->tex.no)
+			main->double_tex = 1;
+		if (ft_strncmp(line, "SO ", 3) == 0 && main->tex.so)
+			main->double_tex = 1;
+		if (ft_strncmp(line, "WE ", 3) == 0 && main->tex.we)
+			main->double_tex = 1;
+		if (ft_strncmp(line, "EA ", 3) == 0 && main->tex.ea)
+			main->double_tex = 1;
+		if (!ft_strncmp(line, "C ", 2) && main->tex.color_c != -1)
+			main->double_tex = 1;
+		if (!ft_strncmp(line, "F ", 2) && main->tex.color_f != -1)
+			main->double_tex = 1;
+		printf("main->double_tex : %d\n", main->double_tex);
+	}
+	if (check == 1)
+	{
+		if (main->double_tex == 1)
+		{
+			close(main->fd);
+			free_textures(main);
+			exit(printf("Error\nDouble texture.\n"));
+		}
 	}
 }

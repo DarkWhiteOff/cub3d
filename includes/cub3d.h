@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/22 19:22:26 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/23 01:19:35 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			draw_ceiling_floor(t_main *main, int i, int wall_h, int ds);
 int				wall_height_calc(t_main *main, int ray_angle);
 void			check_w_h(t_main *main);
 unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y);
+void			check_double(t_main *main, char *line, int check);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE

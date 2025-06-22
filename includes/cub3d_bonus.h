@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:58:07 by tzizi             #+#    #+#             */
-/*   Updated: 2025/06/22 21:35:11 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/23 01:21:21 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void			ray_pos_calc(t_main *main, int ray_angle);
 int				wall_height_calc(t_main *main, int ray_angle);
 void			check_w_h(t_main *main);
 unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y);
+void			check_double(t_main *main, char *line, int check);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE
