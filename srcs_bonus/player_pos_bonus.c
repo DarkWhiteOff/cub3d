@@ -21,8 +21,7 @@ int	close_window(t_main *main)
 	mlx_destroy_image(main->mlx_p, main->tex.tex_south.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_west.img);
 	mlx_destroy_image(main->mlx_p, main->tex.tex_east.img);
-	if (main->tex.tex_door.img)
-		mlx_destroy_image(main->mlx_p, main->tex.tex_door.img);
+	mlx_destroy_image(main->mlx_p, main->tex.tex_door.img);
 	mlx_destroy_image(main->mlx_p, main->img_minimap);
 	mlx_destroy_image(main->mlx_p, main->img);
 	mlx_destroy_window(main->mlx_p, main->mlx_win);
@@ -43,8 +42,8 @@ void	move(float angle, t_main *main)
 
 	x = main->map.d_player_pos.x;
 	y = main->map.d_player_pos.y;
-	ray_cos = cos(degree_to_radians(angle)) * 0.02;
-	ray_sin = sin(degree_to_radians(angle)) * 0.02;
+	ray_cos = cos(degree_to_radians(angle)) * 0.1;
+	ray_sin = sin(degree_to_radians(angle)) * 0.1;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))]
 		[(int)(x + 0.5)]))
 		main->map.d_player_pos.y += ray_sin;
@@ -71,7 +70,7 @@ void	rotation_left(t_main *main)
 			if (main->ray.ray_angle <= 0)
 				main->ray.ray_angle = 360;
 			else
-				main->ray.ray_angle -= 3;
+				main->ray.ray_angle -= 6;
 		}
 	}
 }
@@ -92,7 +91,7 @@ void	rotation_right(t_main *main)
 			if (main->ray.ray_angle >= 360)
 				main->ray.ray_angle = 0;
 			else
-				main->ray.ray_angle += 3;
+				main->ray.ray_angle += 6;
 		}
 	}
 }

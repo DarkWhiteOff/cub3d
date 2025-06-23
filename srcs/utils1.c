@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/23 01:18:25 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/23 09:51:25 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	check_double(t_main *main, char *line, int check)
 			main->double_tex = 1;
 		if (!ft_strncmp(line, "F ", 2) && main->tex.color_f != -1)
 			main->double_tex = 1;
-		printf("main->double_tex : %d\n", main->double_tex);
 	}
 	if (check == 1)
 	{

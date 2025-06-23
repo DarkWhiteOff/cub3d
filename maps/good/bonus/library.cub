@@ -1,10 +1,10 @@
 F 139,99,58
 C 171,154,137
 
-NO tex/eagle.xpm
-SO tex/wood.xpm
-WE tex/redbrick.xpm
-EA tex/mossy.xpm
+NO tex/kanye1.xpm
+SO tex/kanye2.xpm
+WE tex/kanye1.xpm
+EA tex/kanye2.xpm
 DO sprites/door.xpm
 
 1111111111111111111

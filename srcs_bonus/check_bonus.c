@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/23 01:20:59 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/23 10:32:06 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	get_map_start(t_main *main)
 		line = get_next_line(main->fd);
 	}
 	close(main->fd);
+	check_double(main, line, 1);
 }
 
 void	get_infos(t_main *main)
@@ -75,7 +76,6 @@ void	get_infos(t_main *main)
 		line = get_next_line(main->fd);
 	}
 	get_map_start(main);
-	check_double(main, line, 1);
 	if (!main->tex.no || !main->tex.so || !main->tex.we || !main->tex.ea
 		|| main->tex.color_c == -1 || main->tex.color_f == -1 || !main->tex.d)
 	{

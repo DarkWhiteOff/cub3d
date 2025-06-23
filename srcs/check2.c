@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/21 13:11:50 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/23 10:42:24 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,17 @@ void	check_epc(t_main *main, t_pxy *p_pos)
 	}
 }
 
-void	allocate_grids(t_map *map)
+void	allocate_grids(t_main *main, t_map *map, char **line)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	while (main->tex.map_start--)
+	{
+		free((*line));
+		(*line) = get_next_line(main->fd3);
+	}
 	map->grid = (char **)malloc(sizeof(char *) * map->h + 1);
 	while (i < map->h)
 	{
@@ -106,12 +111,7 @@ void	grid_init(t_main *main)
 	main->fd3 = open(main->map.path, O_RDONLY);
 	check_fd_error(main, main->fd3);
 	line = get_next_line(main->fd3);
-	while (main->tex.map_start--)
-	{
-		free(line);
-		line = get_next_line(main->fd3);
-	}
-	allocate_grids(&main->map);
+	allocate_grids(main, &main->map, &line);
 	while (i < main->map.h)
 	{
 		while (j < main->map.diff_w[i])

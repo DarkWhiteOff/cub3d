@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/22 23:11:11 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/23 10:03:04 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,12 @@ void	checks_inits(t_main *main)
 	main->map.grid[main->p_pos.y][main->p_pos.x] = '0';
 }
 
-void	ffree(t_main *main)
-{
-	free(main->map.diff_w);
-	free_textures(main);
-	free_grids(main);
-}
-
 void	render_init(t_main *main)
 {
 	main->mlx_p = mlx_init();
 	if (!main->mlx_p)
 	{
-		ffree(main);
+		free_diff_tex_grids(main, 0);
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
@@ -68,7 +61,7 @@ void	render_init(t_main *main)
 			main->map.px_w, main->map.px_h, "cub3d");
 	if (!main->mlx_win)
 	{
-		ffree(main);
+		free_diff_tex_grids(main, 0);
 		mlx_destroy_display(main->mlx_p);
 		free(main->mlx_p);
 		exit (ft_printf("Error\nMlx failed.\n"));
@@ -76,7 +69,7 @@ void	render_init(t_main *main)
 	main->img = mlx_new_image(main->mlx_p, main->map.px_w, main->map.px_h);
 	if (!main->img)
 	{
-		ffree(main);
+		free_diff_tex_grids(main, 0);
 		mlx_destroy_window(main->mlx_p, main->mlx_win);
 		mlx_destroy_display(main->mlx_p);
 		free(main->mlx_p);

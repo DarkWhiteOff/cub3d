@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/23 01:19:35 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/23 10:43:06 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			full_map(t_main *main);
 void			is_epc(t_main *main, int i, int j, t_pxy *p_pos);
 int				check_other_char(t_map *map, int y, int x);
 void			check_epc(t_main *main, t_pxy *p_pos);
-void			allocate_grids(t_map *map);
+void			allocate_grids(t_main *main, t_map *map, char **line);
 void			grid_init(t_main *main);
 int				get_index_hex(char c);
 int				get_rgb(char *line, int rgb);

@@ -6,7 +6,7 @@
 /*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/22 22:52:07 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/23 16:19:59 by zeezou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	map_init(t_map *map, char *map_path)
 	map->h = 0;
 	map->w = 0;
 	map->px_h = 480;
-	map->px_w = 640;
+	map->px_w = 854;
 	map->diff_w = NULL;
 	map->w_max = 0;
 	map->player_pos = 0;
@@ -72,11 +72,8 @@ void	textures_init(t_main *main)
 			main->tex.we, &main->tex.tex_west.w, &main->tex.tex_west.h);
 	main->tex.tex_east.img = mlx_xpm_file_to_image(main->mlx_p,
 			main->tex.ea, &main->tex.tex_east.w, &main->tex.tex_east.h);
-	if (main->tex.d)
-	{
-		main->tex.tex_door.img = mlx_xpm_file_to_image(main->mlx_p,
-				main->tex.d, &main->tex.tex_door.w, &main->tex.tex_door.h);
-	}
+	main->tex.tex_door.img = mlx_xpm_file_to_image(main->mlx_p,
+			main->tex.d, &main->tex.tex_door.w, &main->tex.tex_door.h);
 }
 
 void	sprites_init(t_main *main)
@@ -91,7 +88,7 @@ void	sprites_init(t_main *main)
 	if (!main->spr_p.img || !main->spr_wall.img
 		|| !main->spr_floor.img || !main->tex.tex_north.img
 		|| !main->tex.tex_south.img || !main->tex.tex_west.img
-		|| !main->tex.tex_east.img)
+		|| !main->tex.tex_east.img || !main->tex.tex_door.img)
 	{
 		free_sprites(main);
 		exit(ft_printf("Error\nSprites/Textures init FAILED"));
