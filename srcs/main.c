@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 15:19:47 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 16:15:21 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	vars_init(t_main *main, char *map_path)
 	main->fd3 = -1;
 	main->empty_line = 0;
 	main->double_tex = 0;
+	main->malloc_fail = 0;
+	main->malloc_fail_i = -1;
 }
 
 void	checks_inits(t_main *main)

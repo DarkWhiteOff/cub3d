@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 15:50:41 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/24 16:31:28 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "struct.h"
 
 // CUB3D
-void			ft_free(char **array, int i, t_main *main);
+void			ft_free(int i, t_main *main);
 void			render_init(t_main *main);
 void			checks_inits(t_main *main);
 void			vars_init(t_main *main, char *map_path);
@@ -40,7 +40,7 @@ void			full_map(t_main *main);
 void			is_epc(t_main *main, int i, int j, t_pxy *p_pos);
 int				check_other_char(t_map *map, int y, int x);
 void			check_epc(t_main *main, t_pxy *p_pos);
-int				allocate_grids(t_main *main, t_map *map, char **line);
+void			allocate_grids(t_main *main, t_map *map, char **line);
 void			grid_init(t_main *main);
 int				get_index_hex(char c);
 int				get_rgb(char *line, int rgb);

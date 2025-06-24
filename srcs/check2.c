@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 14:31:32 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 16:37:04 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,19 @@ void	allocate_grids(t_main *main, t_map *map, char **line)
 		(*line) = get_next_line(main->fd3);
 	}
 	map->grid = (char **)malloc(sizeof(char *) * map->h + 1);
-	while (i < map->h)
+	if (!map->grid)
+		main->malloc_fail = 1;
+	while (i < map->h && map->grid)
 	{
 		map->grid[i] = (char *)malloc(sizeof(char) * (map->w_max + 1));
+		if (i == 2)
+			map->grid[i] = NULL;
+		if (!map->grid[i])
+		{
+			main->malloc_fail = 1;
+			main->malloc_fail_i = i;
+			break ;
+		}
 		i++;
 	}
 }
@@ -114,14 +124,33 @@ void	grid_init(t_main *main)
 	allocate_grids(main, &main->map, &line);
 	while (i < main->map.h)
 	{
-		while (j < main->map.diff_w[i])
-			main->map.grid[i][j++] = line[j];
-		while (j < main->map.w_max)
-			main->map.grid[i][j++] = ' ';
-		main->map.grid[i++][j] = '\0';
-		j = 0;
+		if (main->malloc_fail != 1)
+		{
+			while (j < main->map.diff_w[i])
+				main->map.grid[i][j++] = line[j];
+			while (j < main->map.w_max)
+				main->map.grid[i][j++] = ' ';
+			main->map.grid[i++][j] = '\0';
+			j = 0;
+		}
+		else
+			i++;
 		free(line);
 		line = get_next_line(main->fd3);
 	}
 	close(main->fd3);
+	if (main->malloc_fail == 1)
+	{
+		free(main->map.diff_w);
+		free_textures(main);
+		if (main->malloc_fail_i >= 0)
+			ft_free(main->malloc_fail_i, main);
+	}
+	// i = 0;
+	// while (i < main->map.h)
+	// {
+	// 	printf("main->map.grid[i] : %s\n", main->map.grid[i]);
+	// 	i++;
+	// }
+	exit(0);
 }

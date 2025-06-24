@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 15:46:38 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/24 16:37:56 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ void	free_diff_tex_grids(t_main *main, int check)
 		exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
 }
 
-void	ft_free(char **array, int i, t_main *main)
+void	ft_free(int i, t_main *main)
 {
 	while (i >= 0)
 	{
-		free(array[i]);
+		free(main->map.grid[i]);
 		i--;
 	}
-	free(array);
+	free(main->map.grid);
 	return ;
 }
