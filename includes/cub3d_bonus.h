@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:58:07 by tzizi             #+#    #+#             */
-/*   Updated: 2025/06/23 10:40:27 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:05:12 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int				wall_height_calc(t_main *main, int ray_angle);
 void			check_w_h(t_main *main);
 unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y);
 void			check_double(t_main *main, char *line, int check);
+int				check_line_rgb(char *line);
+int				check_line_rgb2(char *line, int *i, int *nb);
 
 // GET_NEXT_LINE - LIBFT
 # ifndef BUFFER_SIZE
@@ -99,6 +101,7 @@ char			*ft_fill_hexarray(unsigned int n, char *string, char *array);
 int				ft_get_size_hexarray(unsigned int n);
 int				ft_itoa2(int n);
 char			*ft_itoa(int n);
+int				ft_atoi(const char *nptr);
 char			*ft_min(char *str);
 int				ft_count(int n);
 int				ft_unsigned_itoa2(unsigned int n);
