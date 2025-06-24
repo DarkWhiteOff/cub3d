@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 14:32:57 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 16:51:05 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,21 @@ int	strlenmap(char *line)
 	return (i);
 }
 
-void	check_fd_error(t_main *main, int fd)
+void	check_fd_error(t_main *main, int fd, int check)
 {
 	if (fd < 0 || read(fd, 0, 0) < 0)
 	{
 		free(main->map.diff_w);
 		free_textures(main);
 		exit (ft_printf("Error\nfd not working."));
+	}
+	if (check == 1)
+	{
+		if (!main->map.diff_w)
+		{
+			free_textures(main);
+			exit (ft_printf("Error\nMalloc failed."));
+		}
 	}
 }
 

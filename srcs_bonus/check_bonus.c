@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/23 10:32:06 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 16:53:43 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	get_diff_width(t_main *main)
 	main->map.diff_w = (int *)malloc(sizeof(int) * (main->map.h + 1));
 	map_start = main->tex.map_start;
 	main->fd2 = open(main->map.path, O_RDONLY);
-	check_fd_error(main, main->fd2);
+	check_fd_error(main, main->fd2, 1);
 	l = get_next_line(main->fd2);
 	while (map_start--)
 	{
@@ -121,7 +121,7 @@ void	parse_map(t_main *main)
 
 	map_start = main->tex.map_start;
 	main->fd1 = open(main->map.path, O_RDONLY);
-	check_fd_error(main, main->fd1);
+	check_fd_error(main, main->fd1, 0);
 	l = get_next_line(main->fd1);
 	while (map_start--)
 	{

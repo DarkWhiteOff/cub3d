@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:58:07 by tzizi             #+#    #+#             */
-/*   Updated: 2025/06/24 13:05:12 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/24 17:01:39 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "struct_bonus.h"
 
 // CUB3D
+void			ft_free(int i, t_main *main);
 void			render_init(t_main *main);
 void			checks_inits(t_main *main);
 void			vars_init(t_main *main, char *map_path);
@@ -57,7 +58,7 @@ void			raycasting(t_main *main);
 void			draw_texture(t_main *main, int ray_count, int wall_height);
 void			my_mlx_pixel_put(t_img_data *img_data, int x, int y, int color);
 void			empty_line_check(t_main *main, char *line, int fd, int ckeck);
-void			check_fd_error(t_main *main, int fd);
+void			check_fd_error(t_main *main, int fd, int check);
 int				strlenmap(char *line);
 int				check_map_name(char *map_name);
 float			degree_to_radians(float degree);

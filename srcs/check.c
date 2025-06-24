@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 14:51:32 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 16:52:59 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ void	get_diff_width(t_main *main)
 	int		i;
 
 	i = 0;
-	main->map.diff_w = (int *)malloc(sizeof(int) * (main->map.h + 1));
 	map_start = main->tex.map_start;
 	main->fd2 = open(main->map.path, O_RDONLY);
-	check_fd_error(main, main->fd2);
+	main->map.diff_w = (int *)malloc(sizeof(int) * (main->map.h + 1));
+	check_fd_error(main, main->fd2, 1);
 	l = get_next_line(main->fd2);
 	while (map_start--)
 	{
@@ -117,7 +117,7 @@ void	parse_map(t_main *main)
 
 	map_start = main->tex.map_start;
 	main->fd1 = open(main->map.path, O_RDONLY);
-	check_fd_error(main, main->fd1);
+	check_fd_error(main, main->fd1, 0);
 	l = get_next_line(main->fd1);
 	while (map_start--)
 	{

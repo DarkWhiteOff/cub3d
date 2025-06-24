@@ -144,6 +144,8 @@ typedef struct s_main
 	int			fd3;
 	int			empty_line;
 	int			double_tex;
+	int			malloc_fail;
+	int			malloc_fail_i;
 	int			prev_x;
 	int			prev_y;
 	int			x;

@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/18 14:50:43 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:01:28 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,15 @@ void	free_diff_tex_grids(t_main *main, int check)
 	free_grids(main);
 	if (check == 1)
 		exit (ft_printf("Error\nYour map is not fully enclosed !\n"));
+}
+
+void	ft_free(int i, t_main *main)
+{
+	while (i >= 0)
+	{
+		free(main->map.grid[i]);
+		i--;
+	}
+	free(main->map.grid);
+	exit(ft_printf("Error\nMalloc failed."));
 }

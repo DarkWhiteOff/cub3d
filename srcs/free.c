@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:03 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 16:37:56 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:01:24 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	ft_free(int i, t_main *main)
 		i--;
 	}
 	free(main->map.grid);
-	return ;
+	exit(ft_printf("Error\nMalloc failed."));
 }

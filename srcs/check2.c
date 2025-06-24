@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 16:37:04 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:04:47 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void	allocate_grids(t_main *main, t_map *map, char **line)
 	while (i < map->h && map->grid)
 	{
 		map->grid[i] = (char *)malloc(sizeof(char) * (map->w_max + 1));
-		if (i == 2)
-			map->grid[i] = NULL;
 		if (!map->grid[i])
 		{
 			main->malloc_fail = 1;
@@ -119,7 +117,7 @@ void	grid_init(t_main *main)
 	i = 0;
 	j = 0;
 	main->fd3 = open(main->map.path, O_RDONLY);
-	check_fd_error(main, main->fd3);
+	check_fd_error(main, main->fd3, 0);
 	line = get_next_line(main->fd3);
 	allocate_grids(main, &main->map, &line);
 	while (i < main->map.h)
@@ -145,12 +143,6 @@ void	grid_init(t_main *main)
 		free_textures(main);
 		if (main->malloc_fail_i >= 0)
 			ft_free(main->malloc_fail_i, main);
+		exit(ft_printf("Error\nMalloc failed."));
 	}
-	// i = 0;
-	// while (i < main->map.h)
-	// {
-	// 	printf("main->map.grid[i] : %s\n", main->map.grid[i]);
-	// 	i++;
-	// }
-	exit(0);
 }
