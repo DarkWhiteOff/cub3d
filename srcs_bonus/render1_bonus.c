@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render1_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:13 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/20 17:52:03 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:31:15 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	find_tex(t_main *main, t_tex_data *tex, float ray_sin, float ray_cos)
 
 unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 {
-	float	ray_cos;
-	float	ray_sin;
-	char	*dst;
+	float		ray_cos;
+	float		ray_sin;
+	char		*dst;
 	t_tex_data	tex;
 
 	ray_cos = main->ray.cos;

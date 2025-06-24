@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check1_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:44 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/21 13:15:36 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:32:01 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void	check_walls2(t_main *main)
 
 void	check_horizontal(t_main *main)
 {
-	int	i;
-	int	j;
-	char debut;
-	char end;
+	int		i;
+	int		j;
+	char	debut;
+	char	end;
 
 	i = 1;
 	j = 0;
@@ -94,10 +94,10 @@ void	check_horizontal(t_main *main)
 
 void	check_vertical(t_main *main)
 {
-	int	i;
-	int	j;
-	char debut;
-	char end;
+	int		i;
+	int		j;
+	char	debut;
+	char	end;
 
 	i = 0;
 	j = 1;

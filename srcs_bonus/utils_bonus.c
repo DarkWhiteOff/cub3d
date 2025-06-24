@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/22 21:34:07 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:31:31 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,4 @@ void	empty_line_check(t_main *main, char *line, int fd, int check)
 			exit (ft_printf("Error\nYour map has one or more empty lines.\n"));
 		}
 	}
-	
 }
