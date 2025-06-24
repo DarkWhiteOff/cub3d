@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 14:51:56 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:11:23 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,30 @@ void	check_double(t_main *main, char *line, int check)
 			free_textures(main);
 			exit(printf("Error\nDouble texture.\n"));
 		}
+	}
+}
+
+void	grid_init1(t_main *main, char **line)
+{
+	int		j;
+	int		i;
+
+	i = 0;
+	j = 0;
+	while (i < main->map.h)
+	{
+		if (main->malloc_fail != 1)
+		{
+			while (j < main->map.diff_w[i])
+				main->map.grid[i][j++] = (*line)[j];
+			while (j < main->map.w_max)
+				main->map.grid[i][j++] = ' ';
+			main->map.grid[i++][j] = '\0';
+			j = 0;
+		}
+		else
+			i++;
+		free(*line);
+		(*line) = get_next_line(main->fd3);
 	}
 }

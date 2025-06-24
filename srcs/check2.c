@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:46 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 17:04:47 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:09:05 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,31 +111,12 @@ void	allocate_grids(t_main *main, t_map *map, char **line)
 void	grid_init(t_main *main)
 {
 	char	*line;
-	int		j;
-	int		i;
 
-	i = 0;
-	j = 0;
 	main->fd3 = open(main->map.path, O_RDONLY);
 	check_fd_error(main, main->fd3, 0);
 	line = get_next_line(main->fd3);
 	allocate_grids(main, &main->map, &line);
-	while (i < main->map.h)
-	{
-		if (main->malloc_fail != 1)
-		{
-			while (j < main->map.diff_w[i])
-				main->map.grid[i][j++] = line[j];
-			while (j < main->map.w_max)
-				main->map.grid[i][j++] = ' ';
-			main->map.grid[i++][j] = '\0';
-			j = 0;
-		}
-		else
-			i++;
-		free(line);
-		line = get_next_line(main->fd3);
-	}
+	grid_init1(main, &line);
 	close(main->fd3);
 	if (main->malloc_fail == 1)
 	{

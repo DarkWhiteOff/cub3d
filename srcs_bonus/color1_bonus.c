@@ -6,7 +6,7 @@
 /*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 13:02:18 by tzizi             #+#    #+#             */
-/*   Updated: 2025/06/24 13:46:35 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/24 17:11:50 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,29 @@ int	check_line_rgb(char *line)
 			return (0);
 	}
 	return (1 && comma == 2 && nb == 3);
+}
+
+void	grid_init1(t_main *main, char **line)
+{
+	int		j;
+	int		i;
+
+	i = 0;
+	j = 0;
+	while (i < main->map.h)
+	{
+		if (main->malloc_fail != 1)
+		{
+			while (j < main->map.diff_w[i])
+				main->map.grid[i][j++] = (*line)[j];
+			while (j < main->map.w_max)
+				main->map.grid[i][j++] = ' ';
+			main->map.grid[i++][j] = '\0';
+			j = 0;
+		}
+		else
+			i++;
+		free(*line);
+		(*line) = get_next_line(main->fd3);
+	}
 }

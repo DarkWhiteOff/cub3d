@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:27 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 16:51:27 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:09:33 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "struct.h"
 
 // CUB3D
+void			grid_init1(t_main *main, char **line);
 void			ft_free(int i, t_main *main);
 void			render_init(t_main *main);
 void			checks_inits(t_main *main);
