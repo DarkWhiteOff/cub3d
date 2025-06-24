@@ -68,13 +68,13 @@ typedef struct s_tex_data
 
 typedef struct s_tex
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		color_f;
-	int		color_c;
-	int		map_start;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	int			color_f;
+	int			color_c;
+	int			map_start;
 	t_tex_data	tex_north;
 	t_tex_data	tex_south;
 	t_tex_data	tex_west;
