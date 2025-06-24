@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:05 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/23 16:19:59 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 12:46:46 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	map_init(t_map *map, char *map_path)
 	map->path = map_path;
 	map->h = 0;
 	map->w = 0;
-	map->px_h = 480;
-	map->px_w = 854;
+	map->px_h = 1080;
+	map->px_w = 1920;
 	map->diff_w = NULL;
 	map->w_max = 0;
 	map->player_pos = 0;

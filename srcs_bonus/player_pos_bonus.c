@@ -42,8 +42,8 @@ void	move(float angle, t_main *main)
 
 	x = main->map.d_player_pos.x;
 	y = main->map.d_player_pos.y;
-	ray_cos = cos(degree_to_radians(angle)) * 0.1;
-	ray_sin = sin(degree_to_radians(angle)) * 0.1;
+	ray_cos = cos(degree_to_radians(angle)) * 0.02;
+	ray_sin = sin(degree_to_radians(angle)) * 0.02;
 	if (!ft_strchr("1", main->map.grid[(int)(y + 0.5 + (3 * ray_sin))]
 		[(int)(x + 0.5)]))
 		main->map.d_player_pos.y += ray_sin;
@@ -70,7 +70,7 @@ void	rotation_left(t_main *main)
 			if (main->ray.ray_angle <= 0)
 				main->ray.ray_angle = 360;
 			else
-				main->ray.ray_angle -= 6;
+				main->ray.ray_angle -= 3;
 		}
 	}
 }
@@ -91,7 +91,7 @@ void	rotation_right(t_main *main)
 			if (main->ray.ray_angle >= 360)
 				main->ray.ray_angle = 0;
 			else
-				main->ray.ray_angle += 6;
+				main->ray.ray_angle += 3;
 		}
 	}
 }

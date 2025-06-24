@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:49 by zamgar            #+#    #+#             */
-/*   Updated: 2025/05/01 13:52:36 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:33:56 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ int	rgb_to_hex(char *line)
 	int			b0;
 
 	dec = 0;
+	if (!check_line_rgb(line))
+		return (-1);
 	r0 = get_red(line) / 16;
 	g0 = get_green(line) / 16;
 	b0 = get_blue(line) / 16;
