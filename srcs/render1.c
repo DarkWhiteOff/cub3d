@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:13 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/20 17:51:57 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:32:15 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	my_mlx_pixel_put(t_img_data *img_data, int x, int y, int color)
 
 unsigned int	my_mlx_pixel_get2(t_main *main, int x, int y)
 {
-	float	ray_cos;
-	float	ray_sin;
+	float		ray_cos;
+	float		ray_sin;
 	t_tex_data	tex;
 
 	ray_cos = main->ray.cos;
@@ -80,7 +80,7 @@ int	wall_height_calc(t_main *main, int ray_angle)
 
 void	draw_ceiling_floor(t_main *main, int i, int wall_h, int ds)
 {
-	int		j;
+	int	j;
 
 	j = -1;
 	while (++j < main->map.px_h)

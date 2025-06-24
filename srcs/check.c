@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/23 01:17:54 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:30:30 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	get_params(t_main *main, char *line)
 		main->tex.color_c = rgb_to_hex(line);
 	if (!ft_strncmp(line, "F ", 2) && main->tex.color_f == -1)
 		main->tex.color_f = rgb_to_hex(line);
-	
 }
 
 void	get_map_start(t_main *main)
