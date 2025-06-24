@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   color1_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 13:02:18 by tzizi             #+#    #+#             */
-/*   Updated: 2025/06/24 13:34:02 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:40:18 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-
 
 int	check_line_rgb2(char *line, int *i, int *nb)
 {
@@ -19,8 +18,12 @@ int	check_line_rgb2(char *line, int *i, int *nb)
 	int		j;
 
 	j = *i;
-	while ((line[j] && line[j] < 58 && line[j] > 47))
-			j++;
+	while (line[j])
+	{
+		if (line[j] > 58 && line[j] < 47)
+			return (0);
+		j++;
+	}
 	if (j - *i > 0)
 	{
 		tmp = ft_substr(line, *i, j - *i);
@@ -39,10 +42,8 @@ int	check_line_rgb2(char *line, int *i, int *nb)
 int	check_line_rgb(char *line)
 {
 	int		i;
-	int 	j;
 	int		comma;
 	int		nb;
-	char	*tmp;
 
 	i = 0;
 	comma = 0;
@@ -56,7 +57,6 @@ int	check_line_rgb(char *line)
 	{
 		while (line[i] && line[i] == ' ')
 			i++;
-		j = i;
 		if (line[i] == ',')
 			comma++;
 		if (check_line_rgb2(line, &i, &nb) == 0)
