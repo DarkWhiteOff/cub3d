@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:15 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/23 09:51:25 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:51:56 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	check_double(t_main *main, char *line, int check)
 	{
 		if (main->double_tex == 1)
 		{
-			close(main->fd);
 			free_textures(main);
 			exit(printf("Error\nDouble texture.\n"));
 		}

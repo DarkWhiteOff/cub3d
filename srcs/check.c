@@ -6,7 +6,7 @@
 /*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:38:31 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/24 14:30:30 by zamgar           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:51:32 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	get_infos(t_main *main)
 		|| main->tex.color_c == -1 || main->tex.color_f == -1)
 	{
 		free_textures(main);
-		close(main->fd);
 		exit(ft_printf("Error\nTextures missing.\n"));
 	}
 }
