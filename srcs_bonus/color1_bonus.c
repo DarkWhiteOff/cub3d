@@ -6,7 +6,7 @@
 /*   By: tzizi <tzizi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 13:02:18 by tzizi             #+#    #+#             */
-/*   Updated: 2025/06/24 13:40:18 by tzizi            ###   ########.fr       */
+/*   Updated: 2025/06/24 13:46:35 by tzizi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ int	check_line_rgb2(char *line, int *i, int *nb)
 	int		j;
 
 	j = *i;
-	while (line[j])
-	{
-		if (line[j] > 58 && line[j] < 47)
-			return (0);
+	while (line[j] && line[j] < 58 && line[j] > 47
+		|| line[j] == '-' || line[j] == '+')
 		j++;
-	}
 	if (j - *i > 0)
 	{
 		tmp = ft_substr(line, *i, j - *i);
