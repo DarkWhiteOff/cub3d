@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zeezou <zeezou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zamgar <zamgar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:39:08 by zamgar            #+#    #+#             */
-/*   Updated: 2025/06/22 23:11:02 by zeezou           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:20:31 by zamgar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	render_init(t_main *main)
 		exit (ft_printf("Error\nMlx failed.\n"));
 	}
 	main->mlx_win = mlx_new_window(main->mlx_p, main->map.px_w,
-			main->map.px_h, "cub3d");
+			main->map.px_h, "cub3d_bonus");
 	if (!main->mlx_win)
 	{
 		free_diff_tex_grids(main, 0);
