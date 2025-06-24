@@ -14,6 +14,7 @@ SRC =	ft_strncmp.c \
 	ft_printf.c \
 	ft_hex.c \
 	ft_itoa.c \
+	ft_atoi.c \
 	ft_ptr.c \
 	ft_putcharstr.c \
 	ft_strlen.c \
@@ -25,6 +26,7 @@ BFILES =	ft_strncmp.o \
 		ft_printf.o \
 		ft_hex.o \
 		ft_itoa.o \
+		ft_atoi.o \
 		ft_ptr.o \
 		ft_putcharstr.o \
 		ft_strlen.o \
