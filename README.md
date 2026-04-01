@@ -21,7 +21,7 @@ make
 ### Exécution
 Le programme prend en argument un fichier de description de scène avec l'extension **.cub**
 ```bash
-./cube3d maps/good/mandatory/map0.cub
+./cub3D maps/good/mandatory/map0.cub
 ```
 ## Commandes
 | Touches | Action |
