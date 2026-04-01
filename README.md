@@ -8,24 +8,33 @@ Le moteur calcule la perspective en projetant des rayons à travers une carte 2D
 
 ## Caractéristiques principales
 - Rendu fluide de l'environnement en 3D.
+- Gestion des collisions.
 - Gestion des textures différentes selon l'orientation des murs (Nord, Sud, Est, Ouest).
 - Couleurs personnalisables pour le sol et le plafond.
-- Déplacements fluides (Z, Q, S, D ou W, A, S, D) et rotation de la caméra.
+- Déplacements fluides (W, A, S, D) et rotation de la caméra.
 - Parsing complet de fichiers de configuration de scène (.cub).
+### Bonus
+- Minimap.
+- Rotation de la caméra avec la souris.
 
 ## Instructions
-### Compilation
+### Compilation mandatory 
 ```bash
 make
+```
+### Compilation bonus 
+```bash
+make bonus
 ```
 ### Exécution
 Le programme prend en argument un fichier de description de scène avec l'extension **.cub**
 ```bash
 ./cub3D maps/good/mandatory/map0.cub
+./cub3D_bonus maps/good/bonus/cub3d.cub
 ```
 ## Commandes
 | Touches | Action |
 |:---------:|:-------------:|
 | W, A, S, D | Se déplacer | 
-| Flèches Gauche/Droite / Souris | Faire pivoter la vue |
-| Esc / Croix rouge | Fermer le programme proprement |
+| Flèches Gauche/Droite / Souris (bonus) | Faire pivoter la vue |
+| Esc / Croix | Fermer le programme proprement |
